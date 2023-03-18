@@ -1,23 +1,10 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const Users = sequelize.define(
-  "Nguoi_dung",
+const Images = sequelize.define(
+  "Hinh",
   {
-    Email: { type: DataTypes.STRING, allowNull: true, unique: true },
-    Mat_khau: { type: DataTypes.STRING, allowNull: true },
-    Ho_ten: { type: DataTypes.STRING, allowNull: true },
-    // email: { type: DataTypes.STRING, allowNull: false, unique: true },
-    // role: { type: DataTypes.STRING, defaultValue: "user" },
-    // googleid: { type: DataTypes.STRING, allowNull: true },
-    // facebookid: { type: DataTypes.STRING, allowNull: true },
-    // image: { type: DataTypes.STRING, allowNull: true },
-    // emailverified: { type: DataTypes.STRING, defaultValue: "0" },
-    // fullname: { type: DataTypes.STRING, allowNull: true },
-    // dayofbirth: { type: DataTypes.DATE, allowNull: true },
-    // gender: { type: DataTypes.STRING, allowNull: true },
-    // phone: { type: DataTypes.STRING, allowNull: true },
-    // cccd: { type: DataTypes.STRING, allowNull: true },
+    Url: { type: DataTypes.STRING, allowNull: true},
   },
   {
     createdAt: "Thoi_gian_tao",
@@ -25,4 +12,4 @@ const Users = sequelize.define(
   }
 );
 
-export default Users;
+export default Images;

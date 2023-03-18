@@ -1,0 +1,133 @@
+.bestLike{
+    .bestLike__container{
+
+    }
+}
+
+.best-book-section .base-header {
+    margin-top: 5px;
+}
+
+.bbook_wrap {
+    display: flex;
+    gap: 30px;
+}
+
+.bbook_item {
+    background: #fff;
+    padding: 30px 25px;
+    text-align: center;
+    border-radius: 8px;
+    transition: .3s;
+}
+
+.bbook_item:hover {
+    background: #FD661F;
+}
+
+.bbook_item:hover i,
+.bbook_item:hover span {
+    color: #fff;
+}
+
+.bbook_item:hover {
+    box-shadow: 2px 10px 18px 0px rgba(240, 227, 227, 0.65);
+    transition: .3s;
+}
+
+.bbook_item i {
+    display: block;
+    font-size: 44px;
+    color: #FD661F;
+    margin-bottom: 17px;
+}
+
+.bbook_item span {
+    font-size: 20px;
+    color: #1E3322;
+    font-weight: 500;
+}
+
+.bbook_btn {
+    margin-top: 60px;
+    display: flex;
+    gap: 30px;
+}
+
+/*  */
+
+.bbook_crs_item {
+    width: 470px;
+    margin-left: 30px;
+    position: relative;
+}
+
+.bbook_crs_item img {
+    border-radius: 8px;
+}
+
+#best_book::after {
+    position: absolute;
+    content: "";
+    width: 81%;
+    height: 100%;
+    top: -50px;
+    right: 13px;
+    z-index: -1;
+    border-radius: 8px;
+    background-color: rgba(0, 147, 141, 0.09);
+}
+
+.best-book-section .owl-nav .arrow_right {
+    margin-right: 16px;
+}
+
+.best-book-section .owl-nav .arrow_left {
+    margin-right: -2px;
+}
+
+.best-book-section .owl-nav div {
+    font-size: 32px;
+    color: #00938D;
+    opacity: 1;
+    top: 100%;
+}
+
+.best-book-section .owl-nav div:hover {
+    color: #1F1F1E;
+}
+
+.best-book-section .owl-nav {
+    position: absolute;
+    bottom: 10px;
+    margin-left: -102px;
+}
+
+/*  Dots */
+
+.owl-dots {
+    position: absolute;
+    right: 50%;
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    margin-right: 282px;
+    bottom: 11px;
+}
+
+.owl-dots .owl-dot.active span {
+    background: #00938D;
+    width: 25px;
+}
+
+.owl-dots .owl-dot span {
+    width: 20px;
+    background: #D9D9D9;
+    height: 5px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.owl-dot {
+    display: inline-block;
+}

@@ -1,0 +1,20 @@
+.slider__custom {
+  position: relative;
+  .slider__next {
+    z-index: 1;
+    button {
+      font-size: 26px;
+      color: #ffffff;
+      line-height: 44px;
+      text-align: center;
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.25);
+    }
+    .slider__btn {
+      font-size: 20px;
+      text-transform: capitalize;
+      font-weight: 300;
+      cursor: pointer;
+    }
+  }
+}
