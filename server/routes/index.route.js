@@ -1,4 +1,5 @@
 import authRoute from "./auth.route.js"
+import documentRoute from "./document.route.js"
 
 const router = (app) => {
   app.get("/", (req, res, next) => {
@@ -8,6 +9,7 @@ const router = (app) => {
   });
 
   app.use("/auth", authRoute);
+  app.use("/document", documentRoute);
 
 
   app.use((err, req, res, next) => {

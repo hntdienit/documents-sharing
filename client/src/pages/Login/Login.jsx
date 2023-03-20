@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await newRequest.post("/auth/login", { Email, Mat_khau });
-      localStorage.setItem("currentUser", JSON.stringify(res.data));
+      localStorage.setItem("accessToken", JSON.stringify(res.data));
       navigate("/")
     } catch (err) {
       setError(err.response.data);

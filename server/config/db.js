@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 const sequelize = new Sequelize(
-  "b1910055",
+  "luanvan",
   "root",
   "",
   {

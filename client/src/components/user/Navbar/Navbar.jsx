@@ -1,8 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 
+import getCurrentUser from "../../../utils/getCurrentUser.js";
+import newRequest from "../../../utils/newRequest.js";
+
 const Navbar = () => {
+  const navigate = useNavigate();
+  const currentUser = getCurrentUser();
+
+  const handleLogout = async () => {
+    try {
+      await newRequest.post("/auth/logout");
+      localStorage.setItem("accessToken", null);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="navbar">
       <div className="navigation navigation_two">
@@ -14,72 +30,22 @@ const Navbar = () => {
           </div>
           <div id="navigation" className="menu-wrap">
             <ul>
-              <li className="active has-sub">
-                <a href="index.html">Home</a>
-                <ul>
-                  <li>
-                    <a href="index.html">Home One</a>{" "}
-                  </li>
-                  <li>
-                    <a href="index-two.html">Home Two</a>{" "}
-                  </li>
-                </ul>
-              </li>
               <li>
                 <a href="about.html">About</a>
               </li>
+
               <li className="has-sub">
-                <a href="index.html">Pages</a>
+                <a href="blog.html">tai lieu</a>
                 <ul>
+                  <li>
+                    <Link to={"/newdocument"}>them tai lieu</Link>
+                  </li>
+
                   <li>
                     <Link to={"/category"}>Course Category</Link>
                   </li>
-                  <li>
-                    <a href="courses.html">Our Course</a>{" "}
-                  </li>
-                  <li>
-                    <a href="single-course.html">Course Details</a>{" "}
-                  </li>
-                  <li>
-                    <a href="login.html">Login Page</a>{" "}
-                  </li>
-                  <li>
-                    <a href="register.html">Register Page</a>{" "}
-                  </li>
-                  <li>
-                    <a href="teachers.html">Instructor Page</a>{" "}
-                  </li>
-                  <li>
-                    <a href="single-teacher.html">Instructor Details</a>{" "}
-                  </li>
-                  <li>
-                    <a href="events.html">Event Page</a>{" "}
-                  </li>
-                  <li>
-                    <a href="single-event.html">Event Details</a>{" "}
-                  </li>
-                  <li>
-                    <a href="gallery.html">Gallery Page</a>{" "}
-                  </li>
-                  <li>
-                    <a href="404.html">404 Page</a>{" "}
-                  </li>
                 </ul>
               </li>
-              {/* <li className="has-sub">
-                <a href="courses.html"> Courses</a>
-                <ul>
-                  <li>
-                    <a href="course-category.html">Course Category</a>{" "}
-                  </li>
-                  <li>
-                    <a href="courses.html">Our Course</a>{" "}
-                  </li>
-                  <li>
-                    <a href="single-course.html">Course Details</a>{" "}
-                  </li>
-                </ul>
-              </li> */}
               <li className="has-sub">
                 <a href="blog.html">Blog</a>
                 <ul>
@@ -103,11 +69,24 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <div className="header_sign">
-            <Link to={"/login"} className="link">
-              Sign in
-            </Link>
-          </div>
+          {currentUser ? (
+            <>
+              <div className="header_sign">
+                <Link to={"/login"} className="link">
+                  {currentUser.Email || "ho va ten"}
+                </Link>
+                <Link className="link" onClick={handleLogout}>
+                  Logout
+                </Link>
+              </div>
+            </>
+          ) : (
+            <div className="header_sign">
+              <Link to={"/login"} className="link">
+                Sign in
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

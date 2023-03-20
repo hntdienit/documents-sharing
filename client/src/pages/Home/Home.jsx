@@ -8,7 +8,6 @@ import SliderOwl from "../../components/user/SliderOwl/SliderOwl.jsx";
 import WorkFlow from "../../components/user/WorkFlow/WorkFlow.jsx";
 import PopularCat from "../../components/user/PopularCat/PopularCat.jsx";
 import Featured from "../../components/user/Featured/Featured.jsx";
-import HeaderPage from "../../components/user/HeaderPage/HeaderPage.jsx";
 
 const Home = () => {
   const settings = {
@@ -27,7 +26,6 @@ const Home = () => {
   return (
     <div className="home">
       <div className="container">
-        <HeaderPage/>
         <SliderOwl />
         <WorkFlow />
         <PopularCat />
