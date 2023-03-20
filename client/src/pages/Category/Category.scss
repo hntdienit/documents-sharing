@@ -1,0 +1,95 @@
+@import "../../variables.scss";
+
+.category {
+  padding: 130px 0px;
+
+  .category__container {
+    display: flex;
+    flex-direction: row;
+    gap: $gap;
+    padding: $padding;
+    @include query(mobile) {
+      flex-direction: column;
+    }
+    .category__col_1 {
+      flex-grow: 2;
+      > div {
+        margin-bottom: 30px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        border: 1px solid #f0e9e9;
+      }
+      ul li {
+        > div {
+          margin-bottom: 4px;
+        }
+        label {
+          font-size: 16px;
+          margin-left: 5px;
+          color: #1f1f1e;
+        }
+        input[type="checkbox"] {
+          width: 15px;
+          height: 15px;
+          margin-top: 5px;
+        }
+      }
+      .category__title {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+    }
+    .category__col_2 {
+      flex-grow: 8;
+      >div{
+        display: flex;
+        gap: 15px;
+      }
+
+      .category__search {
+        display: grid;
+        grid-template-columns: 1fr 0.7fr auto;
+        grid-gap: 50px;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    //     .widget-search {
+    //       margin-bottom: 0px;
+    //       padding: 5px 5px;
+    //       display: inline-block;
+    // // margin-bottom: 45px;
+    // // width: 100%;
+    // // padding: 30px;
+    // // border: 1px solid #ece3e3;
+    // // border-radius: 12px;
+    //       .input-group {
+    //         input {
+    //           height: 45px;
+    //           width: calc(100% - 50px);
+    //         }
+    //         button {
+    //           padding: 10px 10px;
+    //           width: 45px;
+    //         }
+    //       }
+    //     }
+      }
+
+      .category__col__item{
+
+      }
+    }
+  }
+}
+
+// [class^="category__col_"] {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   border: 4px solid $color;
+//   height: 100vh -$padding * 2;
+//   @include query(mobile) {
+//     height: 110vh ;
+//   }
+// }

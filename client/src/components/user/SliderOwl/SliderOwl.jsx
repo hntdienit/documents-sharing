@@ -17,7 +17,7 @@ const SliderOwl = () => {
                     <p>
                       Online learning is not the next big thing, <br /> it is now the greatest thing ever.
                     </p>
-                    <a href="#" className="more-link">
+                    <a href="#" className="link">
                       Get Started
                     </a>
                   </div>

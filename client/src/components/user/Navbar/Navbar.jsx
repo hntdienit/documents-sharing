@@ -32,7 +32,7 @@ const Navbar = () => {
                 <a href="index.html">Pages</a>
                 <ul>
                   <li>
-                    <a href="course-category.html">Course Category</a>{" "}
+                    <Link to={"/category"}>Course Category</Link>
                   </li>
                   <li>
                     <a href="courses.html">Our Course</a>{" "}
@@ -66,7 +66,7 @@ const Navbar = () => {
                   </li>
                 </ul>
               </li>
-              <li className="has-sub">
+              {/* <li className="has-sub">
                 <a href="courses.html"> Courses</a>
                 <ul>
                   <li>
@@ -79,7 +79,7 @@ const Navbar = () => {
                     <a href="single-course.html">Course Details</a>{" "}
                   </li>
                 </ul>
-              </li>
+              </li> */}
               <li className="has-sub">
                 <a href="blog.html">Blog</a>
                 <ul>
@@ -104,7 +104,7 @@ const Navbar = () => {
           </div>
 
           <div className="header_sign">
-            <Link to={"/login"} className="more-link">
+            <Link to={"/login"} className="link">
               Sign in
             </Link>
           </div>

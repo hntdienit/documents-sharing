@@ -1,138 +1,156 @@
 .footertwo-section {
-    background: #EBF2EE;
-    padding-top: 98px;
+  background: #ebf2ee;
+  padding-top: 98px;
 }
-.footer__container{
+.footer__container {
+  display: flex;
+  // justify-content: space-between;
+  justify-content: space-around;
+  padding: 0 30px;
+  .item {
     display: flex;
-    justify-content: space-between;
-    padding: 0 30px;
-    .item{
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-     
+    flex-direction: column;
+    gap: 15px;
+    .footer_logo {
+      img {
+        width: 100px;
+        height: 100px;
+      }
+      ul {
+        margin-top: 17px;
+        margin-bottom: 20px;
+      }
     }
+  }
 }
 
 .footertwo-section h5 {
-    color: #1F1F1E;
-    padding-bottom: 15px;
-    font-size: 22px;
+  color: #1f1f1e;
+  padding-bottom: 15px;
+  font-size: 22px;
 }
 
 .footertwo-section ul li {
-    display: block;
-    text-align: left;
-    margin-left: 0px;
-    margin-bottom: 8px;
+  display: block;
+  text-align: left;
+  margin-left: 0px;
+  margin-bottom: 8px;
 }
 
 .footertwo-section ul li a {
-    color: #1F1F1E;
-    font-weight: 400;
-    font-family: 'Poppins', sans-serif;
+  color: #1f1f1e;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
 }
 
 .footertwo-section .foo_widget ul {
-    margin-top: -6px;
+  margin-top: -6px;
 }
 
 .footertwo-section .footer_socil ul li {
-    display: inline-block;
-    text-align: left;
-    margin-right: 4px;
+  display: inline-block;
+  text-align: left;
+  margin-right: 4px;
 }
 
 .footertwo-section .footer_socil ul {
-    text-align: left;
+  text-align: left;
 }
 
 .footertwo-section .footer_socil ul li a {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 14px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
 }
 
 .footertwo-section .container {
-    border-bottom: 1px solid #E8D6D6;
-    padding-bottom: 70px;
-}
-
-.footer_logo ul {
-    margin-top: 17px;
-    margin-bottom: 20px;
+  border-bottom: 1px solid #e8d6d6;
+  padding-bottom: 70px;
 }
 
 .footer_socil ul li {
-    margin: 0px 4px;
+  margin: 0px 4px;
 }
 
 .footer_socil ul li a {
-    background: #fff;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    text-align: center;
-    font-size: 14px;
-    line-height: 30px;
+  background: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  line-height: 30px;
 }
 
 .footer_socil ul {
-    text-align: right;
+  text-align: right;
 }
 
 .footer_socil ul li a:hover {
-    color: #fff;
-    background: #00938D;
+  color: #fff;
+  background: #00938d;
 }
 
 .subfooter {
-    text-align: center;
-    background: #00938D;
-    padding: 32px 15px 38px;
+  text-align: center;
+  background: #00938d;
+  padding: 32px 15px 38px;
 }
 
 .subfooter p {
-    color: #fff;
-    margin: 0px;
-    font-size: 14px;
+  color: #fff;
+  margin: 0px;
+  font-size: 14px;
 }
 
 .subfooter p a {
-    color: #fff;
+  color: #fff;
 }
 .footer_contact_form .con-field {
-    border: none;
-    border-radius: 5px;
-    height: 45px;
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding-left: 15px;
+  border: none;
+  border-radius: 5px;
+  height: 45px;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-left: 15px;
 }
 
 .footer_contact_form #message {
-    height: 75px;
-    resize: none;
-    outline: none;
-    padding-top: 7px;
+  height: 75px;
+  resize: none;
+  outline: none;
+  padding-top: 7px;
 }
 
 .footer_contact_form .con-field::placeholder {
-    color: #A9A9AB;
+  color: #a9a9ab;
 }
 
 .footer_contact_form #submit-contact {
-    font-size: 16px;
-    background: #00938D;
-    color: #fff;
-    border-radius: 5px;
-    text-align: center;
-    padding: 14px 0px;
-    font-weight: 500;
-    width: 128px;
-    margin-top: 10px;
-    border: none;
+  font-size: 16px;
+  background: #00938d;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  padding: 14px 0px;
+  font-weight: 500;
+  width: 128px;
+  margin-top: 10px;
+  border: none;
+}
+
+.footertwo-section .subfooter {
+    background: transparent;
+    padding: 24px 15px 31px;
+}
+
+.footertwo-section .subfooter p {
+    color: #717173;
+}
+
+.footertwo-section .subfooter p a {
+    color: #717173;
 }

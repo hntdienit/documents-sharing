@@ -23,6 +23,7 @@ const SliderCustom = ({ children, settings, psbutton }) => {
       <Slider ref={customeSlider} {...settings}>
         {children}
       </Slider>
+      {/* <div>{children}</div> */}
       <div className={classes}>
         <button type="button" className="slider__btn" onClick={next}>
           n

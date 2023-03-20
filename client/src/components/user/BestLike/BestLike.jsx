@@ -1,14 +1,16 @@
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import SliderCustom from "../../public/Slider/Slider.jsx";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import "./BestLike.scss";
 import newRequest from "../../../utils/newRequest.js";
 
 const BestLike = () => {
-
   const customeSlider = useRef();
-
   const previous = () => {
     customeSlider.current.slickNext();
   };
@@ -16,7 +18,6 @@ const BestLike = () => {
   const next = () => {
     customeSlider.current.slickPrev();
   };
-
   const settings = {
     arrows: false,
     centerMode: true,
@@ -28,108 +29,91 @@ const BestLike = () => {
     speed: 600,
     initialSlide: 0,
     autoplaySpeed: 5000,
-    responsive: [
-      {
-        breakpoint: 2700,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 1600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
 
   return (
-    <div className="bestLike">
-      <div className="bestLike__container">
-        <section className="best-book-section">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-6 col-sm-12">
-                <div className="base-header">
-                  <h3> Some Best Books </h3>
-                </div>
-
-                <div className="bbook_wrap">
-                  <div className="bbook_item">
-                    <i className="pe-7s-note2"></i>
-                    <span>
-                      132+ <br /> Total Pages
-                    </span>
-                  </div>
-                  <div className="bbook_item">
-                    <i className="pe-7s-download"></i>
-                    <span>
-                      237+ <br /> Downloads
-                    </span>
-                  </div>
-                  <div className="bbook_item">
-                    <i className="pe-7s-cup"></i>
-                    <span>
-                      13+ <br /> Award Won
-                    </span>
-                  </div>
-                </div>
-                <div className="bbook_btn">
-                  <a href="#" className="more-link link-transparent">
-                    Free Preview
-                  </a>
-                  <a href="#" className="more-link">
-                    Download
-                  </a>
-                </div>
+    <div className="bestlike">
+      {/* <div className="bestlike__container">
+        <div className="bestlike__wrap">
+          <div className="bestlike__item">
+            <div className="bestlike__header">
+              <h3> Some Best Books </h3>
+            </div>
+            <div className="bestlike__card">
+              <div className="bestlike__card__item">
+                <i className="pe-7s-note2">12</i>
+                <span>
+                  132+ <br /> Total Pages
+                </span>
               </div>
-              <div className="col-lg-6 col-sm-12" id="best_book">
-
-              <Slider ref={customeSlider} {...settings}>
-              <div className="bbook_crs_item">
-                  <img src="./img/hinh.jpg" alt="image" />
-                </div>
-              <div className="bbook_crs_item">
-                  <img src="./img/logo_dhct.png" alt="image" />
-                </div>
-              <div className="bbook_crs_item">
-                  <img src="./img/hinh.jpg" alt="image" />
-                </div>
-              </Slider>
-
-              <div>
-                <button type="button" onClick={next}>next</button>
-                <button type="button" onClick={previous}>previous</button>
+              <div className="bestlike__card__item">
+                <i className="pe-7s-download">12</i>
+                <span>
+                  237+ <br /> Downloads
+                </span>
               </div>
-                
+              <div className="bestlike__card__item">
+                <i className="pe-7s-cup">12</i>
+                <span>
+                  13+ <br /> Award Won
+                </span>
               </div>
             </div>
+
+            <div className="bestlike__btn">
+              <a href="#" className="link">
+                Free Preview
+              </a>
+              <a href="#" className="link">
+                Download
+              </a>
+            </div>
           </div>
-        </section>
+
+          <div className="haha3">
+        
+              <div>
+              <Slider ref={customeSlider} {...settings}>
+              <div className="bbook_crs_item">
+            <img src="./img/hinh.jpg" alt="image" />
+          </div>
+          <div className="bbook_crs_item">
+            <img src="./img/logo_dhct.png" alt="image" />
+          </div>
+          <div className="bbook_crs_item">
+            <img src="./img/hinh.jpg" alt="image" />
+          </div>
+      </Slider>
+              </div>
+         
+          </div>
+        </div>
+      </div> */}
+
+      <div className="vitri">
+       <div className="vitri1">
+          <div className="">
+            <Slider className="vitricon" ref={customeSlider} {...settings}>
+              <div className="bbook_crs_item">
+                <img src="./img/hinh.jpg" alt="image" />
+              </div>
+              <div className="bbook_crs_item">
+                <img src="./img/logo_dhct.png" alt="image" />
+              </div>
+              <div className="bbook_crs_item">
+                <img src="./img/hinh.jpg" alt="image" />
+              </div>
+            </Slider>
+            <div className="popularcat__btn">
+              <button type="button" className="slider__btn" onClick={next}>
+                n
+              </button>
+              <button type="button" className="slider__btn" onClick={previous}>
+                p
+              </button>
+            </div>
+          </div>
+       </div>
       </div>
     </div>
   );
