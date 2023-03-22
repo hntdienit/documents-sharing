@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import "./BestLike.scss";
 import newRequest from "../../../utils/newRequest.js";
+import images from "../../../assets/images/index.js";
 
 const BestLike = () => {
   const customeSlider = useRef();
@@ -95,13 +96,13 @@ const BestLike = () => {
           <div className="">
             <Slider className="vitricon" ref={customeSlider} {...settings}>
               <div className="bbook_crs_item">
-                <img src="./img/hinh.jpg" alt="image" />
+                <img src={images.courses2} alt="image" />
               </div>
               <div className="bbook_crs_item">
-                <img src="./img/logo_dhct.png" alt="image" />
+                <img src={images.courses3} alt="image" />
               </div>
               <div className="bbook_crs_item">
-                <img src="./img/hinh.jpg" alt="image" />
+                <img src={images.courses4} alt="image" />
               </div>
             </Slider>
             <div className="popularcat__btn">

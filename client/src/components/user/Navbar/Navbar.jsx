@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.scss";
 
+import images from "../../../assets/images";
 import getCurrentUser from "../../../utils/getCurrentUser.js";
 import newRequest from "../../../utils/newRequest.js";
 
@@ -24,9 +25,9 @@ const Navbar = () => {
       <div className="navigation navigation_two">
         <div className="container">
           <div className="logo">
-            <a href="index.html">
-              <img className="img-responsive" src="./img/logo_dhct.png" alt="" />
-            </a>
+            <Link to={"/"}>
+              <img className="img-responsive" src={images.logo} alt="" />
+            </Link>
           </div>
           <div id="navigation" className="menu-wrap">
             <ul>

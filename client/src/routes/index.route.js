@@ -6,6 +6,7 @@ import Page404 from "../pages/Page404/Page404.jsx";
 import Category from "../pages/Category/Category.jsx";
 
 import NewDocument from "../pages/Document/NewDocument.jsx";
+import SingleDocument from "../pages/SingleDocument/SingleDocument.jsx";
 
 const routes = [
   { path: "/register", component: Register, layout: null },
@@ -14,6 +15,8 @@ const routes = [
   { path: "/category", component: Category },
 
   { path: "/newdocument", component: NewDocument },
+  { path: "/document/:id", component: SingleDocument },
+
 
   // { path: "/P403", component: Page403, layout: null },
   // { path: "/admin", component: AdminHome, layout: AdminLayout, role: "admin" },

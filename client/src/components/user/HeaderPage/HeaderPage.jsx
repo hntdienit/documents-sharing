@@ -13,7 +13,7 @@ const HeaderPage = ({ page, linkpage }) => {
       <div className="headerpage_container">
         <h3>{current.Page}</h3>
         <h4>
-          <Link href="/"> Trang chủ </Link> <span> || </span> {current.LinkPage}
+          <Link to={"/"}> Trang chủ </Link> <span> || </span> {current.LinkPage}
         </h4>
       </div>
     </div>

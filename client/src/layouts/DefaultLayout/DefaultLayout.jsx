@@ -6,7 +6,7 @@ import getCurrentUser from "../../utils/getCurrentUser.js";
 import "./DefaultLayout.scss";
 
 function DefaultLayout({ children, currentUser }) {
-console.log("nhan tu app", currentUser)
+// console.log("nhan tu app", currentUser)
   return (
     <>
       <div className="defaultLayout">

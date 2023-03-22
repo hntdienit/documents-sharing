@@ -1,0 +1,18 @@
+@import "../../../variables.scss";
+
+.star__custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .star__total {
+    margin-right: .5rem;
+  }
+  .star__wrap {
+    .star__item {
+      color: $color_star;
+    }
+  }
+  .star__reviews {
+    margin-left: .5rem;
+  }
+}

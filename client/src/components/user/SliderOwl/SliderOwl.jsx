@@ -1,6 +1,8 @@
 import React from "react";
 import "./SliderOwl.scss";
 
+import images from "../../../assets/images";
+
 const SliderOwl = () => {
   return (
     <div className="sliderOwl">
@@ -25,28 +27,28 @@ const SliderOwl = () => {
 
                 <div className="col-md-6 col-sm-12 item">
                   <div className="hero_img">
-                    <img src="./img/coding.png" alt="" className="coding" />
+                    <img src={images.coding} alt="" className="coding" />
                     <div className="hero_img_ani" id="scene4">
-                      <img src="./img/hero-men2.png" alt="" data-depth="0.10" className="layer" />
+                      <img src={images.hero_men2} alt="" data-depth="0.10" className="layer" />
                     </div>
                     <div className="hero_stu">
                       <h4> 13k+ Students</h4>
-                      <img src="./img/hero_students.png" alt="" />
+                      <img src={images.hero_students} alt="" />
                     </div>
-                    <img src="./img/pencil.png" alt="" className="pencil" />
+                    <img src={images.pencil} alt="" className="pencil" />
                   </div>
                 </div>
               {/* </div> */}
             </div>
 
             <div className="hero_ellipse_icon">
-              <img className="ellipse1" src="./img/ellipse1.png" alt="" />
-              <img className="ellipse2" src="./img/ellipse11.png" alt="" />
-              <img className="ellipse3" src="./img/ellipse3.png" alt="" />
-              <img className="ellipse4" src="./img/ellipse4.png" alt="" />
-              <img className="ellipse7" src="./img/ellipse7.png" alt="" />
+              <img className="ellipse1" src={images.ellipse1} alt="" />
+              <img className="ellipse2" src={images.ellipse11} alt="" />
+              <img className="ellipse3" src={images.ellipse3} alt="" />
+              <img className="ellipse4" src={images.ellipse4} alt="" />
+              <img className="ellipse7" src={images.ellipse7} alt="" />
               {/* <img className="ellipse8" src="./img/ellipse10.png" alt="" /> */}
-              <img className="ellipse6" src="./img/ellipse9.png" alt="" />
+              <img className="ellipse6" src={images.ellipse6} alt="" />
             </div>
           </div>
         </div>

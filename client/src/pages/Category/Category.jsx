@@ -1,11 +1,25 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
+
 import "./Category.scss";
 
 import HeaderPage from ".././../components/user/HeaderPage/HeaderPage.jsx";
 import Card from "../../components/public/Card/Card.jsx";
 import Pagination from "../../components/public/Pagination/Pagination.jsx";
+import Loading from "../../components/public/Loading/Loading.jsx";
+import Error from "../../components/public/Error/Error.jsx";
+
+import newRequest from "../../utils/newRequest.js";
 
 const Category = () => {
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["documents"],
+    queryFn: () =>
+      newRequest.get(`document/all`).then((res) => {
+        return res.data;
+      }),
+  });
+
   return (
     <>
       <HeaderPage page={"The loai"} linkpage={"the loai"} />
@@ -85,11 +99,13 @@ const Category = () => {
               <div className="cat_selectbox">
                 <div className="select-box">
                   <select className="form-select" aria-label="select">
-                        <option value="0" selected>Most Viewed</option>
-                        <option value="1">Java programming</option>
-                        <option value="2">Designer</option>
-                        <option value="3"> English </option>
-                      </select>
+                    <option value="0" selected>
+                      Most Viewed
+                    </option>
+                    <option value="1">Java programming</option>
+                    <option value="2">Designer</option>
+                    <option value="3"> English </option>
+                  </select>
                 </div>
               </div>
 
@@ -97,17 +113,14 @@ const Category = () => {
             </div>
 
             <div className="category__col_item">
-              <Card />
-              <Card />
-            </div>
-            <div className="category__col_item">
-              <Card />
-              <Card />
+              {isLoading ? <Loading /> 
+              :  error ? <Error/> 
+              :  data.map((document) => <Card key={document.id} item={document} />)
+              }
             </div>
 
             <nav className="cat-page-navigation">
-
-              <Pagination/>
+              <Pagination />
               <ul className="pagination">
                 <li className="pagination-arrow">
                   <a href="#">

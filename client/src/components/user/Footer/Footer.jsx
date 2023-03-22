@@ -1,5 +1,8 @@
 import React from "react";
+
 import "./Footer.scss";
+
+import images from "../../../assets/images";
 
 const Footer = () => {
   return (
@@ -9,7 +12,7 @@ const Footer = () => {
           {/* <div className="row"> */}
           <div className="col-3 col-md-6 col-sm-12 item">
             <div className="footer_logo">
-              <img src="./img/logo_dhct.png" alt="" />
+              <img src={images.logo} alt="" />
               <ul>
                 <li>
                   <a href="">(+75) 36 6552 9564 </a>

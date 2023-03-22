@@ -1,0 +1,196 @@
+@import "../../variables.scss";
+
+.singledocument {
+  padding: 5rem 0px 2rem 0px;
+  background: $background;
+
+  .singledocument__container {
+    display: flex;
+    flex-direction: row;
+    gap: $gap;
+    padding: $padding;
+    @include query(mobile) {
+      flex-direction: column;
+    }
+
+    .singledocument__left {
+      max-width: 60%;
+      flex-grow: 4;
+      padding: 0 0 0 1rem;
+
+      .singledocument__wrap {
+        font-size: 30px;
+        font-weight: 700;
+        margin-top: 30px;
+        margin-bottom: 16px;
+        line-height: 1.1;
+
+        .singledocument__img {
+          position: relative;
+          img {
+            padding: 0 2rem;
+            width: 50rem;
+            height: 20rem;
+            object-fit: cover;
+          }
+          span {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: #fd661f;
+            color: #fff;
+            padding: 6px 15px;
+            font-size: 15px;
+            border-radius: 4px;
+          }
+        }
+
+        h3 {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+        }
+        .singledocument__meta {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          img {
+            width: 39px;
+            height: 39px;
+          }
+          p {
+            margin-bottom: 0px;
+            margin-left: 10px;
+            margin-right: 20px;
+            font-weight: 500;
+          }
+          .singledocument__stu {
+            i {
+              font-size: 18px;
+              position: relative;
+              top: 1px;
+              margin-right: 3px;
+            }
+          }
+          .singledocument__rat {
+            margin-left: auto;
+            i {
+              color: #ffc107;
+              font-size: 11px;
+              &:first-child {
+                margin-left: 6px;
+              }
+              &:last-child {
+                margin-right: 3px;
+              }
+            }
+          }
+        }
+        .singledocument__desc {
+          margin-top: 3rem;
+          span {
+            font-size: 25px;
+            color: #1e3322;
+            margin-bottom: 10px;
+            display: block;
+          }
+          p {
+            font-size: 20px;
+            margin-bottom: 24px;
+          }
+        }
+      }
+    }
+
+    .singledocument__right {
+      flex-grow: 6;
+      margin-left: 4rem;
+      .singledocument__details {
+        h2 {
+          font-size: 16px;
+          font-weight: 700;
+          color: #717173;
+          position: relative;
+          padding-bottom: 14px;
+          margin-bottom: 20px;
+
+          &:after {
+            position: absolute;
+            content: "";
+            width: 48px;
+            height: 2px;
+            bottom: 0px;
+            background: #00938d;
+            left: 0px;
+          }
+          span {
+            font-size: 30px;
+            font-weight: 900;
+            color: #1f1f1e;
+            position: relative;
+            top: 5px;
+            margin-left: 15px;
+          }
+          a {
+            margin-top: 23px;
+          }
+        }
+        .singledocument__detail__list {
+          display: flex;
+          justify-content: space-between;
+          color: #717173;
+          font-size: 16px;
+          margin-bottom: 10px;
+
+          span {
+            color: #00938d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i {
+              margin-left: 1rem;
+              font-weight: bold;
+            }
+            &:last-child {
+              margin-right: 2.5rem;
+            }
+          }
+        }
+        .singledocument__btn {
+          margin: 3rem 0;
+          button {
+            border: none;
+            &:first-child {
+              margin-right: 2rem;
+            }
+          }
+        }
+      }
+      .singledocument__related {
+        margin-top: 44px;
+        h3 {
+          padding: 0 0 0.5rem 0;
+          &::after {
+            width: 48px;
+            height: 2px;
+            background: #00938d;
+          }
+        }
+        .singledocument__related__box {
+          margin-bottom: 1rem;
+          a {
+            font-size: 16px;
+            color: $document_related_link;
+            display: block;
+            &:hover{
+              color: $document_related_link_hover;
+            }
+          }
+          span {
+            color: $document_related;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
