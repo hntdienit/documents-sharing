@@ -1,0 +1,10 @@
+@import "../../../variables.scss";
+
+.rate_custom {
+  .rate__star__filled {
+    color: $color_star;
+  }
+  .rate__star__unfilled {
+    color: #dcdcdc;
+  }
+}

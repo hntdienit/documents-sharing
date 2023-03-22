@@ -1,5 +1,7 @@
 import authRoute from "./auth.route.js"
 import documentRoute from "./document.route.js"
+import reviewRoute from "./review.route.js"
+import userRoute from "./user.route.js"
 
 const router = (app) => {
   app.get("/", (req, res, next) => {
@@ -10,6 +12,8 @@ const router = (app) => {
 
   app.use("/auth", authRoute);
   app.use("/document", documentRoute);
+  app.use("/review", reviewRoute);
+  app.use("/user", userRoute);
 
 
   app.use((err, req, res, next) => {

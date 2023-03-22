@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import "./app.scss";
 import DefaultLayout from "./layouts/DefaultLayout/DefaultLayout.jsx";
@@ -60,7 +59,7 @@ function App() {
         {/* </AuthContext.Provider> */}
         {/* <ToastContainer autoClose={5000} /> */}
       </div>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

@@ -3,13 +3,14 @@
 .star__custom {
   display: flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   .star__total {
     margin-right: .5rem;
   }
   .star__wrap {
+    display: flex;
     .star__item {
-      color: $color_star;
+      color: $color_star !important;
     }
   }
   .star__reviews {

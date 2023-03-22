@@ -3,12 +3,11 @@ import "./SingleDocument.scss";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import SchoolIcon from "@mui/icons-material/School";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
 import newRequest from "../../utils/newRequest.js";
 import HeaderPage from "../../components/user/HeaderPage/HeaderPage.jsx";
-import Review from "../../components/user/Review/Review.jsx";
+import Reviews from "../../components/user/Reviews/Reviews.jsx";
 import Star from "../../components/public/Star/Star.jsx";
 
 import images from "../../assets/images";
@@ -53,30 +52,10 @@ const SingleDocument = () => {
                       </i>
                       20,153 Students
                     </span>
-                    {/* <span className="singledocument__rat">
-                      4.7
-                      <i>
-                        <StarBorderIcon />
-                      </i>
-                      <i>
-                        <StarBorderIcon />
-                      </i>
-                      <i>
-                        <StarBorderIcon />
-                      </i>
-                      <i>
-                        <StarBorderIcon />
-                      </i>
-                      <i>
-                        <StarBorderIcon />
-                      </i>
-                      (4,5609)
-                    </span> */}
                     <div className="singledocument__rat">
-                      <Star stars={4.5} reviews={"4,5609"} isStar isReviews/>
+                      <Star stars={4.5} reviews={"4,5609"} isStar isReviews />
                     </div>
                   </div>
-
                   <div className="singledocument__desc">
                     <div>
                       <span>Mô tả</span>
@@ -87,7 +66,7 @@ const SingleDocument = () => {
                         dolor sit
                       </p>
                     </div>
-                    <Review />
+                    <Reviews documentId={data?.Tai_lieu?.id} />
                   </div>
                 </div>
               </div>

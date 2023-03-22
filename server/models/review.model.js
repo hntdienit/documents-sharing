@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const Ratings = sequelize.define(
+const Reviews = sequelize.define(
   "Danh_gia",
   {
     So_sao: { type: DataTypes.STRING },
@@ -13,4 +13,4 @@ const Ratings = sequelize.define(
   }
 );
 
-export default Ratings;
+export default Reviews;
