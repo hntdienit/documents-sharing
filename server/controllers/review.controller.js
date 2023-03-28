@@ -11,7 +11,7 @@ export const newRating = async (req, res, next) => {
     const ratingDocument = await Reviews.findOne({
       where: {
         Tai_lieu_id: req.body.documentId,
-        Nguoi_dung_id: 1,
+        Nguoi_dung_id: req.user.id,
       },
     });
     if (ratingDocument) {

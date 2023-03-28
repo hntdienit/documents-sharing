@@ -1,4 +1,4 @@
-@import "../../../variables.scss";
+// @import "../../../variables.scss";
 
 .star__custom {
   display: flex;
@@ -10,7 +10,7 @@
   .star__wrap {
     display: flex;
     .star__item {
-      color: $color_star !important;
+      color: yellow !important;
     }
   }
   .star__reviews {

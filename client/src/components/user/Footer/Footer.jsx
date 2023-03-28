@@ -3,118 +3,124 @@ import React from "react";
 import "./Footer.scss";
 
 import images from "../../../assets/images";
+import icons from "../../../assets/icons"
 
 const Footer = () => {
   return (
     <div className="footer">
-      <footer className="footertwo-section">
-        <div className="footer__container">
-          {/* <div className="row"> */}
-          <div className="col-3 col-md-6 col-sm-12 item">
-            <div className="footer_logo">
-              <img src={images.logo} alt="" />
-              <ul>
-                <li>
-                  <a href="">(+75) 36 6552 9564 </a>
-                </li>
-                <li>
-                  <a href="services.html">contact@domain.com</a>
-                </li>
-                <li>
-                  <a href="services.html">Washington, United State</a>
-                </li>
-              </ul>
-              <div className="footer_socil">
-                <ul>
-                  <li>
-                    <a href="#">
-                      <i className="fab fa-facebook-f"></i>
+      <footer className="rbt-footer footer-style-1">
+        <div className="footer-top">
+          <div className="container">
+            <div className="row row--15 mt_dec--30">
+              <div className="col-lg-4 col-md-6 col-sm-6 col-12 mt--30">
+                <div className="footer-widget">
+                  <div className="logo">
+                    <a href="index.html">
+                      <img src={images.logo} alt="Edu-cause" />
                     </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="fab fa-twitter"></i>
+                  </div>
+
+                  <p className="description mt--20">
+                    We’re always in search for talented and motivated people. Don’t be shy introduce yourself!
+                  </p>
+
+                  <div className="contact-btn mt--30">
+                    <a className="rbt-btn hover-icon-reverse btn-border-gradient radius-round" href="#">
+                      <div className="icon-reverse-wrapper">
+                        <span className="btn-text">Contact With Us</span>
+                        <span className="btn-icon">
+                          <i><icons.ArrowForwardIcon/></i>
+                        </span>
+                        <span className="btn-icon">
+                        <i><icons.ArrowForwardIcon/></i>
+                        </span>
+                      </div>
                     </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="fab fa-pinterest"></i>
-                    </a>
-                  </li>
-                </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="offset-lg-1 col-lg-2 col-md-6 col-sm-6 col-12 mt--30">
+                <div className="footer-widget">
+                  <h5 className="ft-title">Useful Links</h5>
+                  <ul className="ft-link">
+                    <li>
+                      <a href="12-marketplace.html">Marketplace</a>
+                    </li>
+                    <li>
+                      <a href="04-kindergarten.html">kindergarten</a>
+                    </li>
+                    <li>
+                      <a href="13-university-classic.html">University</a>
+                    </li>
+                    <li>
+                      <a href="09-gym-coaching.html">GYM Coaching</a>
+                    </li>
+                    <li>
+                      <a href="faqs.html">FAQ</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="col-lg-2 col-md-6 col-sm-6 col-12 mt--30">
+                <div className="footer-widget">
+                  <h5 className="ft-title">Our Company</h5>
+                  <ul className="ft-link">
+                    <li>
+                      <a href="contact.html">Contact Us</a>
+                    </li>
+                    <li>
+                      <a href="become-a-teacher.html">Become Teacher</a>
+                    </li>
+                    <li>
+                      <a href="blog.html">Blog</a>
+                    </li>
+                    <li>
+                      <a href="instructor.html">Instructor</a>
+                    </li>
+                    <li>
+                      <a href="event-list.html">Events</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
+                <div className="footer-widget">
+                  <h5 className="ft-title">Get Contact</h5>
+                  <ul className="ft-link">
+                    <li>
+                      <span>Phone:</span> <a href="#">(406) 555-0120</a>
+                    </li>
+                    <li>
+                      <span>E-mail:</span> <a href="mailto:hr@example.com">rainbow@example.com</a>
+                    </li>
+                    <li>
+                      <span>Location:</span> North America, USA
+                    </li>
+                  </ul>
+                  <ul className="social-icon social-default icon-naked justify-content-start mt--20">
+                    <li>
+                      <a href="https://www.facebook.com/">
+                        <i><icons.FacebookIcon/></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.twitter.com">
+                        <i><icons.TwitterIcon/></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.instagram.com/">
+                        <i><icons.InstagramIcon/></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="col-lg-3 col-md-6 col-sm-12 item">
-            <div className="foo_widgetquick_lnk">
-              <h5>Category</h5>
-              <ul>
-                <li>
-                  <a href="courses.html">Privacy & Poilicy</a>
-                </li>
-                <li>
-                  <a href="courses.html">Terms & Condition</a>
-                </li>
-                <li>
-                  <a href="courses.html">Customer Support</a>
-                </li>
-                <li>
-                  <a href="courses.html">For Business </a>
-                </li>
-                <li>
-                  <a href="courses.html">Support</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 col-sm-12 item">
-            <div className="foo_widgetuseful_lnk">
-              <h5>Useful Links</h5>
-              <ul>
-                <li>
-                  <a href="courses.html">About Us</a>
-                </li>
-                <li>
-                  <a href="courses.html">Refer A Friend</a>
-                </li>
-                <li>
-                  <a href="courses.html">Scolarship</a>
-                </li>
-                <li>
-                  <a href="courses.html">Marketing</a>
-                </li>
-                <li>
-                  <a href="courses.html">Free Courses</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6 col-sm-12 item">
-            <div className="foo_widget footer_contact_form">
-              <h5>Send Message</h5>
-              <form method="post" action="mailer.php">
-                <input className="con-field" name="email" id="email" type="text" placeholder="Your Email" />
-                {/* <textarea defaultValue={""} className="con-field" name="email" id="message" placeholder="Your Message">
-                  {" "}
-                </textarea> */}
-                <input type="submit" id="submit-contact" className="btn-alt" value="Submit" />
-              </form>
-            </div>
-          </div>
-          {/* </div> */}
-        </div>
-
-        <div className="subfooter">
-          <p>
-            Copyright © 2021 <a href="index.html">Aducat.</a> All rights Reserved.
-          </p>
         </div>
       </footer>
     </div>

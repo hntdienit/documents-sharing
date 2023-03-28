@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import "./Reviews.scss";
@@ -8,19 +8,18 @@ import Review from "../Review/Review.jsx";
 import newRequest from "../../../utils/newRequest.js";
 import Loading from "../../public/Loading/Loading.jsx";
 import Error from "../../public/Error/Error.jsx";
-
-const user123 = {
-  id: 1,
-};
+import {AuthContext} from "../../../helpers/AuthContext.jsx";
 
 const Reviews = ({ documentId }) => {
   const [openReview, setOpenReview] = useState(false);
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
 
+  const { currentUser } = useContext(AuthContext);
+
   const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
-    queryKey: ["Review"],
+    queryKey: [`Reviews_${documentId}`],
     queryFn: () =>
       newRequest.get(`/review/document/${documentId}`).then((res) => {
         return res.data;
@@ -32,11 +31,11 @@ const Reviews = ({ documentId }) => {
       return newRequest.post("/review/new", review);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["Review"]);
+      queryClient.invalidateQueries([`Reviews_${documentId}`]);
     },
   });
 
-  const handleSubmit = (e) => {
+  const handleAddReview = (e) => {
     e.preventDefault();
     const Noi_dung_danh_gia = e.target[0].value;
     const So_sao = rating;
@@ -53,9 +52,9 @@ const Reviews = ({ documentId }) => {
       ) : (
         <div className="review">
           <div className="review__title">Đánh giá</div>
-          {(data[0]?.Nguoi_dung_id !== user123.id || openReview) && (
+          {(data[0]?.Nguoi_dung_id !== currentUser.userId || openReview) && (
             <div className="review__form">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleAddReview}>
                 <div className="review__form__star">
                   <div>Đánh giá của bạn:</div>
                   <div>
@@ -72,7 +71,7 @@ const Reviews = ({ documentId }) => {
                   <button type="submit" className="review__submit">
                     Lưu
                   </button>
-                  {data[0]?.Nguoi_dung_id === user123.id && (
+                  {data[0]?.Nguoi_dung_id === currentUser.userId && (
                     <button
                       type="button"
                       className="review__submit"

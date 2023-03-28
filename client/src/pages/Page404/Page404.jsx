@@ -1,33 +1,36 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Page404.scss";
+
+import icons from "../../assets/icons";
 
 const Page404 = () => {
   return (
     <div className="page404">
-      <section className="notfound-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="notfound_wrap">
-              <div className="col-sm-12">
-              <div>
-                <h3>404 Page</h3>
-                <h4>
-                  <a href="index.html"> Home </a> <span> &vert; </span> Not Found{" "}
-                </h4>
-              </div>
-            </div>
-                <h2> Oops... Page Not Found!</h2>
-                <p> Sorry the page could not be found here</p>
-                <a href="index.html" className="more-link">
-                  {" "}
-                  Back to home
-                </a>
+      <div className="rbt-error-area bg-gradient-11 rbt-section-gap">
+        <div className="error-area">
+          <div className="container">
+            <div className="row justify-content-center text-center">
+              <div className="col-10">
+                <h1 className="title">404!</h1>
+                <h3 className="sub-title">Không tìm thấy trang!</h3>
+                <p>Không thể tìm thấy trang bạn đang tìm kiếm.</p>
+                <Link to={"/"} className="rbt-btn btn-gradient icon-hover">
+                  <span className="btn-text">Trở về trang chủ</span>
+                  <span className="btn-icon">
+                    <i><icons.ArrowForwardIcon/></i>
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+      <div className="rbt-separator-mid">
+        <div className="container">
+          <hr className="rbt-separator m-0" />
+        </div>
+      </div>
     </div>
   );
 };

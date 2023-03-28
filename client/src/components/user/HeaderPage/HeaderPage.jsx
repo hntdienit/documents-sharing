@@ -17,6 +17,7 @@ const HeaderPage = ({ page, linkpage }) => {
         </h4>
       </div>
     </div>
+
   );
 };
 

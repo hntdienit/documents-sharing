@@ -10,11 +10,11 @@ import createError from "../utils/createError.js";
 // import User from "../models/user.model.js";
 import Users from "../models/user.model.js";
 
-const endCode = (id, username, role) => {
+const endCode = (id, Email) => {
   return jwt.sign(
     {
       iss: "B1910055",
-      sub: { id, username, role },
+      sub: { id, Email },
       iat: new Date().setTime(),
       exp: new Date().setDate(new Date().getDate() + 3),
     },
@@ -86,16 +86,18 @@ export const login = async (req, res, next) => {
 
     bcrypt.compare(Mat_khau, user.Mat_khau).then((match) => {
       if (!match) return res.status(200).json({ error: "Tài khoản hoặc mật khẩu không chính xác!" });
-      const accessToken = endCode(user.id, user.Email, user.role);
+      const accessToken = endCode(user.id, user.Email);
       return res
         .cookie("accessToken", accessToken, {
           httpOnly: true,
         })
         .status(200)
         .json({
-          accessToken: accessToken,
-          useID: user.id,
+          userId: user.id,
+          Ho_ten: "thanh dien",
+          Quyen: "user",
           Email: user.Email,
+          AccessToken: accessToken,
         });
     });
   } catch (err) {
