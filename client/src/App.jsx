@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./app.scss";
 import DefaultLayout from "./layouts/DefaultLayout/DefaultLayout.jsx";
@@ -46,7 +48,7 @@ function App() {
           </Routes>
         </Router>
       </div>
-      {/* <ToastContainer autoClose={5000} /> */}
+      <ToastContainer autoClose={5000} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

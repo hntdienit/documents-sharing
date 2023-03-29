@@ -1,0 +1,20 @@
+.multinavbar_custom {
+  position: fixed;
+  // transition: none;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  padding-top: 0;
+  min-height: 100%;
+  width: 19.29rem;
+  z-index: 810;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  border-radius: 0;
+  margin: 60px 0 0.75rem 0;
+}
+
+@media print {
+  .main-sidebar{
+    display: none !important;
+  }
+}

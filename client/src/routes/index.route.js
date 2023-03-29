@@ -5,6 +5,11 @@ import Login from "../pages/Login/Login.jsx";
 import Page404 from "../pages/Page404/Page404.jsx";
 // import Category from "../pages/Category/Category.jsx";
 
+import AdminLayout from "../layouts/AdminLayout/AdminLayout.jsx"
+import AdminHome from "../pages/admin/Home/Home.jsx"
+
+import NewUser from "../pages/admin/User/NewUser.jsx";
+
 // import NewDocument from "../pages/Document/NewDocument.jsx";
 // import SingleDocument from "../pages/SingleDocument/SingleDocument.jsx";
 // import Profile from "../pages/user/Profile/Profile.jsx";
@@ -21,7 +26,8 @@ const routes = [
   // { path: "/profile/:id", component: Profile },
 
 
-  // { path: "/P403", component: Page403, layout: null },
+  { path: "/admin", component: AdminHome, layout: AdminLayout },
+  { path: "/admin/user/NewUser", component: NewUser, layout: AdminLayout },
   // { path: "/admin", component: AdminHome, layout: AdminLayout, role: "admin" },
   { path: "/", component: Home },
   { path: "/*", component: Page404, layout: null },

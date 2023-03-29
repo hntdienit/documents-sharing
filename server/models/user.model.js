@@ -11,10 +11,10 @@ const Users = sequelize.define(
     CCCD: { type: DataTypes.STRING, allowNull: true },
     Gioi_tinh: { type: DataTypes.STRING, allowNull: true },
     So_dien_thoai: { type: DataTypes.STRING, allowNull: true },
-    Ma_so: { type: DataTypes.STRING, allowNull: true },
-    Trang_thai_nguoi_dung: { type: DataTypes.STRING, defaultValue: "ChuaKichHoat" },
+    Ma_so: { type: DataTypes.STRING, allowNull: true, unique: true  },
+    // Trang_thai_nguoi_dung: { type: DataTypes.STRING, defaultValue: "ChuaKichHoat" },
     Hinh_dai_dien: { type: DataTypes.STRING, allowNull: true },
-    Giang_vien: { type: DataTypes.STRING, allowNull: true },
+    Quyen: { type: DataTypes.STRING, defaultValue: "SinhVien" },
   },
   {
     createdAt: "Thoi_gian_tao",
