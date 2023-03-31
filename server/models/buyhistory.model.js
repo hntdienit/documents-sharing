@@ -1,10 +1,10 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const Comments = sequelize.define(
-  "Binh_luan",
+const BuyHistory = sequelize.define(
+  "Lich_su_mua",
   {
-    Noi_dung_binh_luan: { type: DataTypes.STRING, allowNull: true },
+    Thu_tu_mua: { type: DataTypes.STRING, allowNull: false },
   },
   {
     createdAt: "Thoi_gian_tao",
@@ -12,4 +12,4 @@ const Comments = sequelize.define(
   }
 );
 
-export default Comments;
+export default BuyHistory;
