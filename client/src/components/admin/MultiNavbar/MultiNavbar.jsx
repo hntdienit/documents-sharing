@@ -16,6 +16,12 @@ const MultiNavbar = () => {
                 <li>
                   <Link to={"/admin/user/NewUser"}>NewUser</Link>
                 </li>
+                <li>
+                  <Link to={"/admin/document/create"}>them tai lieu</Link>
+                </li>
+                <li>
+                  <Link to={"/admin/document/list"}>ds tai lieu</Link>
+                </li>
               </ul>
             </div>
           </div>

@@ -11,3 +11,14 @@ export const verifyToken = (req, res, next) => {
     next();
   });
 };
+
+export const checkPermission = (req, res, next) => {
+  try {
+    if (req.user.Quyen !== "QuanTriVien") {
+      return next(createError(403, "Bạn không đủ quyền truy cập!"));
+    }
+    next();
+  } catch (err) {
+    next(err);
+  }
+};

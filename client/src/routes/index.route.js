@@ -9,6 +9,8 @@ import AdminLayout from "../layouts/AdminLayout/AdminLayout.jsx"
 import AdminHome from "../pages/admin/Home/Home.jsx"
 
 import NewUser from "../pages/admin/User/NewUser.jsx";
+import CreateDocument from "../pages/user/Document/CreateDocument.jsx";
+import ListDocument from "../pages/user/Document/ListDocument.jsx";
 
 // import NewDocument from "../pages/Document/NewDocument.jsx";
 // import SingleDocument from "../pages/SingleDocument/SingleDocument.jsx";
@@ -28,6 +30,8 @@ const routes = [
 
   { path: "/admin", component: AdminHome, layout: AdminLayout },
   { path: "/admin/user/NewUser", component: NewUser, layout: AdminLayout },
+  { path: "/admin/document/create", component: CreateDocument, layout: AdminLayout },
+  { path: "/admin/document/list", component: ListDocument, layout: AdminLayout },
   // { path: "/admin", component: AdminHome, layout: AdminLayout, role: "admin" },
   { path: "/", component: Home },
   { path: "/*", component: Page404, layout: null },

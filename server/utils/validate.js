@@ -18,7 +18,7 @@ const vParam = (schema, name) => {
   return (req, res, next) => {
     const { error, value } = schema.validate({ param: req.params[name] }, { abortEarly: false });
     if (error) {
-      return next(createError(400, "Thông tin chưa chính xác!"));
+      return next(createError(400, "Thông tin nhập chưa chính xác!"));
     } else {
       if (!req.value) req.value = {};
       if (!req.value["params"]) req.value.params = {};
@@ -31,7 +31,7 @@ const vParam = (schema, name) => {
 const schemas = {
   login: joi.object({
     Email: joi.string().required().email(),
-    Mat_khau: joi.string().min(4),
+    Mat_khau: joi.string().required().min(4),
   }),
 };
 

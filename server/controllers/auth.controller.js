@@ -10,11 +10,11 @@ import createError from "../utils/createError.js";
 // import User from "../models/user.model.js";
 import Users from "../models/user.model.js";
 
-const endCode = (id, Email) => {
+const endCode = (id, Email, Quyen) => {
   return jwt.sign(
     {
       iss: "B1910055",
-      sub: { id, Email },
+      sub: { id, Email, Quyen },
       iat: new Date().setTime(),
       exp: new Date().setDate(new Date().getDate() + 3),
     },
@@ -25,7 +25,6 @@ const endCode = (id, Email) => {
 export const register = async (req, res, next) => {
   try {
     const { Email, Mat_khau } = req.body;
-    console.log(Email + " " + Mat_khau);
     // bcrypt.hash(password, 10).then(async (hash) => {
     //   const newUser = await Users.create({
     //     username: username,
@@ -86,7 +85,7 @@ export const login = async (req, res, next) => {
 
     bcrypt.compare(Mat_khau, user.Mat_khau).then((match) => {
       if (!match) return res.status(200).json({ error: "Tài khoản hoặc mật khẩu không chính xác!" });
-      const accessToken = endCode(user.id, user.Email);
+      const accessToken = endCode(user.id, user.Email, user.Quyen);
       return res
         .cookie("accessToken", accessToken, {
           httpOnly: true,
@@ -94,8 +93,8 @@ export const login = async (req, res, next) => {
         .status(200)
         .json({
           userId: user.id,
-          Ho_ten: "thanh dien",
-          Quyen: "user",
+          Ho_ten: user.Ho_ten,
+          Quyen: user.Quyen,
           Email: user.Email,
           AccessToken: accessToken,
         });

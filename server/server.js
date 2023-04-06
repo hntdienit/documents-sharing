@@ -10,14 +10,6 @@ import router from "./routes/index.route.js";
 const app = express();
 dotenv.config();
 
-// const connect = async () => {
-//   try {
-//     await mongoose.connect(process.env.MONGO);
-//     console.log("✅ connection ✅");
-//   } catch (error) {
-//     console.log(`📢 not connection ${error}`);
-//   }
-// };
 /* connection Mysql */
 try {
   await sequelize.authenticate();

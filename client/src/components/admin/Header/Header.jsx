@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className="main-header">
       <div className="d-flex align-items-center logo-box justify-content-start">
-        <a href="index.html" className="logo">
+        <Link to={"/admin"} className="logo">
           {/* <div className="logo-mini w-30">
             <span className="light-logo">
               <img src={images.logo} alt="logo" />
@@ -26,7 +26,7 @@ const Header = () => {
               <img src={images.logo} alt="logo" />
             </span>
           </div>
-        </a>
+        </Link>
       </div>
 
       <nav className="navbar navbar-static-top">

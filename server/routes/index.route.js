@@ -1,7 +1,9 @@
-import authRoute from "./auth.route.js"
-import documentRoute from "./document.route.js"
-import reviewRoute from "./review.route.js"
-import userRoute from "./user.route.js"
+import authRoute from "./auth.route.js";
+import documentRoute from "./document.route.js";
+import reviewRoute from "./review.route.js";
+import userRoute from "./user.route.js";
+
+import createError from "../utils/createError.js";
 
 const router = (app) => {
   app.get("/", (req, res, next) => {
@@ -15,29 +17,15 @@ const router = (app) => {
   app.use("/review", reviewRoute);
   app.use("/user", userRoute);
 
+  app.use("/:error", (req, res, next) => {
+    return next(createError(404, "Không tìm thấy đường dẫn mong muốn!"));
+  });
 
   app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;
     const errorMessage = err.message || "Đã có lỗi xảy ra!";
-    return res.status(errorStatus).send(errorMessage);
+    return res.status(errorStatus).json({ error: errorMessage });
   });
-
-  // app.use("/:error", (req, res, next) => {
-  //   const err = new Error("Not Found!");
-  //   err.status = 404;
-  //   next(err);
-  // });
-
-  // /* show error when debug console.log */
-  // app.use((err, req, res, next) => {
-  //   const error = app.get("env") === "development" ? err : {};
-  //   const status = err.status || 500;
-  //   return res.status(status).json({
-  //     error: {
-  //       message: error.message,
-  //     },
-  //   });
-  // });
 };
 
 export default router;

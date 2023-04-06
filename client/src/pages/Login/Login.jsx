@@ -26,13 +26,13 @@ const Login = () => {
       await login(inputs);
       navigate("/");
     } catch (err) {
-      setError(err.response.data);
+      setError(err.response);
     }
   };
 
   return (
     <div className="container">
-      <div className="login">
+      {/* <div className="login">
         <div className="rbt-contact-form contact-form-style-1 max-width-auto">
           <h3 className="title">Login</h3>
           <form className="max-width-auto">
@@ -78,8 +78,8 @@ const Login = () => {
             </div>
           </form>
         </div>
-      </div>
-      {/* <form onSubmit={handleLogin}>
+      </div> */}
+      <form onSubmit={handleLogin}>
         <h1>Đăng nhập</h1>
         <label htmlFor="">Email</label>
         <input name="Email" type="text" placeholder="dien123@gmail.com" onChange={handleChange} />
@@ -88,7 +88,7 @@ const Login = () => {
         <input name="Mat_khau" type="password" onChange={handleChange} />
         <button type="submit">Login</button>
         {error && error}
-      </form> */}
+      </form>
     </div>
   );
 };

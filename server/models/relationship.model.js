@@ -63,6 +63,10 @@ const relationship = () => {
   Documents.hasMany(CartDetails, { foreignKey: "Tai_lieu_id" });
   CartDetails.belongsTo(Documents, { foreignKey: "Tai_lieu_id" });
 
+  /* Documents x OrderDetails: one to Many */
+  Documents.hasMany(OrderDetails, { foreignKey: "Tai_lieu_id" });
+  OrderDetails.belongsTo(Documents, { foreignKey: "Tai_lieu_id" });
+
   /* Documents x Promotions: one to Many */
   Documents.hasMany(Promotions, { foreignKey: "Tai_lieu_id" });
   Promotions.belongsTo(Documents, { foreignKey: "Tai_lieu_id" });
@@ -118,6 +122,10 @@ const relationship = () => {
   /* Users x Subjects: Many to Many */
   Users.belongsToMany(Subjects, { through: "Danh_sach_lop_hoc_phans", foreignKey: "Nguoi_dung_id" });
   Subjects.belongsToMany(Users, { through: "Danh_sach_lop_hoc_phans", foreignKey: "Lop_hoc_phan_id" });
+
+  /* Users x Subjects: one to Many */
+  Users.hasMany(Subjects, { foreignKey: "Giang_vien_id" });
+  Subjects.belongsTo(Users, { foreignKey: "Giang_vien_id" });
 };
 
 export default relationship;
