@@ -1,40 +1,72 @@
-.pageNumbers {
-  list-style: none;
+// .pageNumbers {
+//   list-style: none;
+//   display: flex;
+// }
+
+// .pageNumbers li {
+//   padding: 10px;
+//   border: 1px solid white;
+//   cursor: pointer;
+// }
+
+// .pageNumbers li.active {
+//   background-color: white;
+//   color: black;
+// }
+
+// .pageNumbers li button {
+//   background-color: transparent;
+//   border: none;
+//   color: white;
+//   font-size: 1.5rem;
+//   cursor: pointer;
+// }
+// .pageNumbers li button:hover {
+//   background-color: white;
+//   color: black;
+// }
+// .pageNumbers li button:focus {
+//   outline: none;
+// }
+
+// .loadmore {
+//   padding: 1rem;
+//   background-color: transparent;
+
+//   color: white;
+//   font-size: 1.2rem;
+//   border: 1px solid white;
+//   cursor: pointer;
+// }
+
+//--------
+@import "../../../assets/scss/variables.scss";
+
+.page__container {
   display: flex;
-}
-
-.pageNumbers li {
-  padding: 10px;
-  border: 1px solid white;
   cursor: pointer;
-}
 
-.pageNumbers li.active {
-  background-color: white;
-  color: black;
-}
-
-.pageNumbers li button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-.pageNumbers li button:hover {
-  background-color: white;
-  color: black;
-}
-.pageNumbers li button:focus {
-  outline: none;
-}
-
-.loadmore {
-  padding: 1rem;
-  background-color: transparent;
-
-  color: white;
-  font-size: 1.2rem;
-  border: 1px solid white;
-  cursor: pointer;
+  .page__item {
+    // width: 34px;
+    // height: 34px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    list-style: none;
+  }
+  .page__link {
+    padding: 1rem;
+    border: 1px solid $pages_border;
+    border-radius: $radius_sm;
+    font-size: $fz_xs;
+    font-weight: $fw_light;
+    list-style: none;
+    &:hover {
+      background-color: $pages_bg_hover;
+      color: $pages_active;
+    }
+  }
+  .active {
+    background-color: $color-active;
+    color: $color_white;
+  }
 }

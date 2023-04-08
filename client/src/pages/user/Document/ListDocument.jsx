@@ -27,17 +27,37 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useQuery } from "@tanstack/react-query";
 
 import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
+import TableComponent from "../../../components/public/TableComponent/TableComponent.jsx";
+import Pagination from "../../../components/public/Pagination/Pagination.jsx";
 import newRequest from "../../../utils/newRequest.js";
 import icons from "../../../assets/icons/index.js";
 import Loading from "../../../components/public/Loading/Loading.jsx";
 import Error from "../../../components/public/Error/Error.jsx";
 
 const ListDocument = () => {
+  const title = [
+    {
+      name: "Tên tài liệu",
+    },
+    {
+      name: "Tên tài liệu",
+    },
+  ];
+  const tableData = [
+    {
+      name: "Ten_tai_lieu",
+    },
+    {
+      name: "Ten_tai_lieu1",
+    },
+  ];
+
   const [list, setList] = useState([]);
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(5);
   const [pages, setPages] = useState(0);
   const [rows, setRows] = useState(0);
+  const [currentData, setCurrentData] = useState({});
   const [keyword, setKeyword] = useState("");
   // const [deleteload, setDeleteload] = useState(0);
 
@@ -47,17 +67,31 @@ const ListDocument = () => {
     queryKey: ["ListDocument"],
     queryFn: () =>
       newRequest.get(`/document?keyword=${keyword}&page=${page}&limit=${limit}`).then((res) => {
-        console.log("data...", res.data);
+        // setCurrentData(res.data);
+        // setList(res.data.result);
+        // setPage(res.data.page);
+        // setPages(res.data.totalPage);
+        // setRows(res.data.totalRows);
         return res.data;
-        // setList(response.data.result);
-        // setPage(response.data.page);
-        // setPages(response.data.totalPage);
-        // setRows(response.data.totalRows);
       }),
   });
 
+  useEffect(() => {
+    newRequest.get(`/document?keyword=${keyword}&page=${page}&limit=${limit}`).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        setList(res.data.result);
+        setPage(res.data.page);
+        setPages(res.data.totalPage);
+        setRows(res.data.totalRows);
+      }
+    });
+  }, [page, limit, keyword]);
+
   const changePage = ({ selected }) => {
     setPage(selected);
+    // refetch();
   };
 
   const validationSchema = yup.object({});
@@ -79,7 +113,7 @@ const ListDocument = () => {
         <Error err={error?.response?.data} />
       ) : (
         <Card elevation={4}>
-          <HeaderPage add title={"CreateDocument"} to={"/admin/listproduct"}>
+          <HeaderPage list title={"CreateDocument"} to={"/admin/listproduct"}>
             <Box component={"form"} sx={{ flexGrow: 1 }} onSubmit={formik.handleSubmit} autoComplete="off">
               <Typography component={"div"}>
                 <TextField
@@ -106,40 +140,51 @@ const ListDocument = () => {
           <Typography component={"div"} marginTop={2} marginX={3}>
             <Card elevation={3}>
               <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }}>
+                <Table sx={{ minWidth: 550 }}>
                   <TableHead>
                     <TableRow style={{ backgroundColor: "#e2e3e5" }}>
                       <TableCell align="center">
                         <Typography component={"div"} fontWeight="bold">
-                          #
+                          STT
                         </Typography>
                       </TableCell>
                       <TableCell align="center">
                         <Typography component={"div"} fontWeight="bold">
-                          Name
+                          Tên tài liệu
                         </Typography>
                       </TableCell>
                       <TableCell align="center">
                         <Typography component={"div"} fontWeight="bold">
-                          Action
+                          Tên tài liệu
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography component={"div"} fontWeight="bold">
+                          Tên tài liệu
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography component={"div"} fontWeight="bold">
+                          Chức năng
                         </Typography>
                       </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data.result?.map((item, index) => (
-                      <TableRow key={item.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    {list.map((item, index) => (
+                      <TableRow key={item.id}>
                         <TableCell component="th" scope="row" align="center">
                           {(page + 1) * limit - limit + index + 1}
                         </TableCell>
-                        <TableCell align="center">{item.name}</TableCell>
+                        <TableCell align="center">{item?.Ten_tai_lieu}</TableCell>
+                        <TableCell align="center">{item?.Ten_tai_lieu}</TableCell>
+                        <TableCell align="center">{item?.Ten_tai_lieu}</TableCell>
                         <TableCell align="center">
-                          <Link to={`/admin/editcategory/${item.id}`}>
-                            <Button color="warning">
-                              <EditIcon />
-                            </Button>
-                          </Link>
-                          |
+                          {/* <Link to={`/admin/editcategory/${item.id}`}> */}
+                          <Button color="warning">
+                            <EditIcon />
+                          </Button>
+                          {/* </Link> */}|
                           <Button
                             color="error"
                             // onClick={() => {
@@ -155,52 +200,12 @@ const ListDocument = () => {
                 </Table>
               </TableContainer>
             </Card>
+            {/* <Card elevation={3}>
+              <TableComponent title={title} data={tableData} linkedit={"/admin/editcategory/"} list={list} limit={limit} page={page} />
+            </Card> */}
           </Typography>
           <Grid container spacing={2} paddingX={3} paddingY={3}>
-            <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-              <FormControl sx={{ minWidth: 120 }}>
-                <InputLabel id="select-label">Pages</InputLabel>
-                <Select
-                  labelId="select-label"
-                  value={limit}
-                  label="Pages"
-                  size="small"
-                  onChange={(e) => {
-                    setLimit(e.target.value);
-                    setPage(0);
-                  }}
-                >
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                  <MenuItem value={15}>15</MenuItem>
-                  <MenuItem value={20}>20</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-              <Typography component={"div"}>
-                <ReactPaginate
-                  nextLabel=">"
-                  onPageChange={changePage}
-                  pageRangeDisplayed={1}
-                  marginPagesDisplayed={1}
-                  pageCount={pages}
-                  previousLabel="<"
-                  pageClassName="page-item"
-                  pageLinkClassName="page-link"
-                  previousClassName="page-item"
-                  previousLinkClassName="page-link"
-                  nextClassName="page-item"
-                  nextLinkClassName="page-link"
-                  breakLabel="..."
-                  breakClassName="page-item"
-                  breakLinkClassName="page-link"
-                  containerClassName="pagination"
-                  activeClassName="active"
-                  renderOnZeroPageCount={null}
-                />
-              </Typography>
-            </Grid>
+            <Pagination limit={limit} setLimit={setLimit} setPage={setPage} changePage={changePage} pages={pages} />
           </Grid>
         </Card>
       )}

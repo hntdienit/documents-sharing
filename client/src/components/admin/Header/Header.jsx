@@ -80,7 +80,7 @@ const Header = () => {
                 </label>
               </a>
             </li> */}
-            <li className="dropdown notifications-menu btn-group">
+            {/* <li className="dropdown notifications-menu btn-group">
               <a
                 href="#"
                 className="waves-effect waves-light btn-primary-light svg-bt-icon bg-transparent"
@@ -171,8 +171,8 @@ const Header = () => {
                   <a href="#">View all</a>
                 </li>
               </ul>
-            </li>
-            <li className="btn-group nav-item d-xl-inline-flex d-none">
+            </li> */}
+            {/* <li className="btn-group nav-item d-xl-inline-flex d-none">
               <a
                 href="#"
                 className="waves-effect waves-light nav-link btn-primary-light svg-bt-icon"
@@ -183,9 +183,9 @@ const Header = () => {
                   <icons.MessageIcon />
                 </i>
               </a>
-            </li>
+            </li> */}
 
-            <li className="btn-group d-xl-inline-flex d-none">
+            {/* <li className="btn-group d-xl-inline-flex d-none">
               <a
                 href="#"
                 className="waves-effect waves-light nav-link btn-primary-light svg-bt-icon dropdown-toggle"
@@ -210,7 +210,7 @@ const Header = () => {
                   <img className="w-20 rounded me-10" src={images.en_us} alt="" /> French
                 </a>
               </div>
-            </li>
+            </li> */}
 
             {/* <li className="btn-group nav-item d-xl-inline-flex d-none">
               <a
@@ -223,7 +223,7 @@ const Header = () => {
               </a>
             </li> */}
 
-            <li className="dropdown user user-menu">
+            {/* <li className="dropdown user user-menu">
               <a
                 href="#"
                 className="waves-effect waves-light dropdown-toggle w-auto l-h-12 bg-transparent p-0 no-shadow"
@@ -239,7 +239,7 @@ const Header = () => {
                   <img src={images.avatar} className="avatar rounded-circle bg-primary-light h-40 w-40" alt="" />
                 </div>
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </nav>

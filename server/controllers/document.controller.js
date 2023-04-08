@@ -36,7 +36,25 @@ export const listDocument1 = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 5;
     const search = req.query.keyword || "";
     const offset = limit * page;
-    const totalRows = await Documents.count();
+    const totalRows = await Documents.count({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+    });
 
     const totalPage = Math.ceil(totalRows / limit);
     const result = await Documents.findAll({
