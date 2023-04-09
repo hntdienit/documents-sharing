@@ -1,76 +1,101 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 
 import HomeIcon from "@mui/icons-material/Home";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ListIcon from "@mui/icons-material/List";
+import SearchIcon from "@mui/icons-material/Search";
 
-const HeaderPage = ({ add = false, edit = false, list = false, title, to, children }) => {
+import "./HeaderPage.scss";
+
+const HeaderPage = ({ add = false, edit = false, list = false, title, to, setKeyword }) => {
   let action = "";
   let icon = "";
 
   if (add) {
-    action = `New ${title}`;
+    action = `Thêm ${title}`;
     icon = <AddCircleOutlineIcon />;
   }
   if (edit) {
-    action = `Edit ${title}`;
+    action = `Sửa ${title}`;
     icon = <HomeIcon />;
   }
   if (list) {
-    action = `List ${title}`;
+    action = `Danh sách ${title}`;
     icon = <ListIcon />;
   }
 
+  const validationSchema = yup.object({});
+  const formik = useFormik({
+    initialValues: {
+      keyword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      setKeyword(values.keyword);
+    },
+  });
+
   return (
-    <Box>
-      <Typography component="div" marginTop={2}>
-        <Grid container spacing={2} paddingX={3}>
-          <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-            <Typography variant="h6" component="span" marginLeft={3} marginRight={1} color={"#198754"}>
-              {icon}
-            </Typography>
-            <Typography variant="h6" component="span" color={"#198754"}>
-              {action}
-            </Typography>
+    <>
+      <div className="admin__hp">
+        <Grid container spacing={2} className="ahp__wrap">
+          <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+            <span className="ahp__title">{icon}</span>
+            <span className="ahp__title">{action}</span>
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+            <div className="ahp__tolist">
+              <Link to={to}>
+                <Button variant="contained" startIcon={<AddCircleOutlineIcon />}>
+                  Danh sách {title}
+                </Button>
+              </Link>
+            </div>
           </Grid>
           {list !== false ? (
             <>
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                <Typography component={"div"}>{children}</Typography>
+              <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <form onSubmit={formik.handleSubmit} autoComplete="off">
+                  <div>
+                    <TextField
+                      size="small"
+                      id="keyword"
+                      name="keyword"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Button type="submit">
+                              <SearchIcon />
+                            </Button>
+                          </InputAdornment>
+                        ),
+                      }}
+                      variant="outlined"
+                      placeholder="Tìm ...."
+                      value={formik.values.keyword}
+                      onChange={formik.handleChange}
+                    />
+                  </div>
+                </form>
               </Grid>
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                <Typography component="div" align="right">
-                  <Link to={to}>
-                    <Button variant="contained" startIcon={<AddCircleOutlineIcon />}>
-                      New {title}
-                    </Button>
-                  </Link>
-                </Typography>
+              <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                sap xep gi do...
               </Grid>
             </>
           ) : (
-            <>
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}></Grid>
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                <Typography component="div" align="right">
-                  <Link to={to}>
-                    <Button variant="contained" startIcon={<AddCircleOutlineIcon />}>
-                      List {title}
-                    </Button>
-                  </Link>
-                </Typography>
-              </Grid>
-            </>
+            <></>
           )}
         </Grid>
-      </Typography>
-    </Box>
+      </div>
+    </>
   );
 };
 

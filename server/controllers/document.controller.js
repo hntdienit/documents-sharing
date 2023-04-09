@@ -22,15 +22,7 @@ export const newDocument = async (req, res, next) => {
   }
 };
 
-export const listDocument = async (req, res, next) => {
-  try {
-    const list = await Documents.findAll();
-    res.status(201).json(list);
-  } catch (err) {
-    next(err);
-  }
-};
-export const listDocument1 = async (req, res, next) => {
+export const pagination = async (req, res, next) => {
   try {
     const page = parseInt(req.query.page) || 0;
     const limit = parseInt(req.query.limit) || 5;
@@ -106,6 +98,37 @@ export const singleDocument = async (req, res, next) => {
       },
     };
     res.status(200).json(singledocument);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const editDocument = async (req, res, next) => {
+  try {
+    await Documents.update(
+      {
+        Ten_tai_lieu: req.body.Ten_tai_lieu,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    return res.status(201).json("sua thanh cong");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteDocument = async (req, res, next) => {
+  try {
+    await Documents.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    return res.status(201).json("xoa thanh cong");
   } catch (err) {
     next(err);
   }

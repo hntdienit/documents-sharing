@@ -1,5 +1,11 @@
 import express from "express";
-import { newDocument, listDocument, singleDocument, listDocument1 } from "../controllers/document.controller.js";
+import {
+  newDocument,
+  pagination,
+  singleDocument,
+  editDocument,
+  deleteDocument,
+} from "../controllers/document.controller.js";
 import validator from "../utils/validate.js";
 
 import { verifyToken, checkPermission } from "../middlewares/auth.middleware.js";
@@ -18,10 +24,8 @@ router.post(
   newDocument
 );
 
-router.route("/all").get(listDocument);
+router.route("/").get(pagination);
 
-router.route("/").get(listDocument1);
-
-router.route("/single/:id").get(singleDocument);
+router.route("/:id").get(singleDocument).patch(editDocument).delete(deleteDocument);
 
 export default router;
