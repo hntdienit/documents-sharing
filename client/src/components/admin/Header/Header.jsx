@@ -2,248 +2,238 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./Header.scss";
-import images from "../../../assets/images";
+// import images from "../../../assets/images";
 import icons from "../../../assets/icons";
 
 const Header = () => {
   return (
-    <header className="main-header">
-      <div className="d-flex align-items-center logo-box justify-content-start">
-        <Link to={"/admin"} className="logo">
-          {/* <div className="logo-mini w-30">
-            <span className="light-logo">
-              <img src={images.logo} alt="logo" />
-            </span>
-            <span className="dark-logo">
-              <img src={images.logo} alt="logo" />
-            </span>
-          </div> */}
-          <div className="logo-lg">
-            <span className="light-logo">
-              <img src={images.logo} alt="logo" />
-            </span>
-            <span className="dark-logo">
-              <img src={images.logo} alt="logo" />
-            </span>
+    <>
+      <header className="main-header">
+        <div className="d-flex align-items-center logo-box justify-content-start">
+          <a href="index.html" className="logo justify-content-around w-p100">
+            <div className="logo-mini w-30">
+              <span className="light-logo">
+                <img src={icons.AddCircleOutlineIcon} alt="logo" />
+              </span>
+              <span className="dark-logo">
+                <img src="../images/logo-letter.png" alt="logo" />
+              </span>
+            </div>
+            <div className="logo-lg">
+              <span className="light-logo">
+                <img src="../images/logo-dark-text.png" alt="logo" />
+              </span>
+              <span className="dark-logo">
+                <img src="../images/logo-light-text.png" alt="logo" />
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <nav className="navbar navbar-static-top">
+          <div className="app-menu">
+            <ul className="header-megamenu nav">
+              <li className="btn-group nav-item">
+                <a
+                  href="#"
+                  className="waves-effect waves-light nav-link push-btn"
+                  data-toggle="push-menu"
+                  role="button"
+                >
+                  <span className="icon-Align-left">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                    <span className="path3"></span>
+                  </span>
+                </a>
+              </li>
+              <li className="btn-group nav-item d-none d-xl-inline-block">
+                <a href="contact_app_chat.html" className="waves-effect waves-light nav-link svg-bt-icon" title="Chat">
+                  <i className="icon-Chat">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                  </i>
+                </a>
+              </li>
+              <li className="btn-group nav-item d-none d-xl-inline-block">
+                <a href="mailbox.html" className="waves-effect waves-light nav-link svg-bt-icon" title="Mailbox">
+                  <i className="icon-Mailbox">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                  </i>
+                </a>
+              </li>
+              <li className="btn-group nav-item d-none d-xl-inline-block">
+                <a
+                  href="extra_taskboard.html"
+                  className="waves-effect waves-light nav-link svg-bt-icon"
+                  title="Taskboard"
+                >
+                  <i className="icon-Clipboard-check">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                    <span className="path3"></span>
+                  </i>
+                </a>
+              </li>
+            </ul>
           </div>
-        </Link>
-      </div>
 
-      <nav className="navbar navbar-static-top">
-        <div className="app-menu">
-          <ul className="header-megamenu nav">
-            {/* <li className="btn-group nav-item">
-              <a
-                href="#"
-                className="waves-effect waves-light nav-link push-btn btn-primary-light ms-0"
-                data-toggle="push-menu"
-                role="button"
-              >
-                <i><icons.MenuIcon/></i>
-              </a>
-            </li> */}
-            <li className="btn-group d-lg-inline-flex d-none">
-              <div className="app-menu">
-                <div className="search-bx mx-5">
-                  <form>
-                    <div className="input-group">
-                      <input type="search" className="form-control" placeholder="Search" />
-                      <div className="input-group-append">
-                        <button className="btn" type="submit" id="button-addon3">
-                          <i>
-                            <icons.SearchIcon />
-                            {/* <span className="path1"></span>
-                          <span className="path2"></span> */}
-                          </i>
-                        </button>
+          <div className="navbar-custom-menu r-side">
+            <ul className="nav navbar-nav">
+              <li className="btn-group d-lg-inline-flex d-none">
+                <div className="app-menu">
+                  <div className="search-bx mx-5">
+                    <form>
+                      <div className="input-group">
+                        <input
+                          type="search"
+                          className="form-control"
+                          placeholder="Search"
+                          aria-label="Search"
+                          aria-describedby="button-addon2"
+                        />
+                        <div className="input-group-append">
+                          <button className="btn" type="submit" id="button-addon3">
+                            <i data-feather="search"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+              <li className="btn-group nav-item d-lg-inline-flex d-none">
+                <a
+                  href="#"
+                  data-provide="fullscreen"
+                  className="waves-effect waves-light nav-link full-screen"
+                  title="Full Screen"
+                >
+                  <i className="icon-Expand-arrows">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                  </i>
+                </a>
+              </li>
+
+              <li className="dropdown notifications-menu">
+                <a
+                  href="#"
+                  className="waves-effect waves-light dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  title="Notifications"
+                >
+                  <i className="icon-Notifications">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                  </i>
+                </a>
+                <ul className="dropdown-menu animated bounceIn">
+                  <li className="header">
+                    <div className="p-20">
+                      <div className="flexbox">
+                        <div>
+                          <h4 className="mb-0 mt-0">Notifications</h4>
+                        </div>
+                        <div>
+                          <a href="#" className="text-danger">
+                            Clear All
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </form>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+                  </li>
 
-        <div className="navbar-custom-menu r-side">
-          <ul className="nav navbar-nav">
-            {/* <li className="btn-group d-md-inline-flex d-none">
-              <a href="/" title="skin Change" className="waves-effect skin-toggle waves-light">
-                <label className="switch">
-                  <input type="checkbox" data-mainsidebarskin="toggle" id="toggle_left_sidebar_skin" />
-                  <span className="switch-on">
-                    <i data-feather="moon"></i>
-                  </span>
-                  <span className="switch-off">
-                    <i data-feather="sun"></i>
-                  </span>
-                </label>
-              </a>
-            </li> */}
-            {/* <li className="dropdown notifications-menu btn-group">
-              <a
-                href="#"
-                className="waves-effect waves-light btn-primary-light svg-bt-icon bg-transparent"
-                data-bs-toggle="dropdown"
-                title="Notifications"
-              >
-                <i>
-                  <icons.NotificationsIcon />
-                </i>
-                <div className="pulse-wave"></div>
-              </a>
-              <ul className="dropdown-menu animated bounceIn">
-                <li className="header">
-                  <div className="p-20">
-                    <div className="flexbox">
-                      <div>
-                        <h4 className="mb-0 mt-0">Notifications</h4>
-                      </div>
-                      <div>
-                        <a href="#" className="text-danger">
-                          Clear All
+                  <li>
+                    <ul className="menu sm-scrol">
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-users text-info"></i> Curabitur id eros quis nunc suscipit blandit.
                         </a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <ul className="menu sm-scrol">
-                    <li>
-                      <a href="#">
-                        <i>
-                          <icons.PermIdentityIcon />
-                        </i>
-                        Curabitur id eros quis nunc suscipit blandit.
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i>
-                          <icons.PermIdentityIcon />
-                        </i>
-                        Duis malesuada justo eu sapien elementum, in semper diam posuere.
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i>
-                          <icons.PermIdentityIcon />
-                        </i>
-                        Donec at nisi sit amet tortor commodo porttitor pretium a erat.
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i>
-                          <icons.PermIdentityIcon />
-                        </i>
-                        In gravida mauris et nisi
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i>
-                          <icons.PermIdentityIcon />
-                        </i>
-                        Praesent eu lacus in libero dictum fermentum.
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i>
-                          <icons.PermIdentityIcon />
-                        </i>
-                        Nunc fringilla lorem
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i>
-                          <icons.PermIdentityIcon />
-                        </i>
-                        Nullam euismod dolor ut quam interdum, at scelerisque ipsum imperdiet.
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="footer">
-                  <a href="#">View all</a>
-                </li>
-              </ul>
-            </li> */}
-            {/* <li className="btn-group nav-item d-xl-inline-flex d-none">
-              <a
-                href="#"
-                className="waves-effect waves-light nav-link btn-primary-light svg-bt-icon"
-                title=""
-                id="live-chat"
-              >
-                <i>
-                  <icons.MessageIcon />
-                </i>
-              </a>
-            </li> */}
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-warning text-warning"></i> Duis malesuada justo eu sapien elementum, in
+                          semper diam posuere.
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-users text-danger"></i> Donec at nisi sit amet tortor commodo porttitor
+                          pretium a erat.
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          {" "}
+                          <i className="fa fa-shopping-cart text-success"></i> In gravida mauris et nisi{" "}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-user text-danger"></i> Praesent eu lacus in libero dictum fermentum.
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          {" "}
+                          <i className="fa fa-user text-primary"></i> Nunc fringilla lorem{" "}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i className="fa fa-user text-success"></i> Nullam euismod dolor ut quam interdum, at
+                          scelerisque ipsum imperdiet.
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="footer">
+                    <a href="#">View all</a>
+                  </li>
+                </ul>
+              </li>
 
-            {/* <li className="btn-group d-xl-inline-flex d-none">
-              <a
-                href="#"
-                className="waves-effect waves-light nav-link btn-primary-light svg-bt-icon dropdown-toggle"
-                data-bs-toggle="dropdown"
-              >
-                <img className="rounded-circle" src={images.en_us} alt="" />
-              </a>
-              <div className="dropdown-menu">
-                <a className="dropdown-item my-5" href="#">
-                  <img className="w-20 rounded me-10" src={images.en_us} alt="" /> English
+              <li className="dropdown user user-menu">
+                <a href="#" className="waves-effect waves-light dropdown-toggle" data-bs-toggle="dropdown" title="User">
+                  <i className="icon-User">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                  </i>
                 </a>
-                <a className="dropdown-item my-5" href="#">
-                  <img className="w-20 rounded me-10" src={images.en_us} alt="" /> Spanish
-                </a>
-                <a className="dropdown-item my-5" href="#">
-                  <img className="w-20 rounded me-10" src={images.en_us} alt="" /> German
-                </a>
-                <a className="dropdown-item my-5" href="#">
-                  <img className="w-20 rounded me-10" src={images.en_us} alt="" /> Japanese
-                </a>
-                <a className="dropdown-item my-5" href="#">
-                  <img className="w-20 rounded me-10" src={images.en_us} alt="" /> French
-                </a>
-              </div>
-            </li> */}
+                <ul className="dropdown-menu animated flipInX">
+                  <li className="user-body">
+                    <a className="dropdown-item" href="#">
+                      <i className="ti-user text-muted me-2"></i> Profile
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      <i className="ti-wallet text-muted me-2"></i> My Wallet
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      <i className="ti-settings text-muted me-2"></i> Settings
+                    </a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href="#">
+                      <i className="ti-lock text-muted me-2"></i> Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
 
-            {/* <li className="btn-group nav-item d-xl-inline-flex d-none">
-              <a
-                href="#"
-                data-provide="fullscreen"
-                className="waves-effect waves-light nav-link btn-primary-light svg-bt-icon"
-                title="Full Screen"
-              >
-                <i data-feather="maximize"></i>
-              </a>
-            </li> */}
-
-            {/* <li className="dropdown user user-menu">
-              <a
-                href="#"
-                className="waves-effect waves-light dropdown-toggle w-auto l-h-12 bg-transparent p-0 no-shadow"
-                title="User"
-                data-bs-toggle="modal"
-                data-bs-target="#quick_user_toggle"
-              >
-                <div className="d-flex pt-1 align-items-center">
-                  <div className="text-end me-10">
-                    <p className="pt-5 fs-14 mb-0 fw-700">Nil Yeager</p>
-                    <small className="fs-10 mb-0 text-uppercase text-mute">Admin</small>
-                  </div>
-                  <img src={images.avatar} className="avatar rounded-circle bg-primary-light h-40 w-40" alt="" />
-                </div>
-              </a>
-            </li> */}
-          </ul>
-        </div>
-      </nav>
-    </header>
+              <li>
+                <a href="#" data-toggle="control-sidebar" title="Setting" className="waves-effect waves-light">
+                  <i className="icon-Settings">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                  </i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    </>
   );
 };
 
