@@ -1,0 +1,157 @@
+// .rbt-section-overlayping-top {
+//   margin: -175px auto 0;
+//   position: relative;
+//   z-index: 2;
+// }
+
+// .rbt-section-gapBottom {
+//   padding-bottom: 120px;
+//   @media #{$md-layout} {
+//     padding-bottom: 80px;
+//   }
+//   @media #{$sm-layout} {
+//     padding-bottom: 80px;
+//   }
+// }
+// .rbt-dashboard-content-wrapper {
+//   position: relative;
+//   margin-bottom: 30px;
+// }
+
+// .tutor-bg-photo {
+//     img{
+//         border-radius: 10px;
+//         position: relative;
+//         z-index: 1;
+//         &::before {
+//           position: absolute;
+//           bottom: 0;
+//           left: 0;
+//           width: 100%;
+//           height: 50%;
+//           display: block;
+//           z-index: -1;
+//           transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+//           cursor: pointer;
+//           border-radius: 6px;
+//         }
+//     }
+  
+// }
+
+// .bg_image {
+//   @extend %bgImagePosition;
+// }
+
+.bg_image--22 {
+  img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+//   @media #{$md-layout} {
+//     background-position: center right 33%;
+//   }
+//   @media #{$sm-layout} {
+//     background-position: center right 33%;
+//   }
+}
+// .height-350 {
+//     height: 350px;
+// }
+
+// .rbt-tutor-information {
+//     display: flex;
+//     align-items: end;
+//     justify-content: space-between;
+//     position: absolute;
+//     bottom: 30px;
+//     padding: 0 40px;
+//     width: 100%;
+//     z-index: 2;
+//     @media #{$sm-layout} {
+//         padding: 0 30px;
+//         display: block;
+//     }
+//     .rbt-tutor-information-left {
+//         display: flex;
+//         align-items: center;
+//         @media #{$large-mobile} {
+//             display: block;
+//         }
+//         .thumbnail {
+//             margin-right: 20px;
+//             position: relative;
+//             @media #{$large-mobile} {
+//                 margin-right: 0;
+//                 margin-bottom: 20px;
+//             }
+//         }
+//         .tutor-content {
+//             .title {
+//                 margin-bottom: 8px;
+//                 color: var(--color-white);
+//             }
+//             .rbt-review {
+//                 .rating-count {
+//                     color: var(--color-white);
+//                 }
+//             }
+//         }
+        
+//     }
+//     .rbt-tutor-information-right {
+//         @media #{$sm-layout} {
+//             margin-top: 20px;
+//         }
+//     }
+// }
+// .rbt-meta {
+//     @extend %liststyle;
+//     margin: -7px;
+//     @media #{$lg-layout} {
+//         margin: -3px;
+//     }
+//     @media #{$sm-layout} {
+//         margin: -3px;
+//     }
+//     li {
+//         font-size: 14px;
+//         line-height: 15px;
+//         color: var(--color-body);
+//         display: inline-block;
+//         margin: 7px;
+//         @media #{$lg-layout} {
+//             margin: 3px;
+//         }
+//         @media #{$sm-layout} {
+//             margin: 3px;
+//             font-size: var(--font-size-b4);
+//         }
+//         i {
+//             margin-right: 5px;
+//         }
+//     }
+//     &.rbt-meta-white {
+//         li {
+//             color: var(--color-white);
+//         }
+//     }
+// }
+
+// .rbt-shadow-box {
+//     border-radius: var(--radius);
+//     background: var(--color-white);
+//     overflow: hidden;
+//     box-shadow: var(--shadow-1);
+//     padding: 30px;
+//     @media #{$lg-layout} {
+//         padding: 20px;
+//     }
+//     @media #{$md-layout} {
+//         padding: 20px;
+//     }
+//     @media #{$sm-layout} {
+//         padding: 20px;
+//     }
+// }

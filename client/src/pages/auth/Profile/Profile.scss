@@ -1,0 +1,80 @@
+.profile {
+  padding-bottom: 3rem;
+  .pp__bg {
+    height: 350px;
+    border-radius: 10px;
+    z-index: 1;
+    img {
+      border-radius: 20px;
+    }
+  }
+  .pp_avatar {
+    position: absolute;
+    bottom: 30px;
+    padding: 0 40px;
+    z-index: 2;
+    .avatar_left {
+      .avatar {
+        position: relative;
+        margin-right: 20px;
+      }
+    }
+  }
+  // .rbt-tutor-information {
+  //   display: flex;
+  //   align-items: end;
+  //   justify-content: space-between;
+  //   position: absolute;
+  //   bottom: 30px;
+  //   padding: 0 40px;
+  //   width: 100%;
+  //   z-index: 2;
+  //   @media #{$sm-layout} {
+  //     padding: 0 30px;
+  //     display: block;
+  //   }
+  //   .rbt-tutor-information-left {
+  //     display: flex;
+  //     align-items: center;
+  //     @media #{$large-mobile} {
+  //       display: block;
+  //     }
+  //     .thumbnail {
+  //       margin-right: 20px;
+  //       position: relative;
+  //       @media #{$large-mobile} {
+  //         margin-right: 0;
+  //         margin-bottom: 20px;
+  //       }
+  //     }
+  //     .tutor-content {
+  //       .title {
+  //         margin-bottom: 8px;
+  //         color: var(--color-white);
+  //       }
+  //       .rbt-review {
+  //         .rating-count {
+  //           color: var(--color-white);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   .rbt-tutor-information-right {
+  //     @media #{$sm-layout} {
+  //       margin-top: 20px;
+  //     }
+  //   }
+  // }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .profile {
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .profile {
+    padding-bottom: 1.5rem;
+  }
+}

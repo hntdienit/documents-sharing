@@ -1,8 +1,58 @@
 .fragmentlayout {
   width: 100%;
   height: 100vh;
-  background-color: white;
+  background-color: #ffffff;
   .fragmentlayout__container {
     // margin-top: 5rem;
+    .login {
+      width: 30%;
+      padding-top: 5rem;
+
+      .login-gg {
+        div + span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 1.5rem 0;
+          font-weight: 500;
+          font-size: 13px;
+        }
+      }
+      .btn__social {
+        background-color: #f2f2f2;
+        color: #7a797f;
+        font-weight: 400;
+        font-size: 13px;
+        border-left: 2rem solid #db4537ea;
+        border-right: 2rem solid #db4537ea;
+        &:hover {
+          color: #ffffff;
+          border-left: none;
+          border-right: none;
+          background-color: #db4537ea;
+          transform: inherit;
+        }
+
+        .icon__social {
+          //   margin-left: -3.5rem;
+          margin-right: 1rem;
+        }
+      }
+      .title {
+        font-weight: bolder;
+        font-size: 20px;
+        text-align: center;
+        // padding: .7rem 0 0 0;
+      }
+      .changelogin {
+        padding-top: 1rem;
+        text-align: center;
+        span {
+          font-size: 15px;
+        }
+      }
+      input {
+      }
+    }
   }
 }

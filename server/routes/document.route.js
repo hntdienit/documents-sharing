@@ -8,7 +8,7 @@ import {
 } from "../controllers/document.controller.js";
 import validator from "../utils/validate.js";
 
-import { verifyToken, checkPermission } from "../middlewares/auth.middleware.js";
+import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
 import UploadMiddleware from "../middlewares/upload.middleware.js";
 
 const router = express.Router();
@@ -21,6 +21,7 @@ router.post(
   },
   UploadMiddleware.array("datafile", 10),
   verifyToken,
+  checkUser,
   newDocument
 );
 

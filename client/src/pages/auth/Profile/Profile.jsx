@@ -1,149 +1,190 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import "./Profile.scss";
 import images from "../../../assets/images";
+import HeaderPage from "../../../components/user/HeaderPage/HeaderPage";
 
 const Profile = () => {
-  const [document, setDocument] = useState(false);
-
-  const handleProfile = () => {
-    // if (title == "1") {
-    // setDocument(true);
-    alert("asdas");
-    // }
-  };
   return (
     <>
-      <div className="row">
-        <div className="col-12 grid-margin">
-          <div className="card">
-            <div className="position-relative">
-              <figure className="overflow-hidden mb-0 d-flex justify-content-center">
-                <img src={images.logo} className="rounded-top" alt="profile cover" />
-              </figure>
-              <div className="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
-                <div>
-                  <img className="wd-70 rounded-circle" src={images.avatar} alt="profile" />
-                  <span className="h4 ms-3 text-dark">Amiah Burton</span>
-                </div>
-                <div className="d-none d-md-block">
-                  <button
-                    className="btn btn-primary btn-icon-text"
-                    onClick={() => {
-                      handleProfile();
-                    }}
-                  >
-                    <i data-feather="edit" className="btn-icon-prepend"></i> Edit profile
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center p-3 rounded-bottom">
-              <ul className="d-flex align-items-center m-0 p-0">
-                <li className="d-flex align-items-center active">
-                  <i className="me-1 icon-md text-primary" data-feather="columns"></i>
-                  <Link
-                    className="pt-1px d-none d-md-block text-primary"
-                    onClick={() => {
-                      handleProfile();
-                    }}
-                  >
-                    tai lieu
-                  </Link>
-                </li>
-                <li className="ms-3 ps-3 border-start d-flex align-items-center">
-                  <i className="me-1 icon-md" data-feather="user"></i>
-                  <a className="pt-1px d-none d-md-block text-body" href="#">
-                    About
-                  </a>
-                </li>
-                <li className="ms-3 ps-3 border-start d-flex align-items-center">
-                  <i className="me-1 icon-md" data-feather="users"></i>
-                  <a className="pt-1px d-none d-md-block text-body" href="#">
-                    Friends <span className="text-muted tx-12">3,765</span>
-                  </a>
-                </li>
-                <li className="ms-3 ps-3 border-start d-flex align-items-center">
-                  <i className="me-1 icon-md" data-feather="image"></i>
-                  <a className="pt-1px d-none d-md-block text-body" href="#">
-                    Photos
-                  </a>
-                </li>
-                <li className="ms-3 ps-3 border-start d-flex align-items-center">
-                  <i className="me-1 icon-md" data-feather="video"></i>
-                  <a className="pt-1px d-none d-md-block text-body" href="#">
-                    Videos
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row profile-body">
-        <div className="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-          <div className="card rounded">
-            <div className="card-body">
-              <div className="d-flex align-items-center justify-content-between mb-2">
-                <h6 className="card-title mb-0">About</h6>
-                <div className="dropdown">
-                  <a
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i className="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                  </a>
-                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a className="dropdown-item d-flex align-items-center">
-                      <i data-feather="edit-2" className="icon-sm me-2"></i> <span className="">Edit</span>
-                    </a>
-                    <a className="dropdown-item d-flex align-items-center">
-                      <i data-feather="git-branch" className="icon-sm me-2"></i> <span className="">Update</span>
-                    </a>
-                    <a className="dropdown-item d-flex align-items-center">
-                      <i data-feather="eye" className="icon-sm me-2"></i> <span className="">View all</span>
-                    </a>
+      <HeaderPage page={"Hồ sơ"} linkpage={"Hồ sơ"} />
+      <div className="profile">
+        <div className="rbt-section-overlayping-top rbt-section-gapBottom">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="rbt-dashboard-content-wrapper">
+                  <div className="tutor-bg-photo bg_image bg_image--22 height-350">
+                    <img src={images.course_online_01} alt="" />
+                  </div>
+
+                  <div className="rbt-tutor-information">
+                    <div className="rbt-tutor-information-left">
+                      <div className="thumbnail rbt-avatars size-lg">
+                        <img src={images.avatar} alt="Instructor" />
+                      </div>
+                      <div className="tutor-content">
+                        <h5 className="title">John Due</h5>
+                        <div className="rbt-review">
+                          <div className="rating">
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                          </div>
+                          <span className="rating-count"> (15 Reviews)</span>
+                        </div>
+                        <ul className="rbt-meta rbt-meta-white mt--5">
+                          <li>
+                            <i className="feather-book"></i>20 Courses
+                          </li>
+                          <li>
+                            <i className="feather-users"></i>40 Students
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <p>
-                Hi! I m Amiah the Senior UI Designer at NobleUI. We hope you enjoy the design and quality of Social.
-              </p>
-              <div className="mt-3">
-                <label className="tx-11 fw-bolder mb-0 text-uppercase">Joined:</label>
-                <p className="text-muted">November 15, 2015</p>
+              <div className="col-lg-12 mt--30">
+                <div className="rbt-shadow-box">
+                  <h4 className="rbt-title-style-3">Biography</h4>
+                  <div className="row g-5">
+                    <div className="col-lg-8">
+                      <p className="mt--10 mb--20">
+                        I m the Front-End Developer for #Rainbow IT in Bangladesh, OR. I have serious passion for UI
+                        effects, animations and creating intuitive, dynamic user experiences.
+                      </p>
+                    </div>
+                    <div className="col-lg-2 offset-lg-2">
+                      <div className="feature-sin best-seller-badge text-end h-100">
+                        <span className="rbt-badge-2 w-100 text-center badge-full-height">
+                          <span className="image">
+                            <img src={images.course_online_01} alt="Best Seller Icon" />
+                          </span>{" "}
+                          Bestseller
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="mt-3">
-                <label className="tx-11 fw-bolder mb-0 text-uppercase">Lives:</label>
-                <p className="text-muted">New York, USA</p>
+            </div>
+
+            <div className="rbt-profile-course-area mt--60">
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="sction-title">
+                    <h2 className="rbt-title-style-3">Courses</h2>
+                  </div>
+                </div>
               </div>
-              <div className="mt-3">
-                <label className="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
-                <p className="text-muted">me@nobleui.com</p>
+              <div className="row g-5 mt--5">
+                <div
+                  className="col-lg-4 col-md-6 col-sm-12 col-12"
+                  data-sal-delay="150"
+                  data-sal="slide-up"
+                  data-sal-duration="800"
+                >
+                  <div className="rbt-card variation-01 rbt-hover">
+                    <div className="rbt-card-img">
+                      <a href="course-details.html">
+                        <img src={images.course_online_01} alt="Card image" />
+                        <div className="rbt-badge-3 bg-white">
+                          <span>-40%</span>
+                          <span>Off</span>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="rbt-card-body">
+                      <div className="rbt-card-top">
+                        <div className="rbt-review">
+                          <div className="rating">
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                            <i className="fas fa-star"></i>
+                          </div>
+                          <span className="rating-count"> (15 Reviews)</span>
+                        </div>
+                        <div className="rbt-bookmark-btn">
+                          <a className="rbt-round-btn" title="Bookmark" href="#">
+                            <i className="feather-bookmark"></i>
+                          </a>
+                        </div>
+                      </div>
+
+                      <h4 className="rbt-card-title">
+                        <a href="course-details.html">React Front To Back</a>
+                      </h4>
+
+                      <ul className="rbt-meta">
+                        <li>
+                          <i className="feather-book"></i>12 Lessons
+                        </li>
+                        <li>
+                          <i className="feather-users"></i>50 Students
+                        </li>
+                      </ul>
+
+                      <p className="rbt-card-text">It is a long established fact that a reader will be distracted.</p>
+                      <div className="rbt-author-meta mb--10">
+                        <div className="rbt-avater">
+                          <a href="#">
+                            <img src={images.course_online_01} alt="Sophia Jaymes" />
+                          </a>
+                        </div>
+                        <div className="rbt-author-info">
+                          By <a href="profile.html">Angela</a> In <a href="#">Development</a>
+                        </div>
+                      </div>
+                      <div className="rbt-card-bottom">
+                        <div className="rbt-price">
+                          <span className="current-price">$60</span>
+                          <span className="off-price">$120</span>
+                        </div>
+                        <a className="rbt-btn-link" href="course-details.html">
+                          Learn More<i className="feather-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="mt-3">
-                <label className="tx-11 fw-bolder mb-0 text-uppercase">Website:</label>
-                <p className="text-muted">www.nobleui.com</p>
-              </div>
-              <div className="mt-3 d-flex social-links">
-                <a className="btn btn-icon border btn-xs me-2">
-                  <i data-feather="github"></i>
-                </a>
-                <a className="btn btn-icon border btn-xs me-2">
-                  <i data-feather="twitter"></i>
-                </a>
-                <a className="btn btn-icon border btn-xs me-2">
-                  <i data-feather="instagram"></i>
-                </a>
+            </div>
+
+            <div className="row">
+              <div className="col-lg-12 mt--60">
+                <nav>
+                  <ul className="rbt-pagination">
+                    <li>
+                      <a href="#" aria-label="Previous">
+                        <i className="feather-chevron-left"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">1</a>
+                    </li>
+                    <li className="active">
+                      <a href="#">2</a>
+                    </li>
+                    <li>
+                      <a href="#">3</a>
+                    </li>
+                    <li>
+                      <a href="#" aria-label="Next">
+                        <i className="feather-chevron-right"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>
         </div>
-        {document ? <div className="col-md-8 col-xl-6 middle-wrapper">haha</div> : ""}
       </div>
     </>
   );

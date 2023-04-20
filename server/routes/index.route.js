@@ -1,5 +1,6 @@
 import authRoute from "./auth.route.js";
 import documentRoute from "./document.route.js";
+import subjectRoute from "./subject.route.js"
 import reviewRoute from "./review.route.js";
 import userRoute from "./user.route.js";
 
@@ -14,6 +15,7 @@ const router = (app) => {
 
   app.use("/auth", authRoute);
   app.use("/document", documentRoute);
+  app.use("/subject", subjectRoute);
   app.use("/review", reviewRoute);
   app.use("/user", userRoute);
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+
 import "./HeaderPage.scss";
 
 const HeaderPage = ({ page, linkpage }) => {
@@ -9,15 +11,25 @@ const HeaderPage = ({ page, linkpage }) => {
   };
 
   return (
-    <div className="headerpage">
-      <div className="headerpage_container">
-        <h3>{current.Page}</h3>
-        <h4>
-          <Link to={"/"}> Trang chủ </Link> <span> || </span> {current.LinkPage}
-        </h4>
+    <>
+      <div className="rbt-breadcrumb-default ptb--60 ptb_md--50 ptb_sm--30 bg-gradient-1">
+        <div className="container">
+          <div className="breadcrumb-inner text-center">
+            <h2 className="title">{current.Page}</h2>
+            <ul className="page-list">
+              <li>
+                <Link to={"/"}>Trang chủ</Link>
+              </li>
+              <li className="icon-right"></li>
+              <li>
+                <KeyboardDoubleArrowRightIcon />
+                {current.Page}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-
+    </>
   );
 };
 

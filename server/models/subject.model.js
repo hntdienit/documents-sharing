@@ -6,6 +6,7 @@ const Subjects = sequelize.define(
   {
     Ma_lop_hoc_phan: { type: DataTypes.STRING, allowNull: true },
     Ten_lop_hoc_phan: { type: DataTypes.STRING, allowNull: true },
+    Hoat_dong: { type: DataTypes.BOOLEAN, defaultValue: true },
   },
   {
     createdAt: "Thoi_gian_tao",

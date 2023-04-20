@@ -12,12 +12,21 @@ export const verifyToken = (req, res, next) => {
   });
 };
 
-export const checkPermission = (req, res, next) => {
+export const checkAdmin = (req, res, next) => {
   try {
-    if (req.user.Quyen !== "QuanTriVien") {
+    if (req.user.Quyen !== "QuanTri") {
       return next(createError(403, "Bạn không đủ quyền truy cập!"));
     }
     next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const checkUser = (req, res, next) => {
+  try {
+    if (req.user.Quyen === "SinhVien" || req.user.Quyen === "GiangVien") next();
+    else return next(createError(403, "Bạn không đủ quyền truy cập!"));
   } catch (err) {
     next(err);
   }

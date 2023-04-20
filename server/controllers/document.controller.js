@@ -8,12 +8,39 @@ import Users from "../models/user.model.js";
 
 export const newDocument = async (req, res, next) => {
   try {
-    const newDocument = new Documents({
-      Ten_tai_lieu: req.body.Ten_tai_lieu,
-      Mo_ta_tai_lieu: req.body.Mo_ta_tai_lieu,
-      Url: `${req.protocol}://${req.get("host")}/files/${req.files[0].filename}`,
-      Nguoi_dung_id: req.user.id,
-    });
+    let data;
+    if (req.body.Cong_Khai == "true") {
+      if (req.body.LopHP == "true") {
+        data = {
+          Ten_tai_lieu: req.body.Ten_tai_lieu,
+          Mo_ta_tai_lieu: req.body.Mo_ta_tai_lieu,
+          Url: `${req.protocol}://${req.get("host")}/files/${req.files[0].filename}`,
+          Cong_khai: true,
+          Lop_hoc_phan_id: req.body.LopHPId,
+          Nguoi_dung_id: req.user.id,
+        };
+      } else {
+        data = {
+          Ten_tai_lieu: req.body.Ten_tai_lieu,
+          Mo_ta_tai_lieu: req.body.Mo_ta_tai_lieu,
+          Url: `${req.protocol}://${req.get("host")}/files/${req.files[0].filename}`,
+          Cong_khai: true,
+          Lop_hoc_phan_id: null,
+          Nguoi_dung_id: req.user.id,
+        };
+      }
+    } else {
+      data = {
+        Ten_tai_lieu: req.body.Ten_tai_lieu,
+        Mo_ta_tai_lieu: req.body.Mo_ta_tai_lieu,
+        Url: `${req.protocol}://${req.get("host")}/files/${req.files[0].filename}`,
+        Cong_khai: false,
+        Lop_hoc_phan_id: req.body.LopHPId,
+        Nguoi_dung_id: req.user.id,
+      };
+    }
+
+    const newDocument = new Documents(data);
 
     const saveDocument = await newDocument.save();
     res.status(201).json(saveDocument);

@@ -96,6 +96,7 @@ export const login = async (req, res, next) => {
           Ho_ten: user.Ho_ten,
           Quyen: user.Quyen,
           Email: user.Email,
+          Hinh_dai_dien: user.Hinh_dai_dien,
           AccessToken: accessToken,
         });
     });

@@ -40,7 +40,7 @@
 // }
 
 //--------
-@import "../../../assets/scss/variables.scss";
+// @import "../../../assets/scss/variables.scss";
 
 .page__container {
   display: flex;
@@ -55,18 +55,18 @@
   }
   .page__link {
     padding: 1rem;
-    border: 1px solid $pages_border;
-    border-radius: $radius_sm;
-    font-size: $fz_xs;
-    font-weight: $fw_light;
+    // border: 1px solid $pages_border;
+    // border-radius: $radius_sm;
+    // font-size: $fz_xs;
+    // font-weight: $fw_light;
     list-style: none;
     &:hover {
-      background-color: $pages_bg_hover;
-      color: $pages_active;
+      // background-color: $pages_bg_hover;
+      // color: $pages_active;
     }
   }
   .active {
-    background-color: $color-active;
-    color: $color_white;
+    // background-color: $color-active;
+    // color: $color_white;
   }
 }

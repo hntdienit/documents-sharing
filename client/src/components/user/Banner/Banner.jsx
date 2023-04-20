@@ -3,77 +3,137 @@ import { Link } from "react-router-dom";
 
 import "./Banner.scss";
 import images from "../../../assets/images";
-import icons from "../../../assets/icons";
+
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
+import SliderCustom from "../../public/Slider/Slider.jsx";
 
 const Banner = () => {
+  const settings = {
+    arrows: false,
+    centerMode: true,
+    swipeToSlide: true,
+    infinite: true,
+    rows: 1,
+    slidesPerRow: 1,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 600,
+    initialSlide: 0,
+    autoplaySpeed: 5000,
+  };
   return (
-    <div className="Banner">
-      <div className="rbt-banner-area rbt-banner-8 variation-01 bg_image bg_image--9">
-        <div className="wrapper w-100">
-          <div className="container">
-            <div className="row g-5 align-items-center">
-              <div className="col-lg-6 order-2 order-lg-1">
-                <div className="content">
-                  <div className="inner">
-                    <div className="rbt-badge-group justify-content-start">
-                      <span className="meta-text d-flex align-items-center">
-                        <span className="icon">🎬</span> Video Online Course
-                      </span>
-                      <a href="#" className="rbt-badge-2">
-                        <div className="image">
-                          <img src={images.aclient_02} alt="Education Images" />
-                        </div>{" "}
-                        Learn with <strong>Fatima Asrafy</strong>
-                      </a>
-                    </div>
-                    <h1 className="title">Online Courses</h1>
-                    <p className="description has-medium-font-size mt--20">
-                      Dive in and learn React.js from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations,
-                      Next.js and way more!
-                    </p>
-                    <div className="slider-btn rbt-button-group justify-content-start">
-                      <a className="rbt-btn btn-gradient radius-round hover-icon-reverse" href="#">
-                        <span className="icon-reverse-wrapper">
-                          <span className="btn-text">Log in to Start</span>
-                          <span className="btn-icon">
-                            <i><icons.ArrowForwardIcon/></i>
-                          </span>
-                          <span className="btn-icon">
-                          <i><icons.ArrowForwardIcon/></i>
-                          </span>
-                        </span>
-                      </a>
-                      <a className="rbt-btn radius-round hover-icon-reverse btn-white" href="#">
-                        <span className="icon-reverse-wrapper">
-                          <span className="btn-text">Buy The Course</span>
-                          <span className="btn-icon">
-                          <i><icons.ArrowForwardIcon/></i>
-                          </span>
-                          <span className="btn-icon">
-                          <i><icons.ArrowForwardIcon/></i>
-                          </span>
-                        </span>
-                      </a>
-                    </div>
+   <div className="rbt-banner-area rbt-banner-2 header-transperent-spacer">
+      <div className="wrapper">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="banner-content text-center">
+                <div className="inner">
+                  <div className="rbt-new-badge rbt-new-badge-one mb--30">
+                    <span className="rbt-new-badge-icon">🏆</span> Chia sẻ và tìm kiếm tài liệu
                   </div>
-                </div>
-              </div>
-              <div className="col-lg-5 offset-xl-1 order-1 order-lg-2">
-                <div className="video-popup-wrapper">
-                  <img className="w-100 rbt-radius" src={images.video_02} alt="Video Images" />
-                  <a
-                    className="rbt-btn rounded-player-2 popup-video position-to-top with-animation"
-                    href="https://www.youtube.com/watch?v=nA1Aqp0sPQo"
-                  >
-                    <span className="play-icon"></span>
-                  </a>
+                  <h1 className="title">
+                    chúng ta<span className="theme-gradient"> chia sẻ </span>tài liệu và
+                    <span className="theme-gradient"> tìm kiếm </span>tài liệu mình cần
+                  </h1>
                 </div>
               </div>
             </div>
           </div>
+          <div className="swiper service-item-3-activation  rbt-arrow-between gutter-swiper-30">
+            <div className="swiper-wrapper">
+              <SliderCustom settings={settings}>
+                <div className="swiper-slide">
+                  <div className="single-slide">
+                    <div className="rbt-service rbt-service-2 rbt-hover-02 bg-no-shadow card-bg-4">
+                      <Link to={"/"}>
+                        <div className="inner">
+                          <div className="content">
+                            <p>React Js dolor sit, amet consectetur.</p>
+                            <span className="transparent-button">
+                              Tìm hiểu thêm
+                              <ArrowForwardIcon />
+                            </span>
+                          </div>
+                          <div className="thumbnail">
+                            <img src={images.pdf} className="img_banner" alt="Education Images" />
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="single-slide">
+                    <div className="rbt-service rbt-service-2 rbt-hover-02 bg-no-shadow card-bg-4">
+                      <div className="inner">
+                        <div className="content">
+                          <h4 className="title">
+                            <a href="#">React</a>
+                          </h4>
+                          <p>React Js dolor sit, amet consectetur.</p>
+                          <a className="transparent-button" href="#">
+                            Tìm hiểu thêm
+                            <ArrowForwardIcon />
+                          </a>
+                        </div>
+                        <div className="thumbnail">
+                          <img src={images.pdf} className="img_banner" alt="Education Images" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="single-slide">
+                    <div className="rbt-service rbt-service-2 rbt-hover-02 bg-no-shadow card-bg-4">
+                      <div className="inner">
+                        <div className="content">
+                          <h4 className="title">
+                            <a href="#">React</a>
+                          </h4>
+                          <p>React Js dolor sit, amet consectetur.</p>
+                          <a className="transparent-button" href="#">
+                            Learn More
+                            <ArrowForwardIcon />
+                          </a>
+                        </div>
+                        <div className="thumbnail">
+                          <img src={images.pdf} className="img_banner" alt="Education Images" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="single-slide">
+                    <div className="rbt-service rbt-service-2 rbt-hover-02 bg-no-shadow card-bg-4">
+                      <div className="inner">
+                        <div className="content">
+                          <h4 className="title">
+                            <a href="#">React</a>
+                          </h4>
+                          <p>React Js dolor sit, amet consectetur.</p>
+                          <a className="transparent-button" href="#">
+                            Learn More
+                            <ArrowForwardIcon />
+                          </a>
+                        </div>
+                        <div className="thumbnail">
+                          <img src={images.pdf} className="img_banner" alt="Education Images" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SliderCustom>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+   </div>
   );
 };
 

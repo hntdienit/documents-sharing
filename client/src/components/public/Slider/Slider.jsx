@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import "./Slider.scss";
 
-const SliderCustom = ({ children, settings, psbutton }) => {
+const SliderCustom = ({ children, settings, psbutton, buttonnext = false }) => {
   const customeSlider = useRef();
 
   const previous = () => {
@@ -24,14 +24,16 @@ const SliderCustom = ({ children, settings, psbutton }) => {
         {children}
       </Slider>
       {/* <div>{children}</div> */}
-      <div className={classes}>
-        <button type="button" className="slider__btn" onClick={next}>
-          n
-        </button>
-        <button type="button" className="slider__btn" onClick={previous}>
-          p
-        </button>
-      </div>
+      {buttonnext && (
+        <div className={classes}>
+          <button type="button" className="slider__btn" onClick={next}>
+            n
+          </button>
+          <button type="button" className="slider__btn" onClick={previous}>
+            p
+          </button>
+        </div>
+      )}
     </div>
   );
 };

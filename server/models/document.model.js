@@ -9,7 +9,7 @@ const Documents = sequelize.define(
     Kieu_tai_lieu: { type: DataTypes.STRING, defaultValue: "Tài liệu điện tử" },
     Url: { type: DataTypes.STRING, allowNull: true },
     So_lan_tai_ve: { type: DataTypes.INTEGER, defaultValue: 0 },
-    Cong_khai: { type: DataTypes.INTEGER, allowNull: true },
+    Cong_khai: { type: DataTypes.BOOLEAN, defaultValue: true },
   },
   {
     createdAt: "Thoi_gian_tao",

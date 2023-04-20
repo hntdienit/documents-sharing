@@ -1,8 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import "./Sidebar.scss";
 import icons from "../../../assets/icons";
+import newRequest from "../../../utils/newRequest.js";
+import { AuthContext } from "../../../helpers/AuthContext.jsx";
 
 const sidelink = [
   {
@@ -11,7 +14,7 @@ const sidelink = [
       {
         title: "Email",
         titleIcon: <icons.AddCircleOutlineIcon />,
-        linkCreate: "/admin",
+        linkCreate: "/admin/document/create",
         linkList: "/admin",
       },
       {
@@ -25,6 +28,20 @@ const sidelink = [
 ];
 
 const Sidebar = () => {
+  const { setCurrentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await newRequest.post("/auth/logout").then((res) => {
+      if (res.data.error) {
+        toast.error(res.data.error, {});
+      } else {
+        setCurrentUser(null);
+        toast.info("Bạn đã đăng xuất thành công!", {});
+        navigate("/");
+      }
+    });
+  };
   return (
     <>
       <nav className="admin__sidebar">
@@ -41,6 +58,7 @@ const Sidebar = () => {
 
         <div className="sidebar__body">
           <ul className="nav">
+            <Link onClick={handleLogout}> logout</Link>
             {sidelink.map((s, i) => (
               <div key={s.nav_category}>
                 <li className="nav-item nav-category">{s.nav_category}</li>
