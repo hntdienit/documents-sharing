@@ -1,4 +1,4 @@
-@import "../../../variables.scss";
+// @import "../../../variables.scss";
 
 .review__item {
   border-radius: 10px;
@@ -56,15 +56,15 @@
         overflow: hidden;
         outline: none;
         border: none;
-        color: $color_btn;
+        // color: $color_btn;
         position: relative;
-        background: $background_btn;
+        // background: $background_btn;
         font-size: 16px;
         font-weight: 500;
         border-radius: 5px;
         font-family: "Poppins", sans-serif;
         &:hover {
-          background-color: $background_btn_hover;
+          // background-color: $background_btn_hover;
           transition: all 0.4s ease;
         }
       }

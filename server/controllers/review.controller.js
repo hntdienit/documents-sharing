@@ -28,7 +28,7 @@ export const newRating = async (req, res, next) => {
     const saveRating = await Reviews.create({
       So_sao: req.body.So_sao,
       Noi_dung_danh_gia: req.body.Noi_dung_danh_gia,
-      Nguoi_dung_id: 1,
+      Nguoi_dung_id: req.user.id,
       Tai_lieu_id: req.body.documentId,
     });
     res.status(201).json(saveRating);
@@ -38,27 +38,13 @@ export const newRating = async (req, res, next) => {
 };
 
 export const getRatingDocument = async (req, res, next) => {
-  const userId = 1;
   try {
-    const userRatingDocument = await Reviews.findOne({
-      where: {
-        Tai_lieu_id: req.params.id,
-        Nguoi_dung_id: userId,
-      },
-    });
     const ratingDocument = await Reviews.findAll({
       where: {
         Tai_lieu_id: req.params.id,
-        [Op.not]: {
-          Nguoi_dung_id: userId,
-        },
       },
     });
-    let listRating = [];
-    if (!!userRatingDocument) listRating = [userRatingDocument, ...ratingDocument];
-    else listRating = [...ratingDocument];
-
-    res.status(200).json(listRating);
+    res.status(200).json(ratingDocument);
   } catch (err) {
     next(err);
   }

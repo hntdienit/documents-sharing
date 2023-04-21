@@ -1,8 +1,8 @@
-@import "../../../variables.scss";
+// @import "../../../variables.scss";
 
 .rate_custom {
   .rate__star__filled {
-    color: $color_star;
+    color: #ff9747 !important;
   }
   .rate__star__unfilled {
     color: #dcdcdc;

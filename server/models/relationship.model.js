@@ -14,6 +14,7 @@ import Reports from "./report.model.js";
 import Reviews from "./review.model.js";
 import Subjects from "./subject.model.js";
 import Users from "./user.model.js";
+import Majors from "./major.model.js";
 
 const relationship = () => {
   //   /* Users x Addresses: Many to Many */
@@ -126,6 +127,10 @@ const relationship = () => {
   /* Users x Subjects: one to Many */
   Users.hasMany(Subjects, { foreignKey: "Giang_vien_id" });
   Subjects.belongsTo(Users, { foreignKey: "Giang_vien_id" });
+
+  /* Majors x Documents: one to Many */
+  Majors.hasMany(Documents, { foreignKey: "Nganh_hoc_id" });
+  Documents.belongsTo(Majors, { foreignKey: "Nganh_hoc_id" });
 };
 
 export default relationship;

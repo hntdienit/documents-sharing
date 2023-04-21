@@ -1,5 +1,4 @@
 import React from "react";
-import "./ErrorCompoment.scss";
 
 const ErrorCompoment = ({err}) => {
   return (

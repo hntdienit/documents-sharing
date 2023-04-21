@@ -16,8 +16,8 @@ import sp_pdfjs_dist from "../../../assets/js/sp_pdfjs_dist.js";
 
 import "./Document.scss";
 import HeaderPage from "../../../components/user/HeaderPage/HeaderPage.jsx";
-import LoadingCompoment from "../../../components/public/LoadingCompoment/LoadingCompoment.jsx";
-import ErrorCompoment from "../../../components/public/ErrorCompoment/ErrorCompoment.jsx";
+import LoadingCompoment from "../../../components/public/LoadingCompoment.jsx";
+import ErrorCompoment from "../../../components/public/ErrorCompoment.jsx";
 import newRequest from "../../../utils/newRequest.js";
 import validationData from "../../../helpers/validationData.jsx";
 import { AuthContext } from "../../../helpers/AuthContext.jsx";
@@ -137,7 +137,7 @@ const ShareDocument = () => {
                   <div className="row">
                     <Formik
                       initialValues={initialValues}
-                      // validationSchema={validationSchema}
+                      // validationSchema={validationSchema} mo ta 150 ky tu
                       onSubmit={(values) => {
                         postForm(values);
                       }}

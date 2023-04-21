@@ -1,3 +1,40 @@
-// @import "./assets/scss/variables.scss";
+.img_detail {
+  width: 80%;
+  height: 100% !important;
+  object-fit: cover;
+  min-height: 600px;
+  margin-left: 2rem;
+}
 
-// @import "./assets/scss/auth/profile.scss"
+.img__review {
+  height: 70px !important;
+  width: 70px !important;
+  object-fit: cover;
+}
+
+.b2 {
+  width: 80% !important;
+}
+
+.review_user {
+  border-bottom: 1px solid #cbd1db;
+}
+
+.edit_review {
+  // position: absolute;
+  // top: 0px;
+  // right: 0px;
+  min-width: 200px !important;
+}
+
+.no_data_search {
+  display: flex;
+  justify-content: center;
+}
+.mt_d {
+  min-height: 100px;
+}
+.lang_h{
+  // max-width: 200px !important;
+  left: 0px !important;
+}

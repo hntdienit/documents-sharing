@@ -5,6 +5,8 @@ import AdminHome from "../pages/admin/Home/Home.jsx";
 // public
 import Page404 from "../pages/public/Page404/Page404.jsx";
 import Home from "../pages/Home/Home.jsx";
+import Categories from "../pages/user/Categories.jsx";
+import Detail from "../pages/user/Detail.jsx";
 
 // auth
 import Register from "../pages/Register/Register.jsx";
@@ -20,7 +22,7 @@ import EditDocument from "../pages/user/Document/EditDocument.jsx";
 
 // sinhvien
 import ShareDocument from "../pages/user/Document/ShareDocument.jsx";
-import ProfileUser from "../pages/user/Profile/Profile.jsx";
+
 
 // giangvien
 
@@ -44,6 +46,8 @@ const routes = [
   // giangvien
 
   // public
+  { path: "/document/all", component: Categories},
+  { path: "/document/:id", component: Detail},
   { path: "/", component: Home },
   { path: "/*", component: Page404, layout: null },
 ];

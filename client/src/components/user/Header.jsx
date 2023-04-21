@@ -74,7 +74,7 @@ const Header = () => {
                             <span className="menu-item">English</span>
                             <KeyboardArrowDownIcon />
                           </Link>
-                          <ul className="sub-menu">
+                          <ul className="sub-menu lang_h">
                             <li>
                               <Link to={"/"}>
                                 <img className="left-image" src={images.fr} alt="Language Images" />
@@ -252,12 +252,6 @@ const Header = () => {
                       </li>
                     </ul>
                   </div>
-
-                  <div className="header-info">
-                    <a className="rbt-btn rbt-switch-btn btn-gradient btn-sm hover-transform-none" href="#">
-                      <span data-text="Tài liệu miễn phí">Tài liệu miễn phí</span>
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -275,6 +269,9 @@ const Header = () => {
                     </li>
                     <li className="has-dropdown has-menu-child-item">
                       <Link to={"/document/share"}>Chia sẻ tài liệu</Link>
+                    </li>
+                    <li className="has-dropdown has-menu-child-item">
+                      <Link to={"/document/all"}>Danh sách tài liệu</Link>
                     </li>
                   </ul>
                 </nav>

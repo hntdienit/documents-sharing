@@ -1,10 +1,9 @@
 import React from "react";
-import "./LoadingCompoment.scss";
 
-const LoadingCompoment = () => {
+const LoadingCompoment = ({loading}) => {
   return (
     <div className="loadingcompoment">
-      <h3>Đang tải nội dung...</h3>
+      <h3>{loading || "Đang tải nội dung..."}</h3>
     </div>
   );
 };

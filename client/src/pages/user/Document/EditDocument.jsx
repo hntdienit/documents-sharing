@@ -18,8 +18,8 @@ import Typography from "@mui/material/Typography";
 import SaveIcon from "@mui/icons-material/Save";
 
 import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
-import LoadingCompoment from "../../../components/public/LoadingCompoment/LoadingCompoment.jsx";
-import ErrorCompoment from "../../../components/public/ErrorCompoment/ErrorCompoment.jsx";
+import LoadingCompoment from "../../../components/public/LoadingCompoment.jsx";
+import ErrorCompoment from "../../../components/public/ErrorCompoment.jsx";
 import newRequest from "../../../utils/newRequest.js";
 
 import { useQuery } from "@tanstack/react-query";

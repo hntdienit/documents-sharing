@@ -16,7 +16,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
-import Pagination from "../../../components/public/Pagination/Pagination.jsx";
+import Pagination from "../../../components/public/Pagination.jsx";
 import newRequest from "../../../utils/newRequest.js";
 
 const ListDocument = () => {
