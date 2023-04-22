@@ -40,17 +40,26 @@
 }
 
 .cart-table {
-  .pro-thumbnail{
+  .pro-thumbnail {
     // display: flex;
     // justify-content: center;
     // align-items: center;
     img {
-    width: 100% !important;
-    min-width: 150px !important;
-    height: 100% !important;
-    min-height: 200px !important;
-    object-fit: cover;
+      width: 100% !important;
+      min-width: 150px !important;
+      height: 100% !important;
+      min-height: 200px !important;
+      object-fit: cover;
+    }
   }
-  }
-  
+}
+
+.h-50vh{
+  height: 50vh !important;
+}
+
+.f-c-c{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }

@@ -4,6 +4,7 @@ import subjectRoute from "./subject.route.js"
 import reviewRoute from "./review.route.js";
 import userRoute from "./user.route.js";
 import cartRoute from "./cart.route.js"
+import orderRoute from "./order.route.js"
 
 import createError from "../utils/createError.js";
 
@@ -20,6 +21,7 @@ const router = (app) => {
   app.use("/review", reviewRoute);
   app.use("/user", userRoute);
   app.use("/cart", cartRoute);
+  app.use("/order", orderRoute);
 
   app.use("/:error", (req, res, next) => {
     return next(createError(404, "Không tìm thấy đường dẫn mong muốn!"));
