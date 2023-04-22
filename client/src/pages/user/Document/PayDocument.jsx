@@ -70,14 +70,14 @@ const PayDocument = () => {
   if (major.error) return <ErrorCompoment />;
   return (
     <>
-      <HeaderPage page={"Chia sẻ tài liệu"} />
+      <HeaderPage page={"Đăng bán tài liệu"} />
       <div className="aydocument checkout_area bg-color-white rbt-section-gap pb-7">
         <div className="container">
           <div className="row g-5 checkout-form f-c-c">
             <div className="col-lg-10">
               <div className="checkout-content-wrapper">
                 <div id="billing-form">
-                  <h4 className="checkout-title">Chia sẻ tài liệu</h4>
+                  <h4 className="checkout-title">Đăng bán tài liệu</h4>
 
                   <div className="row">
                     <Formik
@@ -180,7 +180,7 @@ const PayDocument = () => {
                           </div>
                           <div className="form-submit-group mt-5">
                             <button type="submit" className="rbt-btn btn-md btn-gradient hover-icon-reverse w-100">
-                              Chia sẻ
+                              Đăng bán
                             </button>
                           </div>
                         </form>

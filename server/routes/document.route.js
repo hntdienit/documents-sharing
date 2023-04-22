@@ -1,6 +1,7 @@
 import express from "express";
 import {
   shareDocument,
+  payDocument,
   pagination,
   singleDocument,
   editDocument,
@@ -23,6 +24,18 @@ router.post(
   verifyToken,
   checkUser,
   shareDocument
+);
+
+router.post(
+  "/pay",
+  function (req, res, next) {
+    req.storage = "./public/images";
+    next();
+  },
+  UploadMiddleware.array("datafile", 10),
+  verifyToken,
+  checkUser,
+  payDocument
 );
 
 router.route("/").get(pagination);

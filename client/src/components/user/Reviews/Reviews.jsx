@@ -11,7 +11,7 @@ import LoadingCompoment from "../../public/LoadingCompoment.jsx";
 import ErrorCompoment from "../../public/ErrorCompoment.jsx";
 import { AuthContext } from "../../../helpers/AuthContext.jsx";
 
-const Reviews = ({ documentId }) => {
+const Reviews = ({ documentId, refetch }) => {
   const [openReview, setOpenReview] = useState(false);
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
@@ -33,6 +33,7 @@ const Reviews = ({ documentId }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries([`Reviews_${documentId}`]);
+      refetch();
     },
   });
 

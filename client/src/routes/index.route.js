@@ -7,6 +7,7 @@ import Page404 from "../pages/public/Page404/Page404.jsx";
 import Home from "../pages/Home/Home.jsx";
 import Categories from "../pages/user/Categories.jsx";
 import Detail from "../pages/user/Detail.jsx";
+import ViewPDF from "../pages/public/ViewPDF.jsx";
 
 // auth
 import Register from "../pages/Register/Register.jsx";
@@ -52,6 +53,7 @@ const routes = [
 
   // public
   { path: "/document/all", component: Categories },
+  { path: "/document/viewpdf/:id", component: ViewPDF },
   { path: "/document/:id", component: Detail },
   { path: "/", component: Home },
   { path: "/*", component: Page404, layout: null },

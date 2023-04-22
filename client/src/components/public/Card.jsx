@@ -19,12 +19,12 @@ const Card = ({ item }) => {
       <div className="rbt-card variation-01 rbt-hover-02 card-list-2">
         <div className="rbt-card-img">
           <Link to={`/document/${item.id}`}>
-            <img src={images.course_online_01} alt="Card image" />
+            <img src={item?.Url ? images.pdf : item?.Hinhs[0]?.Url} alt="Card image" />
           </Link>
         </div>
         <div className="rbt-card-body">
           <div className="rbt-category">
-            <Link to={"/"}>Development</Link>
+            <Link to={"/"}>{item?.Nganh_hoc?.Ma_nganh_hoc + " - " + item?.Nganh_hoc?.Ten_nganh_hoc}</Link>
           </div>
           <h4 className="rbt-card-title">
             <Link to={`/document/${item.id}`}>{item?.Ten_tai_lieu}</Link>

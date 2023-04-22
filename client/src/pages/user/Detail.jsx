@@ -18,7 +18,7 @@ const Detail = () => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: [`detail_${id}`],
     queryFn: () =>
       newRequest.get(`/document/${id}`).then((res) => {
@@ -50,7 +50,7 @@ const Detail = () => {
     }
   };
 
-  const decQuantity = (stock) => {
+  const decQuantity = () => {
     if (quantity === 1) {
       toast.error("Số lượng phải lớn hơn 0!", {});
     } else {
@@ -69,7 +69,11 @@ const Detail = () => {
           <div className="row g-5 row--30 align-items-center">
             <div className="col-lg-6">
               <div className="thumbnail">
-                <img className="radius-10 img_detail" src={images.course_online_01} alt="Product Images" />
+                <img
+                  className="radius-10 img_detail"
+                  src={data?.Tai_lieu?.Url ? images.pdf : data?.Hinhs[0]?.Url}
+                  alt="Product Images"
+                />
               </div>
             </div>
             <div className="col-lg-6">
@@ -86,60 +90,87 @@ const Detail = () => {
                 <span className="rbt-label-style description">{data?.Nguoi_dung?.Ho_ten}</span>
 
                 <div className="rbt-price justify-content-start mt--10">
-                  <span className="current-price theme-gradient">{data?.Tai_lieu?.Gia} vnđ</span>
-                  {/* <span className="off-price">$150.00</span> */}
+                  {data?.Tai_lieu?.Url ? (
+                    <span className="current-price theme-gradient"></span>
+                  ) : (
+                    <span className="current-price theme-gradient">{data?.Tai_lieu?.Gia} vnđ</span>
+                    // {/* <span className="off-price">$150.00</span> */}
+                  )}
                 </div>
 
-                <p className="my-4">
-                  {data?.Tai_lieu?.Mo_ta_tai_lieu}
-                </p>
+                <p className="my-4">{data?.Tai_lieu?.Mo_ta_tai_lieu}</p>
 
-                <div className="product-action mb--20">
-                  <div className="pro-qty">
-                    <span
-                      className="dec qtybtn"
-                      onClick={() => {
-                        decQuantity(data?.Tai_lieu?.So_luong);
-                      }}
-                    >
-                      -
-                    </span>
-                    <input type="text" value={quantity} readOnly />
-                    <span
-                      className="inc qtybtn"
-                      onClick={() => {
-                        incQuantity(data?.Tai_lieu?.So_luong);
-                      }}
-                    >
-                      +
-                    </span>
-                  </div>
+                {data?.Tai_lieu?.Url ? (
                   <div className="addto-cart-btn">
-                    <button
-                      className="rbt-btn btn-gradient hover-icon-reverse"
-                      onClick={() => {
-                        addProductToCart();
-                      }}
-                    >
-                      <span className="icon-reverse-wrapper">
-                        <span className="btn-text">Thêm vào giỏ hàng</span>
-                        <span className="btn-icon">
-                          <KeyboardDoubleArrowRightIcon />
+                    <Link to={`/document/viewpdf/${id}`}>
+                      <button className="rbt-btn btn-gradient hover-icon-reverse">
+                        <span className="icon-reverse-wrapper">
+                          <span className="btn-text">Xem tài liệu</span>
+                          <span className="btn-icon">
+                            <KeyboardDoubleArrowRightIcon />
+                          </span>
+                          <span className="btn-icon">
+                            <KeyboardDoubleArrowRightIcon />
+                          </span>
                         </span>
-                        <span className="btn-icon">
-                          <KeyboardDoubleArrowRightIcon />
-                        </span>
-                      </span>
-                    </button>
+                      </button>
+                    </Link>
                   </div>
-                </div>
+                ) : (
+                  <div className="product-action mb--20">
+                    <div className="pro-qty">
+                      <span
+                        className="dec qtybtn"
+                        onClick={() => {
+                          decQuantity();
+                        }}
+                      >
+                        -
+                      </span>
+                      <input type="text" value={quantity} readOnly />
+                      <span
+                        className="inc qtybtn"
+                        onClick={() => {
+                          incQuantity(data?.Tai_lieu?.So_luong);
+                        }}
+                      >
+                        +
+                      </span>
+                    </div>
+                    <div className="addto-cart-btn">
+                      <button
+                        className="rbt-btn btn-gradient hover-icon-reverse"
+                        onClick={() => {
+                          addProductToCart();
+                        }}
+                      >
+                        <span className="icon-reverse-wrapper">
+                          <span className="btn-text">Thêm vào giỏ hàng</span>
+                          <span className="btn-icon">
+                            <KeyboardDoubleArrowRightIcon />
+                          </span>
+                          <span className="btn-icon">
+                            <KeyboardDoubleArrowRightIcon />
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 <ul className="product-feature">
                   <li>
-                    <span>số lượng còn:</span> {data?.Tai_lieu?.So_luong}
+                    {data?.Tai_lieu?.Url ? (
+                      <p></p>
+                    ) : (
+                      <>
+                        <span>số lượng còn:</span> {data?.Tai_lieu?.So_luong}
+                      </>
+                    )}
                   </li>
                   <li>
-                    <span>Ngành học: </span> <Link to={"/"}>Motivation</Link>
+                    <span>Ngành học: </span>
+                    <Link to={"/"}>{data?.Nganh?.Ma_nganh_hoc + " - " + data?.Nganh?.Ten_nganh_hoc}</Link>
                   </li>
                 </ul>
               </div>
@@ -148,7 +179,7 @@ const Detail = () => {
         </div>
       </div>
 
-      <Reviews documentId={data?.Tai_lieu?.id} />
+      <Reviews documentId={data?.Tai_lieu?.id} refetch={refetch} />
     </>
   );
 };
