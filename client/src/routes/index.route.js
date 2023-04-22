@@ -14,6 +14,7 @@ import Login from "../pages/Login/Login.jsx";
 import Profile from "../pages/auth/Profile/Profile.jsx";
 import Wishlist from "../pages/user/Wishlist/Wishlist.jsx";
 import Cart from "../pages/user/Cart.jsx";
+import Checkout from "../pages/user/Checkout.jsx";
 
 // admin
 import NewUser from "../pages/admin/User/NewUser.jsx";
@@ -23,7 +24,7 @@ import EditDocument from "../pages/user/Document/EditDocument.jsx";
 
 // sinhvien
 import ShareDocument from "../pages/user/Document/ShareDocument.jsx";
-
+import PayDocument from "../pages/user/Document/PayDocument.jsx";
 
 // giangvien
 
@@ -33,7 +34,8 @@ const routes = [
   { path: "/login", component: Login, layout: null },
   { path: "/profile", component: Profile, role: "NguoiDung" },
   { path: "/wishlist", component: Wishlist, role: "NguoiDung" },
-  { path: "/cart", component: Cart, role: "NguoiDung" },
+  { path: "/cart", component: Cart, role: "SinhVien" },
+  { path: "/checkout", component: Checkout, role: "SinhVien" },
 
   // admin
   { path: "/admin", component: AdminHome, layout: AdminLayout, role: "QuanTri" },
@@ -44,12 +46,13 @@ const routes = [
 
   // sinhvien
   { path: "/document/share", component: ShareDocument, role: "SinhVien" },
+  { path: "/document/pay", component: PayDocument, role: "SinhVien" },
 
   // giangvien
 
   // public
-  { path: "/document/all", component: Categories},
-  { path: "/document/:id", component: Detail},
+  { path: "/document/all", component: Categories },
+  { path: "/document/:id", component: Detail },
   { path: "/", component: Home },
   { path: "/*", component: Page404, layout: null },
 ];

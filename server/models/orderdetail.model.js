@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const OrderDetail = sequelize.define(
+const OrderDetails = sequelize.define(
   "Chi_tiet_don_hang",
   {
     So_luong: { type: DataTypes.INTEGER, allowNull: false },
@@ -13,4 +13,4 @@ const OrderDetail = sequelize.define(
   }
 );
 
-export default OrderDetail;
+export default OrderDetails;

@@ -178,7 +178,7 @@ const Header = () => {
                           <i>
                             <ShoppingCartIcon />
                           </i>
-                          <span className="rbt-cart-count">4</span>
+                          {/* <span className="rbt-cart-count">4</span> */}
                         </Link>
                       </li>
 
@@ -265,10 +265,13 @@ const Header = () => {
                 <nav className="mainmenu-nav">
                   <ul className="mainmenu">
                     <li className="with-megamenu has-menu-child-item position-static">
-                      <Link to={"/"}>Trang chủ</Link>
+                      <Link to={"/"}>Trang chủ </Link>
                     </li>
                     <li className="has-dropdown has-menu-child-item">
                       <Link to={"/document/share"}>Chia sẻ tài liệu</Link>
+                    </li>
+                    <li className="has-dropdown has-menu-child-item">
+                      <Link to={"/document/pay"}>Bán tài liệu</Link>
                     </li>
                     <li className="has-dropdown has-menu-child-item">
                       <Link to={"/document/all"}>Danh sách tài liệu</Link>

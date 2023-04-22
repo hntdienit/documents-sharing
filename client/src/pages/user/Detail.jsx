@@ -64,7 +64,7 @@ const Detail = () => {
   return (
     <>
       <HeaderPage page={"Chi tiết tài liệu"} linkpage={"Chi tiết tài liệu"} />
-      <div className="rbt-single-product-area rbt-single-product rbt-section-gap">
+      <div className="rbt-single-product-area rbt-single-product rbt-section-gap mt-6 pb-5">
         <div className="container">
           <div className="row g-5 row--30 align-items-center">
             <div className="col-lg-6">
@@ -75,22 +75,23 @@ const Detail = () => {
             <div className="col-lg-6">
               <div className="content">
                 <div className="rbt-review justify-content-start">
-                  <Star stars={3.7} isReviews reviews={"75 đánh giá"} />
+                  <Star
+                    stars={data?.Danh_gia?.So_sao}
+                    isReviews
+                    reviews={data?.Danh_gia?.So_sao > 0 ? `${data?.Danh_gia?.So_nguoi} đánh giá` : "0 đánh giá"}
+                  />
                 </div>
 
                 <h2 className="title mt--10 mb--10">{data?.Tai_lieu?.Ten_tai_lieu}</h2>
-                <span className="rbt-label-style description">By: Hal Elrod</span>
+                <span className="rbt-label-style description">{data?.Nguoi_dung?.Ho_ten}</span>
 
                 <div className="rbt-price justify-content-start mt--10">
-                  <span className="current-price theme-gradient">$95.00</span>
-                  <span className="off-price">$150.00</span>
+                  <span className="current-price theme-gradient">{data?.Tai_lieu?.Gia} vnđ</span>
+                  {/* <span className="off-price">$150.00</span> */}
                 </div>
 
                 <p className="my-4">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt. ut
-                  labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam. et justo duo dolores
-                  et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                  ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.
+                  {data?.Tai_lieu?.Mo_ta_tai_lieu}
                 </p>
 
                 <div className="product-action mb--20">

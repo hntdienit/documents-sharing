@@ -5,9 +5,13 @@ import createError from "../utils/createError.js";
 
 import Documents from "../models/document.model.js";
 import Users from "../models/user.model.js";
+import Reviews from "../models/review.model.js";
 
-export const newDocument = async (req, res, next) => {
+export const shareDocument = async (req, res, next) => {
   try {
+    if (!req.body.Cong_Khai && !req.body.LopHP) {
+      req.body.Cong_Khai = true;
+    }
     let data;
     if (req.body.Cong_Khai == "true") {
       if (req.body.LopHP == "true") {
@@ -18,6 +22,7 @@ export const newDocument = async (req, res, next) => {
           Cong_khai: true,
           Lop_hoc_phan_id: req.body.LopHPId,
           Nguoi_dung_id: req.user.id,
+          Nganh_hoc_id: req.body.Nganh_hoc_id,
         };
       } else {
         data = {
@@ -27,6 +32,7 @@ export const newDocument = async (req, res, next) => {
           Cong_khai: true,
           Lop_hoc_phan_id: null,
           Nguoi_dung_id: req.user.id,
+          Nganh_hoc_id: req.body.Nganh_hoc_id,
         };
       }
     } else {
@@ -37,6 +43,7 @@ export const newDocument = async (req, res, next) => {
         Cong_khai: false,
         Lop_hoc_phan_id: req.body.LopHPId,
         Nguoi_dung_id: req.user.id,
+        Nganh_hoc_id: req.body.Nganh_hoc_id,
       };
     }
 
@@ -76,6 +83,7 @@ export const pagination = async (req, res, next) => {
     });
 
     const totalPage = Math.ceil(totalRows / limit);
+
     const result = await Documents.findAll({
       where: {
         [Op.or]: [
@@ -94,6 +102,8 @@ export const pagination = async (req, res, next) => {
       offset: offset,
       limit: limit,
       order: [["id", "DESC"]],
+      required: false,
+      include: [{ model: Reviews }],
     });
 
     res.json({
@@ -118,8 +128,22 @@ export const singleDocument = async (req, res, next) => {
     if (!userDocument) {
       return next(createError(404, "Thông tin chủ sở hữu không tồn tại!"));
     }
+
+    const reviewDocument = await Reviews.findAll({ where: { Tai_lieu_id: document.id } });
+    let Tong_sao = 0;
+    reviewDocument.forEach((item) => {
+      Tong_sao += +item.So_sao;
+    });
+
+    let So_sao = Tong_sao / reviewDocument.length;
+    So_sao = So_sao.toFixed(1);
+
     const singledocument = {
       Tai_lieu: document,
+      Danh_gia: {
+        So_sao: So_sao,
+        So_nguoi: reviewDocument.length,
+      },
       Nguoi_dung: {
         Ho_ten: userDocument.Ho_ten,
       },

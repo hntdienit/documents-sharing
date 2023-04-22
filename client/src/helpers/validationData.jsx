@@ -12,12 +12,46 @@ const validate = {
       "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một số và một ký tự đặc biệt!"
     )
     .required("Mật khẩu không được để trống!"),
+  Ten_tai_lieu: yup
+    .string()
+    .min(5, "Tên tài liệu phải nhiều hơn 5 ký tự!")
+    .max(80, "Tên tài liệu phải ít hơn 80 ký tự!")
+    .required("Tên tài liệu không được để trống!"),
+  Mo_ta_tai_lieu: yup
+    .string()
+    .min(5, "Mô tả tài liệu phải nhiều hơn 5 ký tự!")
+    .max(150, "Mô tả tài liệu phải ít hơn 150 ký tự!")
+    .required("Mô tả tài liệu không được để trống!"),
+  Nganh_hoc_id: yup.string().required("Bạn chưa chọn tài liệu thuộc ngành nào!"),
+  So_luong: yup
+    .number("Số lượng phải là số!")
+    .integer("Số lượng phải là kiểu số nguyên!")
+    .min(0, "Số lượng phải lớn hơn 0")
+    .required("Số lượng không được để trống!"),
+  Gia: yup
+    .number("Giá phải là số!")
+    .integer("Giá phải là kiểu số nguyên!")
+    .min(1000, "Giá phải lớn hơn 1000")
+    .required("Giá không được để trống"),
 };
 
 const validationData = {
   login: yup.object({
     Email: validate.Email,
     // Mat_khau: validate.Mat_khau,
+  }),
+  shareDocument: yup.object({
+    Ten_tai_lieu: validate.Ten_tai_lieu,
+    Mo_ta_tai_lieu: validate.Mo_ta_tai_lieu,
+    Nganh_hoc_id: validate.Nganh_hoc_id,
+    LopHPId: validate.LopHPId,
+  }),
+  payDocument: yup.object({
+    Ten_tai_lieu: validate.Ten_tai_lieu,
+    Mo_ta_tai_lieu: validate.Mo_ta_tai_lieu,
+    Nganh_hoc_id: validate.Nganh_hoc_id,
+    So_luong: validate.So_luong,
+    Gia: validate.Gia,
   }),
 };
 

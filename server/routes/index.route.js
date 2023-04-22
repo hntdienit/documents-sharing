@@ -1,10 +1,12 @@
 import authRoute from "./auth.route.js";
 import documentRoute from "./document.route.js";
-import subjectRoute from "./subject.route.js"
+import subjectRoute from "./subject.route.js";
 import reviewRoute from "./review.route.js";
 import userRoute from "./user.route.js";
-import cartRoute from "./cart.route.js"
-import orderRoute from "./order.route.js"
+import cartRoute from "./cart.route.js";
+import orderRoute from "./order.route.js";
+import paymentmethodRoute from "./paymentmethod.route.js";
+import majorRoute from "./major.route.js"
 
 import createError from "../utils/createError.js";
 
@@ -22,6 +24,8 @@ const router = (app) => {
   app.use("/user", userRoute);
   app.use("/cart", cartRoute);
   app.use("/order", orderRoute);
+  app.use("/paymentmethod", paymentmethodRoute);
+  app.use("/major", majorRoute);
 
   app.use("/:error", (req, res, next) => {
     return next(createError(404, "Không tìm thấy đường dẫn mong muốn!"));

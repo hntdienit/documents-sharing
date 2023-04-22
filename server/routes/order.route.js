@@ -1,10 +1,12 @@
 import express from "express";
-import { createvnpay, vnpay_ipn, vnpay_return } from "../controllers/order.controller.js";
+import { postCheckout, createvnpay, vnpay_ipn, vnpay_return } from "../controllers/order.controller.js";
 import validator from "../utils/validate.js";
 
 import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
+
+router.route("/checkout").post(verifyToken, postCheckout);
 
 //  vnpay
 router.route("/create_payment_url").post(verifyToken, createvnpay);

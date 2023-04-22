@@ -45,25 +45,6 @@ const Cart = () => {
     });
   };
 
-  const postFormVNP = async () => {
-    await newRequest
-      .post(`/order/create_payment_url`, {
-        // ...data,
-        amount: 10100,
-        bankCode: "",
-        orderDescription: "Online payment",
-        orderType: "billpayment",
-        language: "vn",
-      })
-      .then((response) => {
-        if (response.data.error) {
-          // toast.error(`Add new product failed! - error: ${response.data.error}`, {});
-        } else {
-          window.open(response.data.url, "_self");
-        }
-      });
-  };
-
   if (isLoading) return <LoadingCompoment />;
   if (error) return <ErrorCompoment />;
 
@@ -95,18 +76,15 @@ const Cart = () => {
                         <h4 className="title mb--30">Tổng đơn hàng</h4>
                       </div>
                       <p>
-                        Tổng <span>10000 vnd</span>
+                        Tổng <span>{data.reduce((a, c) => a + c?.Tai_lieu?.Gia * c?.So_luong, 0)} vnđ</span>
                       </p>
                       <div className="cart-submit-btn-group mt-2">
                         <div className="single-button w-50">
-                          <button
-                            className="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100"
-                            onClick={() => {
-                              postFormVNP();
-                            }}
-                          >
-                            <span data-text="Thanh toán">Thanh toán</span>
-                          </button>
+                          <Link to={"/checkout"}>
+                            <button className="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100">
+                              <span data-text="Thanh toán">Thanh toán</span>
+                            </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -136,7 +114,7 @@ const Cart = () => {
                                 <a href="#">{d?.Tai_lieu?.Ten_tai_lieu}</a>
                               </td>
                               <td className="pro-price">
-                                <span>$48.00</span>
+                                <span>{d?.Tai_lieu?.Gia}</span>
                               </td>
                               <td className="pro-quantity">
                                 <div className="pro-qty">
@@ -160,7 +138,7 @@ const Cart = () => {
                                 </div>
                               </td>
                               <td className="pro-subtotal">
-                                <span>$100.00</span>
+                                <span>{d?.So_luong * d?.Tai_lieu?.Gia} vnđ</span>
                               </td>
                               <td className="pro-remove">
                                 <Link onClick={() => handleDelete(d?.id)}>

@@ -50,6 +50,14 @@ const ShareDocument = () => {
       }),
   });
 
+  const major = useQuery({
+    queryKey: [`major_${currentUser?.userId}`],
+    queryFn: () =>
+      newRequest.get(`/major/all`).then((res) => {
+        return res.data;
+      }),
+  });
+
   const handleFile = (e) => {
     setDataFile(e.target.files);
     let selectedFile = e.target.files[0];
@@ -66,16 +74,17 @@ const ShareDocument = () => {
         setPdfFile(null);
       }
     } else {
-      console.log("vui lòng chọn một tệp PDF");
+      setPdfError("Vui lòng chọn một tệp PDF");
     }
   };
 
   const initialValues = {
-    Ten_tai_lieu: "tai lieu 7",
-    Mo_ta_tai_lieu: "mo ta 7",
+    Ten_tai_lieu: "",
+    Mo_ta_tai_lieu: "",
     Cong_Khai: true,
     LopHP: false,
     LopHPId: "",
+    Nganh_hoc_id: "",
   };
 
   const navigate = useNavigate();
@@ -87,11 +96,12 @@ const ShareDocument = () => {
     formDataToSend.append("Cong_Khai", data.Cong_Khai);
     formDataToSend.append("LopHP", data.LopHP);
     formDataToSend.append("LopHPId", data.LopHPId);
+    formDataToSend.append("Nganh_hoc_id", data.Nganh_hoc_id);
     for (let i = 0; i < datafile.length; i++) {
       formDataToSend.append("datafile", datafile[i]);
     }
     await newRequest
-      .post("/document/new", formDataToSend, {
+      .post("/document/share", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -100,14 +110,14 @@ const ShareDocument = () => {
         if (response.data.error) {
           toast.error(`${response.data.error}`, {});
         } else {
-          toast.success("Add new product successfully!", {});
-          // navigate("/admin");
+          toast.success("Chia sẻ tài liệu thành công, chờ quản trị viên kiểm duyệt!", {});
+          navigate("/");
         }
       });
   };
 
-  if (isLoading) return <LoadingCompoment />;
-  if (error) return <ErrorCompoment />;
+  if (isLoading || major.isLoading) return <LoadingCompoment />;
+  if (error || major.error) return <ErrorCompoment />;
   return (
     <>
       <HeaderPage page={"Chia sẻ tài liệu"} />
@@ -137,7 +147,7 @@ const ShareDocument = () => {
                   <div className="row">
                     <Formik
                       initialValues={initialValues}
-                      // validationSchema={validationSchema} mo ta 150 ky tu
+                      validationSchema={validationData.shareDocument}
                       onSubmit={(values) => {
                         postForm(values);
                       }}
@@ -145,7 +155,7 @@ const ShareDocument = () => {
                       {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
                         <form onSubmit={handleSubmit}>
                           <div className="row mb--15">
-                            <div className="col-lg-6">
+                            <div className="col-lg-12">
                               <TextField
                                 fullWidth
                                 margin="normal"
@@ -158,7 +168,7 @@ const ShareDocument = () => {
                                 helperText={touched.Ten_tai_lieu && errors.Ten_tai_lieu}
                               />
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-12">
                               <TextField
                                 fullWidth
                                 margin="normal"
@@ -171,13 +181,33 @@ const ShareDocument = () => {
                                 helperText={touched.Mo_ta_tai_lieu && errors.Mo_ta_tai_lieu}
                               />
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-12">
+                              <TextField
+                                fullWidth
+                                margin="normal"
+                                select
+                                label="Thuộc ngành"
+                                id="Nganh_hoc_id"
+                                name="Nganh_hoc_id"
+                                value={values.Nganh_hoc_id}
+                                onChange={handleChange}
+                                error={touched.Nganh_hoc_id && Boolean(errors.Nganh_hoc_id)}
+                                helperText={touched.Nganh_hoc_id && errors.Nganh_hoc_id}
+                              >
+                                {major?.data?.map((m) => (
+                                  <MenuItem key={m.id} value={m.id}>
+                                    {m?.Ma_nganh_hoc} - {m?.Ten_nganh_hoc}
+                                  </MenuItem>
+                                ))}
+                              </TextField>
+                            </div>
+                            <div className="col-lg-12 mt-3">
                               <input type="file" name="datafile" onChange={handleFile} />
                               {pdfError && <span className="text-danger">{pdfError}</span>}
                             </div>
 
                             {currentUser.Quyen === "GiangVien" && (
-                              <div className="col-12 mb--20">
+                              <div className="col-12 mt-4">
                                 <div>
                                   <FormControlLabel
                                     control={<Checkbox checked={values.Cong_Khai} />}
@@ -222,7 +252,7 @@ const ShareDocument = () => {
                               </div>
                             )}
                           </div>
-                          <div className="form-submit-group">
+                          <div className="form-submit-group mt-5">
                             <button type="submit" className="rbt-btn btn-md btn-gradient hover-icon-reverse w-100">
                               Chia sẻ
                             </button>

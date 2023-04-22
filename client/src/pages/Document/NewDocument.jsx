@@ -85,7 +85,7 @@ const NewDocument = ({ currentUser }) => {
       // console.log("Mo_ta_tai_lieu.....", data.Mo_ta_tai_lieu);
       // console.log("file.....", files1);
 
-      await newRequest.post("/document/new", formDataToSend, {
+      await newRequest.post("/document/share", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

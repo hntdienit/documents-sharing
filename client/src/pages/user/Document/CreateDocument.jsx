@@ -20,7 +20,7 @@ const CreateDocument = () => {
 
   const postForm = async (data) => {
     await newRequest
-      .post("/document/new", data, {
+      .post("/document/share", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

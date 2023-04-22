@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  newDocument,
+  shareDocument,
   pagination,
   singleDocument,
   editDocument,
@@ -14,7 +14,7 @@ import UploadMiddleware from "../middlewares/upload.middleware.js";
 const router = express.Router();
 
 router.post(
-  "/new",
+  "/share",
   function (req, res, next) {
     req.storage = "./public/files";
     next();
@@ -22,7 +22,7 @@ router.post(
   UploadMiddleware.array("datafile", 10),
   verifyToken,
   checkUser,
-  newDocument
+  shareDocument
 );
 
 router.route("/").get(pagination);
