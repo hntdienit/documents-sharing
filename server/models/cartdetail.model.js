@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const CartDetail = sequelize.define(
+const CartDetails = sequelize.define(
   "Chi_tiet_gio_hang",
   {
     So_luong: { type: DataTypes.INTEGER, allowNull: false },
@@ -12,4 +12,4 @@ const CartDetail = sequelize.define(
   }
 );
 
-export default CartDetail;
+export default CartDetails;

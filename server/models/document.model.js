@@ -10,6 +10,8 @@ const Documents = sequelize.define(
     Url: { type: DataTypes.STRING, allowNull: true },
     So_lan_tai_ve: { type: DataTypes.INTEGER, defaultValue: 0 },
     Cong_khai: { type: DataTypes.BOOLEAN, defaultValue: true },
+    So_luong: { type: DataTypes.INTEGER, defaultValue: 1 },
+    Kiem_duyet: { type: DataTypes.BOOLEAN, defaultValue: false },
   },
   {
     createdAt: "Thoi_gian_tao",

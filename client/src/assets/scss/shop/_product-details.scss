@@ -23,17 +23,17 @@
         color: var(--color-body);
         height: 50px;
     }
-    // & input {
-    //     width: 28px;
-    //     float: left;
-    //     border: none;
-    //     height: 33px;
-    //     line-height: 33px;
-    //     padding: 0;
-    //     text-align: center;
-    //     background-color: transparent;
-    //     box-shadow: none;
-    // } 
+    & input {
+        width: 28px;
+        float: left;
+        border: none;
+        height: 33px;
+        line-height: 33px;
+        padding: 0;
+        text-align: center;
+        background-color: transparent;
+        box-shadow: none;
+    } 
     @media #{$large-mobile} {
         margin: 0;
     }

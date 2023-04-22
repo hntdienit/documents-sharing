@@ -174,12 +174,12 @@ const Header = () => {
                   <div className="header-info">
                     <ul className="quick-access">
                       <li className="access-icon rbt-mini-cart">
-                        <a className="rbt-cart-sidenav-activation rbt-round-btn" href="#">
+                        <Link to={"/cart"} className="rbt-cart-sidenav-activation rbt-round-btn">
                           <i>
                             <ShoppingCartIcon />
                           </i>
                           <span className="rbt-cart-count">4</span>
-                        </a>
+                        </Link>
                       </li>
 
                       <li className="access-icon rbt-user-wrapper icon__user">

@@ -57,7 +57,7 @@ const EditDocument = () => {
   };
 
   if (isLoading) return <LoadingCompoment />;
-  if (error) return <ErrorCompoment err={"loi 1212323"} />;
+  if (error) return <ErrorCompoment />;
   return (
     <>
       <Card elevation={4}>

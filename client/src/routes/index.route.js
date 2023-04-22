@@ -13,6 +13,7 @@ import Register from "../pages/Register/Register.jsx";
 import Login from "../pages/Login/Login.jsx";
 import Profile from "../pages/auth/Profile/Profile.jsx";
 import Wishlist from "../pages/user/Wishlist/Wishlist.jsx";
+import Cart from "../pages/user/Cart.jsx";
 
 // admin
 import NewUser from "../pages/admin/User/NewUser.jsx";
@@ -32,6 +33,7 @@ const routes = [
   { path: "/login", component: Login, layout: null },
   { path: "/profile", component: Profile, role: "NguoiDung" },
   { path: "/wishlist", component: Wishlist, role: "NguoiDung" },
+  { path: "/cart", component: Cart, role: "NguoiDung" },
 
   // admin
   { path: "/admin", component: AdminHome, layout: AdminLayout, role: "QuanTri" },

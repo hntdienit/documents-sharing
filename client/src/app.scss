@@ -34,7 +34,23 @@
 .mt_d {
   min-height: 100px;
 }
-.lang_h{
+.lang_h {
   // max-width: 200px !important;
   left: 0px !important;
+}
+
+.cart-table {
+  .pro-thumbnail{
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    img {
+    width: 100% !important;
+    min-width: 150px !important;
+    height: 100% !important;
+    min-height: 200px !important;
+    object-fit: cover;
+  }
+  }
+  
 }

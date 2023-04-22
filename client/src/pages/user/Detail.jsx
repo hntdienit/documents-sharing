@@ -1,7 +1,8 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import { toast } from "react-toastify";
 
 import images from "../../assets/images/index.js";
 import HeaderPage from "../../components/user/HeaderPage/HeaderPage.jsx";
@@ -13,6 +14,9 @@ import ErrorCompoment from "../../components/public/ErrorCompoment.jsx";
 
 const Detail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [quantity, setQuantity] = useState(1);
 
   const { isLoading, error, data } = useQuery({
     queryKey: [`detail_${id}`],
@@ -21,6 +25,38 @@ const Detail = () => {
         return res.data;
       }),
   });
+
+  const addProductToCart = async () => {
+    await newRequest
+      .post("/cart/add", {
+        So_luong: quantity,
+        Tai_lieu_id: id,
+      })
+      .then((res) => {
+        if (res.data.error) {
+          toast.error(`${res.data.error}`, {});
+        } else {
+          toast.success("Thêm sản phẩm vào giỏ hàng thành công!", {});
+          navigate("/cart");
+        }
+      });
+  };
+
+  const incQuantity = (stock) => {
+    if (quantity >= stock) {
+      toast.error("Số lượng phải nhỏ hơn số lượng còn!", {});
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const decQuantity = (stock) => {
+    if (quantity === 1) {
+      toast.error("Số lượng phải lớn hơn 0!", {});
+    } else {
+      setQuantity(quantity - 1);
+    }
+  };
 
   if (isLoading) return <LoadingCompoment />;
   if (error) return <ErrorCompoment err={error?.response?.data} />;
@@ -58,10 +94,34 @@ const Detail = () => {
                 </p>
 
                 <div className="product-action mb--20">
+                  <div className="pro-qty">
+                    <span
+                      className="dec qtybtn"
+                      onClick={() => {
+                        decQuantity(data?.Tai_lieu?.So_luong);
+                      }}
+                    >
+                      -
+                    </span>
+                    <input type="text" value={quantity} readOnly />
+                    <span
+                      className="inc qtybtn"
+                      onClick={() => {
+                        incQuantity(data?.Tai_lieu?.So_luong);
+                      }}
+                    >
+                      +
+                    </span>
+                  </div>
                   <div className="addto-cart-btn">
-                    <a className="rbt-btn btn-gradient hover-icon-reverse" href="cart.html">
+                    <button
+                      className="rbt-btn btn-gradient hover-icon-reverse"
+                      onClick={() => {
+                        addProductToCart();
+                      }}
+                    >
                       <span className="icon-reverse-wrapper">
-                        <span className="btn-text">Add To Cart</span>
+                        <span className="btn-text">Thêm vào giỏ hàng</span>
                         <span className="btn-icon">
                           <KeyboardDoubleArrowRightIcon />
                         </span>
@@ -69,13 +129,13 @@ const Detail = () => {
                           <KeyboardDoubleArrowRightIcon />
                         </span>
                       </span>
-                    </a>
+                    </button>
                   </div>
                 </div>
 
                 <ul className="product-feature">
                   <li>
-                    <span>số lượng còn:</span> 7
+                    <span>số lượng còn:</span> {data?.Tai_lieu?.So_luong}
                   </li>
                   <li>
                     <span>Ngành học: </span> <Link to={"/"}>Motivation</Link>
