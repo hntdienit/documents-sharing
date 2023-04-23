@@ -56,12 +56,16 @@
   }
 }
 
-.h-50vh{
+.h-50vh {
   height: 50vh !important;
 }
 
-.f-c-c{
+.f-c-c {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+}
+
+.icon_like{
+  color: red;
 }

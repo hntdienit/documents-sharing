@@ -250,6 +250,13 @@ const Header = () => {
                           </div>
                         </div>
                       </li>
+                      <li className="access-icon rbt-mini-cart">
+                        <Link to={"/wishlist"} className="rbt-cart-sidenav-activation rbt-round-btn">
+                          <i>
+                          <FavoriteIcon />
+                          </i>
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 </div>

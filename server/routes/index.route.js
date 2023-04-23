@@ -7,6 +7,7 @@ import cartRoute from "./cart.route.js";
 import orderRoute from "./order.route.js";
 import paymentmethodRoute from "./paymentmethod.route.js";
 import majorRoute from "./major.route.js"
+import wishlistRoute from "./wishlist.route.js"
 
 import createError from "../utils/createError.js";
 
@@ -26,6 +27,7 @@ const router = (app) => {
   app.use("/order", orderRoute);
   app.use("/paymentmethod", paymentmethodRoute);
   app.use("/major", majorRoute);
+  app.use("/wishlist", wishlistRoute);
 
   app.use("/:error", (req, res, next) => {
     return next(createError(404, "Không tìm thấy đường dẫn mong muốn!"));
