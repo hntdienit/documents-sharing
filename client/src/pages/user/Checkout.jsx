@@ -34,7 +34,7 @@ const Checkout = () => {
       if (response.data.error) {
         // toast.error(`Add new product failed! - error: ${response.data.error}`, {});
       } else {
-        console.log(response.data.hinh);
+        // console.log(response.data.hinh);
         toast.success("Checkout successfully!", {});
         navigate("/");
       }

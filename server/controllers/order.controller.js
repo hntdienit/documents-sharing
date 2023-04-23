@@ -1,5 +1,5 @@
 import sequelize from "../config/db.js";
-import { Op } from "sequelize";
+import { Op, or } from "sequelize";
 
 import { vnpay } from "../config/vnpay.js";
 import dateFormat from "dateformat";
@@ -13,6 +13,7 @@ import CartDetails from "../models/cartdetail.model.js";
 import Documents from "../models/document.model.js";
 import PaymentMethod from "../models/paymentmethod.model.js";
 import OrderDetails from "../models/orderdetail.model.js";
+import Users from "../models/user.model.js";
 
 function deleteZombieOrder(orderId) {
   setTimeout(async function () {
@@ -23,6 +24,57 @@ function deleteZombieOrder(orderId) {
     }
   }, 2 * 60 * 1000);
 }
+
+export const getAllOrder = async (req, res, next) => {
+  try {
+    const listDocument = await Documents.findAll({
+      attributes: ["id"],
+      where: {
+        Nguoi_dung_id: req.user.id,
+      },
+    });
+
+    let tailieuid = [];
+    listDocument.forEach((l) => {
+      tailieuid = [...tailieuid, l.id];
+    });
+
+    const listorder = await OrderDetails.findAll({
+      attributes: ["Don_hang_id"],
+      where: {
+        Tai_lieu_id: tailieuid,
+      },
+      group: "Don_hang_id",
+    });
+
+    let donhangid = [];
+    listorder.forEach((l) => {
+      donhangid = [...donhangid, l.Don_hang_id];
+    });
+
+    const order = await Order.findAll({
+      where: {
+        id: donhangid,
+      },
+      required: false,
+      include: [{ model: Users }],
+    });
+
+    const orderdetail = await OrderDetails.findAll({
+      where: {
+        Don_hang_id: donhangid,
+        Tai_lieu_id: tailieuid,
+      }
+    })
+
+    res.json({
+      order: order,
+      orderdetail: orderdetail
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const postCheckout = async (req, res, next) => {
   try {

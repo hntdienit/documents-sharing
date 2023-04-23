@@ -131,6 +131,22 @@ const relationship = () => {
   /* Majors x Documents: one to Many */
   Majors.hasMany(Documents, { foreignKey: "Nganh_hoc_id" });
   Documents.belongsTo(Majors, { foreignKey: "Nganh_hoc_id" });
+
+  /* Users x Messages: one to Many */
+  Users.hasMany(Messages, { foreignKey: "Nguoi_dung_id" });
+  Messages.belongsTo(Users, { foreignKey: "Nguoi_dung_id" });
+
+  /* Conversations x Messages: one to Many */
+  Conversations.hasMany(Messages, { foreignKey: "Hoi_thoai_id" });
+  Messages.belongsTo(Conversations, { foreignKey: "Hoi_thoai_id" });
+
+  /* Users x Conversations: one to Many */
+  Users.hasMany(Conversations, { foreignKey: "Nguoi_ban_id" });
+  Conversations.belongsTo(Users, { foreignKey: "Nguoi_ban_id" });
+
+  /* Users x Conversations: one to Many */
+  Users.hasMany(Conversations, { foreignKey: "Nguoi_mua_id" });
+  Conversations.belongsTo(Users, { foreignKey: "Nguoi_mua_id" });
 };
 
 export default relationship;

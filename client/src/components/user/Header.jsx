@@ -10,6 +10,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 import newRequest from "../../utils/newRequest.js";
 import images from "../../assets/images";
@@ -203,7 +204,7 @@ const Header = () => {
                                 <ul className="user-list-wrapper">
                                   <li>
                                     <Link to={"/profile"}>
-                                      <span className="me-1">
+                                      <span className="me-2">
                                         <AccountCircleIcon />
                                       </span>
                                       <span>Trang cá nhân</span>
@@ -211,10 +212,18 @@ const Header = () => {
                                   </li>
                                   <li>
                                     <Link to={"/wishlist"}>
-                                      <span className="me-1">
+                                      <span className="me-2">
                                         <FavoriteIcon />
                                       </span>
-                                      <span>Wishlist</span>
+                                      <span>Danh sách yêu thích</span>
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link to={"/order"}>
+                                      <span className="me-2">
+                                        <ListAltIcon />
+                                      </span>
+                                      <span>Đơn hàng</span>
                                     </Link>
                                   </li>
                                 </ul>
@@ -282,6 +291,9 @@ const Header = () => {
                     </li>
                     <li className="has-dropdown has-menu-child-item">
                       <Link to={"/document/all"}>Danh sách tài liệu</Link>
+                    </li>
+                    <li className="has-dropdown has-menu-child-item">
+                      <Link to={"/messages"}>tin nhan</Link>
                     </li>
                   </ul>
                 </nav>

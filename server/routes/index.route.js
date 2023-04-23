@@ -6,8 +6,10 @@ import userRoute from "./user.route.js";
 import cartRoute from "./cart.route.js";
 import orderRoute from "./order.route.js";
 import paymentmethodRoute from "./paymentmethod.route.js";
-import majorRoute from "./major.route.js"
-import wishlistRoute from "./wishlist.route.js"
+import majorRoute from "./major.route.js";
+import wishlistRoute from "./wishlist.route.js";
+import conversationRoute from "./conversation.route.js";
+import messagesRoute from "./message.route.js";
 
 import createError from "../utils/createError.js";
 
@@ -28,6 +30,8 @@ const router = (app) => {
   app.use("/paymentmethod", paymentmethodRoute);
   app.use("/major", majorRoute);
   app.use("/wishlist", wishlistRoute);
+  app.use("/conversation", conversationRoute);
+  app.use("/messages", messagesRoute);
 
   app.use("/:error", (req, res, next) => {
     return next(createError(404, "Không tìm thấy đường dẫn mong muốn!"));

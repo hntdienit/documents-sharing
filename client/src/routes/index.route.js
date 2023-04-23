@@ -13,9 +13,12 @@ import ViewPDF from "../pages/public/ViewPDF.jsx";
 import Register from "../pages/Register/Register.jsx";
 import Login from "../pages/Login/Login.jsx";
 import Profile from "../pages/auth/Profile/Profile.jsx";
-import Wishlist from "../pages/user/Wishlist/Wishlist.jsx";
+import Wishlist from "../pages/user/Wishlist.jsx";
 import Cart from "../pages/user/Cart.jsx";
 import Checkout from "../pages/user/Checkout.jsx";
+import Message from "../pages/user/Message.jsx";
+import Messages from "../pages/user/Messages.jsx";
+import Order from "../pages/user/Order.jsx";
 
 // admin
 import NewUser from "../pages/admin/User/NewUser.jsx";
@@ -37,6 +40,9 @@ const routes = [
   { path: "/wishlist", component: Wishlist, role: "NguoiDung" },
   { path: "/cart", component: Cart, role: "SinhVien" },
   { path: "/checkout", component: Checkout, role: "SinhVien" },
+  { path: "/messages", component: Messages, role: "SinhVien" },
+  { path: "/message/:id", component: Message, role: "SinhVien" },
+  { path: "/order", component: Order, role: "SinhVien" },
 
   // admin
   { path: "/admin", component: AdminHome, layout: AdminLayout, role: "QuanTri" },
