@@ -10,7 +10,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import ListAltIcon from "@mui/icons-material/ListAlt";
 
 import newRequest from "../../utils/newRequest.js";
 import images from "../../assets/images";
@@ -72,7 +72,7 @@ const Header = () => {
                         <li className="has-child-menu">
                           <Link to={"/"}>
                             <img className="left-image" src={images.en_us} alt="Language Images" />
-                            <span className="menu-item">English</span>
+                            <span className="menu-item">Tiếng Anh</span>
                             <KeyboardArrowDownIcon />
                           </Link>
                           <ul className="sub-menu lang_h">
@@ -137,32 +137,21 @@ const Header = () => {
                   <div className="header-info">
                     <div className="logo">
                       <Link to={"/"}>
-                        <img src={images.logo} alt="Education Logo Images" />
+                        <img src={images.logo} alt="Education Logo Images" className="img-logo" />
                       </Link>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="rbt-header-sec-col rbt-header-center">
+              <div className="rbt-header-sec-col rbt-header-center d-none d-md-block">
                 <div className="rbt-header-content">
                   <div className="header-info">
-                    <div className="rbt-search-with-category">
-                      {/* <div className="filter-select rbt-modern-select search-by-category">
-                        <select>
-                          <option>All Categories</option>
-                          <option>Education</option>
-                          <option>Course</option>
-                          <option>Art</option>
-                          <option>Web Design</option>
-                        </select>
-                      </div> */}
+                    <div className="rbt-search-field">
                       <div className="search-field">
-                        <input type="text" placeholder="Search Course" />
+                        <input type="text" placeholder="Tìm tài liệu..." />
                         <button className="rbt-round-btn serach-btn" type="submit">
-                          <i>
-                            <SearchIcon />
-                          </i>
+                          <SearchIcon />
                         </button>
                       </div>
                     </div>
@@ -226,6 +215,14 @@ const Header = () => {
                                       <span>Đơn hàng</span>
                                     </Link>
                                   </li>
+                                  <li>
+                                    <Link to={"/userorder"}>
+                                      <span className="me-2">
+                                        <ListAltIcon />
+                                      </span>
+                                      <span>Đơn đặt hàng</span>
+                                    </Link>
+                                  </li>
                                 </ul>
                                 <hr className="mt--10 mb--10" />
                               </>
@@ -262,7 +259,7 @@ const Header = () => {
                       <li className="access-icon rbt-mini-cart">
                         <Link to={"/wishlist"} className="rbt-cart-sidenav-activation rbt-round-btn">
                           <i>
-                          <FavoriteIcon />
+                            <FavoriteIcon />
                           </i>
                         </Link>
                       </li>
@@ -292,9 +289,9 @@ const Header = () => {
                     <li className="has-dropdown has-menu-child-item">
                       <Link to={"/document/all"}>Danh sách tài liệu</Link>
                     </li>
-                    <li className="has-dropdown has-menu-child-item">
+                    {/* <li className="has-dropdown has-menu-child-item">
                       <Link to={"/messages"}>tin nhan</Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </nav>
               </div>

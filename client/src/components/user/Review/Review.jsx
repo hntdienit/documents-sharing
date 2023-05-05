@@ -15,7 +15,7 @@ import { AuthContext } from "../../../helpers/AuthContext";
 const Review = ({ review, setReview, setRating, setOpenReview }) => {
 
   const { currentUser } = useContext(AuthContext);
-
+console.log(review?.Nguoi_dung_id)
   const { isLoading, error, data } = useQuery({
     queryKey: [`Review_${review?.Nguoi_dung_id}`],
     queryFn: () =>
@@ -30,7 +30,7 @@ const Review = ({ review, setReview, setRating, setOpenReview }) => {
     setReview(review.Noi_dung_danh_gia);
   };
 
-  if (isLoading) return <LoadingCompoment loading={"123214"}/>;
+  if (isLoading) return <LoadingCompoment/>;
   if (error) return <ErrorCompoment err={error?.response?.data} />;
 
   return (
@@ -41,7 +41,7 @@ const Review = ({ review, setReview, setRating, setOpenReview }) => {
             <div className="comment-body">
               <div className="single-comment w-100">
                 <div className="comment-img">
-                  <img src={images.course_online_01} alt="Author Images" className="img__review" />
+                  <img src={images.noavatar} alt="Author Images" className="img__review" />
                 </div>
                 <div className="comment-inner row">
                   <div className="col-lg-8">
@@ -49,7 +49,7 @@ const Review = ({ review, setReview, setRating, setOpenReview }) => {
                       <Link to={"/"}>{data.Ho_ten}</Link>
                     </h6>
                     <div className="comment-meta">
-                      <div className="time-spent">Nov 23, 2018 at 12:23 pm</div>
+                      <div className="time-spent">2023: 12:23 pm</div>
                     </div>
                     <div className="rbt-review justify-content-start mb-2">
                       <Star stars={review.So_sao} />
@@ -75,7 +75,7 @@ const Review = ({ review, setReview, setRating, setOpenReview }) => {
                     )}
                   </div>
                   <div className="comment-text col-lg-12">
-                    <p className="b2">{review.Noi_dung_danh_gia}</p>
+                    <p className="b2 review_content">{review.Noi_dung_danh_gia}</p>
                   </div>
                 </div>
               </div>

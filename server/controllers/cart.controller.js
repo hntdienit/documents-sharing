@@ -5,6 +5,7 @@ import createError from "../utils/createError.js";
 
 import CartDetails from "../models/cartdetail.model.js";
 import Documents from "../models/document.model.js";
+import Images from "../models/image.model.js";
 
 export const addProductToCart = async (req, res, next) => {
   try {
@@ -60,6 +61,11 @@ export const getCart = async (req, res, next) => {
       include: [
         {
           model: Documents,
+          include: [
+            {
+              model: Images,
+            },
+          ],
         },
       ],
     });

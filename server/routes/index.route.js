@@ -10,14 +10,17 @@ import majorRoute from "./major.route.js";
 import wishlistRoute from "./wishlist.route.js";
 import conversationRoute from "./conversation.route.js";
 import messagesRoute from "./message.route.js";
+import adminRoute from "./admin.route.js"
+import courseRoute from "./course.route.js"
 
 import createError from "../utils/createError.js";
 
 const router = (app) => {
   app.get("/", (req, res, next) => {
-    return res.status(200).json({
-      message: "server run ok!",
-    });
+    // return res.status(200).json({
+    //   message: "server run ok!",
+    // });
+    return res.send("<button><a href='/auth/google'>Login With Google</a></button>");
   });
 
   app.use("/auth", authRoute);
@@ -32,6 +35,8 @@ const router = (app) => {
   app.use("/wishlist", wishlistRoute);
   app.use("/conversation", conversationRoute);
   app.use("/messages", messagesRoute);
+  app.use("/admin", adminRoute);
+  app.use("/course", courseRoute);
 
   app.use("/:error", (req, res, next) => {
     return next(createError(404, "Không tìm thấy đường dẫn mong muốn!"));

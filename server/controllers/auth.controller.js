@@ -65,6 +65,7 @@ export const register = async (req, res, next) => {
     const hash = bcrypt.hashSync(req.body.Mat_khau, 5);
 
     const newUser = await Users.create({
+      Ho_ten: req.body.Ho_ten,
       Email: Email,
       Mat_khau: hash,
     });
@@ -113,4 +114,23 @@ export const logout = async (req, res) => {
     })
     .status(200)
     .send("Bạn đã đăng xuất thành công. Tạm biệt!");
+};
+
+export const googleSuccess = async (req, res) => {
+  const user = req.user;
+  if (!user) return res.redirect("/auth/callback/failure");
+  const accessToken = endCode(user.id, user.Email, user.Quyen);
+  return res
+    .cookie("accessToken", accessToken, {
+      httpOnly: true,
+    })
+    .status(200)
+    .json({
+      userId: user.id,
+      Ho_ten: user.Ho_ten,
+      Quyen: user.Quyen,
+      Email: user.Email,
+      Hinh_dai_dien: user.Hinh_dai_dien,
+      AccessToken: accessToken,
+    });
 };

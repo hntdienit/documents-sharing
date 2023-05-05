@@ -25,9 +25,9 @@ const Pagination = ({ limit, setLimit, setPage, changePage, pages, even = false 
                   setPage(0);
                 }}
               >
+                <MenuItem value={6}>6</MenuItem>
                 <MenuItem value={10}>10</MenuItem>
                 <MenuItem value={20}>20</MenuItem>
-                <MenuItem value={30}>30</MenuItem>
               </Select>
             ) : (
               <Select

@@ -16,6 +16,10 @@ module.exports = {
         Ma_nganh_hoc: "KT",
         Ten_nganh_hoc: "Kinh tế",
       },
+      {
+        Ma_nganh_hoc: "T",
+        Ten_nganh_hoc: "Toán",
+      },
     ]);
   },
 

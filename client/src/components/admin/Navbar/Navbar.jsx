@@ -37,7 +37,7 @@ const Navbar = () => {
                 aria-expanded="false"
               >
                 <i className="flag-icon flag-icon-us mt-1" title="us"></i>
-                <span className="ms-1 me-1 d-none d-md-inline-block">English</span>
+                <span className="ms-1 me-1 d-none d-md-inline-block">Tiếng Anh</span>
               </Link>
               <div className="dropdown-menu" aria-labelledby="languageDropdown">
                 <Link to={"/admin"} className="dropdown-item py-2">
@@ -140,7 +140,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <img className="wd-30 ht-30 rounded-circle" src={images.avatar} alt="profile" />
+                <img className="wd-30 ht-30 rounded-circle" src={images.noavatar} alt="profile" />
               </Link>
               <div className="dropdown-menu p-0" aria-labelledby="profileDropdown">
                 <div className="d-flex flex-column align-items-center border-bottom px-5 py-3">

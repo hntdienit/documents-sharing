@@ -85,7 +85,7 @@ const Order = () => {
                                 <p hidden>{total > 0 ? (total = 0) : (total = 0)}</p>
                               </td>
                               <td className="pro-remove">
-                                <Link>
+                                <Link to={"/messages"}>
                                   <MessageIcon />
                                 </Link>
                               </td>

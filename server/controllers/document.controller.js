@@ -110,6 +110,69 @@ export const pagination = async (req, res, next) => {
             },
           },
         ],
+        Kiem_duyet: true,
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+    });
+
+    const totalPage = Math.ceil(totalRows / limit);
+
+    const result = await Documents.findAll({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
+        Kiem_duyet: true,
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+      required: false,
+      include: [{ model: Reviews }, { model: Images }, { model: Majors }],
+    });
+
+    res.json({
+      result: result,
+      page: page,
+      limit: limit,
+      totalRows: totalRows,
+      totalPage: totalPage,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+export const pagination1 = async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.keyword || "";
+    const offset = limit * page;
+    const totalRows = await Documents.count({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
       },
       offset: offset,
       limit: limit,
@@ -176,7 +239,7 @@ export const singleDocument = async (req, res, next) => {
       where: { Tai_lieu_id: document.id },
     });
 
-    const Nganh = await Majors.findByPk(document.Nganh_hoc_id)
+    const Nganh = await Majors.findByPk(document.Nganh_hoc_id);
 
     const singledocument = {
       Tai_lieu: document,
@@ -222,6 +285,33 @@ export const deleteDocument = async (req, res, next) => {
       },
     });
     return res.status(201).json("xoa thanh cong");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const checkDocument = async (req, res, next) => {
+  try {
+    if (req.body.checkD) {
+      await Documents.update(
+        {
+          Kiem_duyet: 1,
+        },
+        {
+          where: {
+            id: req.body.id,
+          },
+        }
+      );
+    } else {
+      await Documents.destroy({
+        where: {
+          id: req.body.id,
+        },
+      });
+    }
+
+    res.status(201).json();
   } catch (err) {
     next(err);
   }

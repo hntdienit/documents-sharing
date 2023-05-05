@@ -473,20 +473,20 @@ ul {
     }
 }
 
-// .search-field {
-//     input {
-//         height: auto;
-//         box-shadow: none;
-//         padding: 0 20px;
-//         padding-right: 65px;
-//         line-height: 47px;
-//     }
-//     &.filed-solid { 
-//         input {
-//             background: var(--color-gray-light);
-//         }
-//     }
-// }
+.search-field {
+    input {
+        height: auto;
+        box-shadow: none;
+        padding: 0 20px;
+        padding-right: 65px;
+        line-height: 47px;
+    }
+    &.filed-solid { 
+        input {
+            background: var(--color-gray-light);
+        }
+    }
+}
 
 
 .search-field {

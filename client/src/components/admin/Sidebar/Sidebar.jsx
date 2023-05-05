@@ -6,16 +6,17 @@ import "./Sidebar.scss";
 import icons from "../../../assets/icons";
 import newRequest from "../../../utils/newRequest.js";
 import { AuthContext } from "../../../helpers/AuthContext.jsx";
+import images from "../../../assets/images";
 
 const sidelink = [
   {
-    nav_category: "web apps",
+    nav_category: "Trang",
     nav: [
       {
-        title: "Email",
+        title: "tài liệu",
         titleIcon: <icons.AddCircleOutlineIcon />,
-        linkCreate: "/admin/document/create",
-        linkList: "/admin",
+        // linkCreate: "/admin/document/create",
+        linkList: "/admin/document/list",
       },
       {
         title: "Email31",
@@ -47,7 +48,7 @@ const Sidebar = () => {
       <nav className="admin__sidebar">
         <div className="sidebar__header">
           <Link to={"/admin"} className="sidebar__brand">
-            Noble<span>UI</span>
+            <img src={images.logo} alt="" />
           </Link>
           {/* <div className="sidebar-toggler not-active">
                 <span></span>
@@ -58,8 +59,7 @@ const Sidebar = () => {
 
         <div className="sidebar__body">
           <ul className="nav">
-            <Link onClick={handleLogout}> logout</Link>
-            {sidelink.map((s, i) => (
+            {/* {sidelink.map((s, i) => (
               <div key={s.nav_category}>
                 <li className="nav-item nav-category">{s.nav_category}</li>
                 {s.nav.map((n) => (
@@ -95,7 +95,149 @@ const Sidebar = () => {
                   </li>
                 ))}
               </div>
-            ))}
+            ))} */}
+
+            <div>
+              {/* <li className="nav-item nav-category">Trang</li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      data-bs-toggle="collapse"
+                      href={"#document"}
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="emails"
+                    >
+                      <i className="link-icon"><icons.AddCircleOutlineIcon /></i>
+                      <span className="link-title">Tài liệu</span>
+                      <i className="link-arrow">
+                     
+                      </i>
+                    </a>
+                    <div id="document">
+                      <ul className="nav sub-menu">
+                        <li className="nav-item">
+                          <Link to={n.linkCreate} className="nav-link">
+                            tao {n.title}
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link to={'/admin/document/list'} className="nav-link">
+                            Kiểm duyệt tài liệu
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </li> */}
+
+              <li className="nav-item nav-category">Quản lý thông tin</li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/user/list"} className="nav-link">
+                        Quản lý người dùng
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/student/list"} className="nav-link">
+                        Quản lý sinh viên
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/lecturers/list"} className="nav-link">
+                        Quản lý giảng viên
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/course/list"} className="nav-link">
+                        Quản lý lớp học
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/subject/list"} className="nav-link">
+                        Quản lý lớp học phần
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/major/list"} className="nav-link">
+                        Quản lý ngành học
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li className="nav-item nav-category">Kiểm duyệt</li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/document/list"} className="nav-link">
+                        Kiểm duyệt tài liệu
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li className="nav-item nav-category">Thống kê</li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/statistic"} className="nav-link">
+                        Thống kê
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li className="nav-item nav-category">Xử lý vi phạm</li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link to={"/admin/document/list"} className="nav-link">
+                        Xử lý vi phạm
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+            </div>
           </ul>
         </div>
       </nav>

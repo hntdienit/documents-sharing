@@ -1,5 +1,5 @@
 import express from "express";
-import {getAllOrder, postCheckout, createvnpay, vnpay_ipn, vnpay_return } from "../controllers/order.controller.js";
+import {getAllOrder,getUserOrder, postCheckout, createvnpay, vnpay_ipn, vnpay_return } from "../controllers/order.controller.js";
 import validator from "../utils/validate.js";
 
 import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
@@ -7,6 +7,8 @@ import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
 const router = express.Router();
 
 router.route("/all").get(verifyToken, getAllOrder);
+router.route("/userorder").get(verifyToken, getUserOrder);
+
 
 router.route("/checkout").post(verifyToken, postCheckout);
 

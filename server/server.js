@@ -7,6 +7,9 @@ import sequelize from "./config/db.js";
 import relationship from "./models/relationship.model.js";
 import router from "./routes/index.route.js";
 
+import passport from "passport";
+import cookieSession from "cookie-session";
+
 const app = express();
 dotenv.config();
 
@@ -21,12 +24,48 @@ try {
   console.error("Kết nối database thất bại...", error);
 }
 
+/* take data req.body */
 app.use(express.urlencoded({ extended: false }));
-app.use(cors({ origin: process.env.Client, credentials: true }));
 app.use(express.json({ extended: true }));
+
+/* middlewares */
+app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
 
 app.use(express.static("public"));
+
+app.use(
+  cookieSession({
+    name: "google-auth-session",
+    keys: ["key1", "key2"],
+    // sessionSameSite: "none",
+    // cookieIpCheck: "none",
+  })
+);
+
+app.use((req, res, next) => {
+  if (req.session && !req.session.regenerate) {
+    req.session.regenerate = (cb) => {
+      cb();
+    };
+  }
+  if (req.session && !req.session.save) {
+    req.session.save = (cb) => {
+      cb();
+    };
+  }
+  next();
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 /* routes */
 router(app);

@@ -1,26 +1,26 @@
 import express from "express";
-import { learnAll } from "../controllers/subject.controller.js";
+import {
+  learnAll,
+  newsubject,
+  listsubject,
+  getsubject,
+  editsubject,
+  deletesubject,
+} from "../controllers/subject.controller.js";
 import validator from "../utils/validate.js";
 
-import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
-import UploadMiddleware from "../middlewares/upload.middleware.js";
+import { verifyToken, checkUser, checkAdmin } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-// router.post(
-//   "/new",
-//   function (req, res, next) {
-//     req.storage = "./public/files";
-//     next();
-//   },
-//   UploadMiddleware.array("datafile", 10),
-//   verifyToken,
-//   checkUser,
-//   newDocument
-// );
-
 router.route("/learn/all").get(verifyToken, checkUser, learnAll);
 
-// router.route("/:id").get(singleDocument).patch(editDocument).delete(deleteDocument);
+router.route("/").post(verifyToken, checkAdmin, newsubject).get(listsubject);
+
+router
+  .route("/:id")
+  .get(getsubject)
+  .patch(verifyToken, checkAdmin, editsubject)
+  .delete(verifyToken, checkAdmin, deletesubject);
 
 export default router;

@@ -1,10 +1,26 @@
 import express from "express";
-import { getAll } from "../controllers/major.controller.js";
+import {
+  getAll,
+  newmajor,
+  listmajor,
+  getmajor,
+  editmajor,
+  deletemajor,
+} from "../controllers/major.controller.js";
 
-import { verifyToken } from "../middlewares/auth.middleware.js";
+import { verifyToken, checkAdmin } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
 router.route("/all").get(verifyToken, getAll);
+
+router.route("/").post(verifyToken, checkAdmin, newmajor).get(listmajor);
+
+router
+  .route("/:id")
+  .get(getmajor)
+  .patch(verifyToken, checkAdmin, editmajor)
+  .delete(verifyToken, checkAdmin, deletemajor);
+
 
 export default router;

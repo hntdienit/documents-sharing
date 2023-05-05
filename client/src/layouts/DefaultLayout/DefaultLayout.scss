@@ -10612,90 +10612,90 @@
 //     transform: translateY(-50%);
 // }
 
-// .rbt-search-with-category .search-field {
-//     width: 80%;
-// }
+.rbt-search-with-category .search-field {
+    width: 80%;
+}
 
-// .rbt-search-field,
-// .rbt-search-with-category {
-//     display: flex;
-//     align-items: center;
-//     border: 1px solid var(--color-border);
-//     height: 45px;
-//     border-radius: 500px;
-// }
+.rbt-search-field,
+.rbt-search-with-category {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    height: 45px;
+    border-radius: 500px;
+}
 
-// .rbt-search-field .rbt-modern-select .bootstrap-select button.btn-light,
-// .rbt-search-with-category .rbt-modern-select .bootstrap-select button.btn-light {
-//     border: 0 none;
-//     box-shadow: none;
-//     height: inherit;
-//     padding: 10px 20px;
-//     border-radius: inherit;
-//     line-height: 23px;
-//     padding-right: 40px;
-//     background-color: transparent;
-// }
+.rbt-search-field .rbt-modern-select .bootstrap-select button.btn-light,
+.rbt-search-with-category .rbt-modern-select .bootstrap-select button.btn-light {
+    border: 0 none;
+    box-shadow: none;
+    height: inherit;
+    padding: 10px 20px;
+    border-radius: inherit;
+    line-height: 23px;
+    padding-right: 40px;
+    background-color: transparent;
+}
 
-// .rbt-search-field .search-field .serach-btn::after,
-// .rbt-search-with-category .search-field .serach-btn::after {
-//     display: none;
-// }
+.rbt-search-field .search-field .serach-btn::after,
+.rbt-search-with-category .search-field .serach-btn::after {
+    display: none;
+}
 
-// .search-field input {
-//     height: auto;
-//     box-shadow: none;
-//     padding: 0 20px;
-//     padding-right: 65px;
-//     line-height: 47px;
-// }
+.search-field input {
+    height: auto;
+    box-shadow: none;
+    padding: 0 20px;
+    padding-right: 65px;
+    line-height: 47px;
+}
 
-// .search-field.filed-solid input {
-//     background: var(--color-gray-light);
-// }
+.search-field.filed-solid input {
+    background: var(--color-gray-light);
+}
 
-// .search-field {
-//     display: flex;
-//     position: relative;
-//     width: 100%;
-//     height: 100%;
-// }
+.search-field {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
 
-// .search-field input {
-//     border: 0 none;
-//     box-shadow: none;
-// }
+.search-field input {
+    border: 0 none;
+    box-shadow: none;
+}
 
-// .search-field .serach-btn {
-//     position: absolute;
-//     right: 0;
-//     top: 0;
-//     height: 100%;
-//     width: 50px;
-//     border-radius: 0;
-// }
+.search-field .serach-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 50px;
+    border-radius: 0;
+}
 
-// .search-field .serach-btn::after {
-//     border-radius: 0;
-// }
+.search-field .serach-btn::after {
+    border-radius: 0;
+}
 
-// @media only screen and (max-width: 767px) {
-//     .rbt-search-with-category .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-//         width: 139px;
-//     }
-//     .rbt-search-with-category .search-field input {
-//         padding-right: 34px;
-//         font-size: 13px;
-//         padding-left: 12px;
-//     }
-//     .rbt-search-with-category .rbt-modern-select .bootstrap-select button.btn-light {
-//         font-size: 13px;
-//         padding-right: 25px;
-//     }
-//     .rbt-search-with-category .filter-select select {
-//         min-width: 139px;
-//     }
-// }
+@media only screen and (max-width: 767px) {
+    .rbt-search-with-category .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+        width: 139px;
+    }
+    .rbt-search-with-category .search-field input {
+        padding-right: 34px;
+        font-size: 13px;
+        padding-left: 12px;
+    }
+    .rbt-search-with-category .rbt-modern-select .bootstrap-select button.btn-light {
+        font-size: 13px;
+        padding-right: 25px;
+    }
+    .rbt-search-with-category .filter-select select {
+        min-width: 139px;
+    }
+}
 
 // /*--------------------------
 //     Secondary Menu

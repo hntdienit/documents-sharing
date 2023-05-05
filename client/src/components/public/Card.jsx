@@ -49,7 +49,7 @@ const Card = ({ item }) => {
       <div className="rbt-card variation-01 rbt-hover-02 card-list-2">
         <div className="rbt-card-img">
           <Link to={`/document/${item.id}`}>
-            <img src={item?.Url ? images.pdf : item?.Hinhs[0]?.Url} alt="Card image" />
+            <img src={item?.Url ? images.pdf : item?.Hinhs[0]?.Url} alt="Card image"  className="img-full"/>
           </Link>
         </div>
         <div className="rbt-card-body">

@@ -68,12 +68,15 @@ const Detail = () => {
         <div className="container">
           <div className="row g-5 row--30 align-items-center">
             <div className="col-lg-6">
-              <div className="thumbnail">
-                <img
-                  className="radius-10 img_detail"
-                  src={data?.Tai_lieu?.Url ? images.pdf : data?.Hinhs[0]?.Url}
-                  alt="Product Images"
-                />
+              <div className=" img-detail">
+                <div className="img_mini_wrap"></div>
+                <div>
+                  <img
+                    className="radius-10 img_detail"
+                    src={data?.Tai_lieu?.Url ? images.pdf : data?.Hinhs[0]?.Url}
+                    alt="Product Images"
+                  />
+                </div>
               </div>
             </div>
             <div className="col-lg-6">
@@ -93,12 +96,14 @@ const Detail = () => {
                   {data?.Tai_lieu?.Url ? (
                     <span className="current-price theme-gradient"></span>
                   ) : (
-                    <span className="current-price theme-gradient">{data?.Tai_lieu?.Gia} vnđ</span>
-                    // {/* <span className="off-price">$150.00</span> */}
+                    <>
+                      <span className="current-price theme-gradient my-3">{data?.Tai_lieu?.Gia} vnđ</span>
+                      {/* <span className="off-price">$150.00</span> */}
+                    </>
                   )}
                 </div>
 
-                <p className="my-4">{data?.Tai_lieu?.Mo_ta_tai_lieu}</p>
+                <p className="my-4 decs_detail">{data?.Tai_lieu?.Mo_ta_tai_lieu}</p>
 
                 {data?.Tai_lieu?.Url ? (
                   <div className="addto-cart-btn">

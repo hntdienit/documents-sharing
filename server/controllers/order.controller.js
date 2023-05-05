@@ -7,6 +7,7 @@ import sortObject from "../utils/sortObject.js";
 import querystring from "qs";
 import crypto from "crypto";
 import createError from "../utils/createError.js";
+import mailer from "../utils/mailer.js";
 
 import Order from "../models/order.model.js";
 import CartDetails from "../models/cartdetail.model.js";
@@ -64,13 +65,26 @@ export const getAllOrder = async (req, res, next) => {
       where: {
         Don_hang_id: donhangid,
         Tai_lieu_id: tailieuid,
-      }
-    })
+      },
+    });
 
     res.json({
       order: order,
-      orderdetail: orderdetail
+      orderdetail: orderdetail,
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getUserOrder = async (req, res, next) => {
+  try {
+    const order = await Order.findAll({
+      where: {
+        Nguoi_dung_id: req.user.id,
+      },
+    });
+    res.json(order);
   } catch (err) {
     next(err);
   }
@@ -92,6 +106,19 @@ export const postCheckout = async (req, res, next) => {
       Nguoi_dung_id: req.user.id,
       Phuong_thuc_thanh_toan_id: tt.id,
     });
+
+    mailer(
+      req.user.Email,
+      "Bạn đã đạt hàng",
+      `<div style="text-align: center">
+              <h2>Thông tin đơn hàng của bạn</h2>
+              <p>Mã đơn hàng <span style="color: #00aff0">${userOrder.Ma_don_hang}</span></p>
+              <p>Tổng đơn hàng <span style="color: #00aff0">${userOrder.Tong_don_hang}</span></p>
+              <p>Địa chỉ nhận hàng <span style="color: #00aff0">${userOrder.Dia_chi_nhan_hang}</span></p>
+              <p>Hình thực thanh toán <span style="color: #00aff0">${tt.Ten_phuong_thuc_thanh_toan}</span></p>
+              <p>Cảm ơn bạn đã mua hàng!</p>
+            </div>`
+    );
 
     const userCartItem = await CartDetails.findAll({
       where: { Nguoi_dung_id: req.user.id },
@@ -183,6 +210,18 @@ export const createvnpay = async (req, res, next) => {
     Nguoi_dung_id: req.user.id,
     Phuong_thuc_thanh_toan_id: tt.id,
   });
+  mailer(
+    req.user.Email,
+    "Bạn đã đạt hàng",
+    `<div style="text-align: center">
+            <h2>Thông tin đơn hàng của bạn</h2>
+            <p>Mã đơn hàng <span style="color: #00aff0">${userOrder.Ma_don_hang}</span></p>
+            <p>Tổng đơn hàng <span style="color: #00aff0">${userOrder.Tong_don_hang}</span></p>
+            <p>Địa chỉ nhận hàng <span style="color: #00aff0">${userOrder.Dia_chi_nhan_hang}</span></p>
+            <p>Hình thực thanh toán <span style="color: #00aff0">${tt.Ten_phuong_thuc_thanh_toan}</span></p>
+            <p>Cảm ơn bạn đã mua hàng!</p>
+          </div>`
+  );
 
   deleteZombieOrder(orderId);
 

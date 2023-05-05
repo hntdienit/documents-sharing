@@ -13,7 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
 import Pagination from "../../../components/public/Pagination.jsx";
@@ -29,7 +29,7 @@ const ListDocument = () => {
   const [deleteload, setDeleteload] = useState(0);
 
   useEffect(() => {
-    newRequest.get(`/document?keyword=${keyword}&page=${page}&limit=${limit}`).then((res) => {
+    newRequest.get(`/document/admin?keyword=${keyword}&page=${page}&limit=${limit}`).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
       } else {
@@ -73,7 +73,7 @@ const ListDocument = () => {
   return (
     <>
       <Card elevation={4}>
-        <HeaderPage list title={"CreateDocument"} to={"/admin/listproduct"} setKeyword={setKeyword} />
+        <HeaderPage list notnew title={"tài liệu"} to={"/admin/document/list"} setKeyword={setKeyword} />
         <Typography component={"div"} marginTop={2} marginX={3}>
           <Card elevation={3}>
             <TableContainer component={Paper}>
@@ -92,17 +92,17 @@ const ListDocument = () => {
                     </TableCell>
                     <TableCell align="center">
                       <Typography component={"div"} fontWeight="bold">
-                        Tên tài liệu
+                        Mô tả tài liệu
                       </Typography>
                     </TableCell>
                     <TableCell align="center">
                       <Typography component={"div"} fontWeight="bold">
-                        Tên tài liệu
+                        Kiểu tài liệu
                       </Typography>
                     </TableCell>
                     <TableCell align="center">
                       <Typography component={"div"} fontWeight="bold">
-                        Chức năng
+                        Kiểm duyệt
                       </Typography>
                     </TableCell>
                   </TableRow>
@@ -114,23 +114,26 @@ const ListDocument = () => {
                         {(page + 1) * limit - limit + index + 1}
                       </TableCell>
                       <TableCell align="center">{item?.Ten_tai_lieu}</TableCell>
-                      <TableCell align="center">{item?.Ten_tai_lieu}</TableCell>
-                      <TableCell align="center">{item?.Ten_tai_lieu}</TableCell>
+                      <TableCell align="center">{item?.Mo_ta_tai_lieu}</TableCell>
+                      <TableCell align="center">{item?.Kieu_tai_lieu}</TableCell>
                       <TableCell align="center">
-                        <Link to={`/admin/document/edit/${item.id}`}>
-                          <Button color="warning">
-                            <EditIcon />
-                          </Button>
-                        </Link>
-                        |
-                        <Button
-                          color="error"
-                          onClick={() => {
-                            deleteItem(item.id);
-                          }}
-                        >
-                          <DeleteForeverIcon />
-                        </Button>
+                        {!item?.Kiem_duyet && (
+                          <span>
+                            {item?.Url ? (
+                              <Link to={`/admin/document/viewpdf/${item.id}`}>
+                                <Button color="info">
+                                  <EditIcon />
+                                </Button>
+                              </Link>
+                            ) : (
+                              <Link to={`/admin/document/view/${item.id}`}>
+                                <Button color="info">
+                                  <EditIcon />
+                                </Button>
+                              </Link>
+                            )}
+                          </span>
+                        )}
                       </TableCell>
                     </TableRow>
                   ))}

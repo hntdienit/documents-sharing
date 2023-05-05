@@ -32,6 +32,9 @@ const Categories = () => {
     setPage(selected);
   };
 
+  // if (data) return <LoadingCompoment />;
+  // if (error) return <ErrorCompoment />;
+
   return (
     <>
       <HeaderPage page={"Danh sách tài liệu"} linkpage={"Danh sách tài liệu"} />
@@ -57,7 +60,7 @@ const Categories = () => {
                         <form action="#" className="rbt-search-style me-0">
                           <input
                             type="text"
-                            placeholder="Search Your Course.."
+                            placeholder="Tìm kiếm tài liệu..."
                             onChange={(e) => {
                               setKeyword(e.target.value);
                             }}
@@ -96,7 +99,7 @@ const Categories = () => {
 
                 <div className="mt-5">
                   <Pagination
-                    // even
+                    even
                     limit={limit}
                     setLimit={setLimit}
                     setPage={setPage}

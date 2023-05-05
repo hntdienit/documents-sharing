@@ -50,7 +50,7 @@ function App() {
         </Router>
       </div>
       <ToastContainer autoClose={5000} />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

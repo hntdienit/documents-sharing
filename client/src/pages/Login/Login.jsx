@@ -5,7 +5,6 @@ import { Formik } from "formik";
 import { toast } from "react-toastify";
 import GoogleIcon from "@mui/icons-material/Google";
 
-import "./Login.scss";
 import { AuthContext } from "../../helpers/AuthContext.jsx";
 import newRequest from "../../utils/newRequest.js";
 import validationData from "../../helpers/validationData.jsx";
@@ -37,13 +36,33 @@ const Login = () => {
       }
     });
   };
+
+  const handleLoginGG = async () => {
+    await newRequest.get("/auth/google").then((res) => {
+      if (res.data.error) {
+        toast.error(res.data.error, {});
+      } else {
+        setCurrentUser(res.data);
+        toast.success("Bạn đã đăng nhập thành công!", {});
+        if (res.data.Quyen === "QuanTri") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }
+    });
+  };
   return (
     <>
       <div className="container login">
         <div className="rbt-contact-form contact-form-style-1 max-width-auto">
           <div className="login-gg">
             <div>
-              <Link to={"/"}>
+              <Link
+                onClick={() => {
+                  handleLoginGG();
+                }}
+              >
                 <button type="submit" className="rbt-btn btn-md w-100 btn__social">
                   <span className="icon__social">
                     <GoogleIcon />
@@ -112,7 +131,7 @@ const Login = () => {
                 </div>
                 <div className="changelogin">
                   <span>Bạn chưa có tài khoản </span>
-                  <Link className="rbt-btn-link" to={"/"}>
+                  <Link className="rbt-btn-link" to={"/register"}>
                     đăng ký
                   </Link>
                 </div>

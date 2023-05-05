@@ -1,6 +1,7 @@
 import * as yup from "yup";
 
 const validate = {
+  Ho_ten: yup.string().required("Họ tên không để chống không để trống!"),
   Email: yup.string().email("Email không đúng định dạng!").required("Email không để trống!"),
   Mat_khau: yup
     .string()
@@ -12,6 +13,7 @@ const validate = {
       "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một số và một ký tự đặc biệt!"
     )
     .required("Mật khẩu không được để trống!"),
+  Lai_mat_khau: yup.string().oneOf([yup.ref("Mat_khau"), null], "Mật khẩu không khớp!"),
   Ten_tai_lieu: yup
     .string()
     .min(5, "Tên tài liệu phải nhiều hơn 5 ký tự!")
@@ -39,6 +41,12 @@ const validationData = {
   login: yup.object({
     Email: validate.Email,
     // Mat_khau: validate.Mat_khau,
+  }),
+  register: yup.object({
+    Ho_ten: validate.Ho_ten,
+    Email: validate.Email,
+    Mat_khau: validate.Mat_khau,
+    Lai_mat_khau: validate.Lai_mat_khau,
   }),
   shareDocument: yup.object({
     Ten_tai_lieu: validate.Ten_tai_lieu,

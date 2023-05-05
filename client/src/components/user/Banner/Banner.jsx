@@ -51,7 +51,7 @@ const Banner = () => {
                       <Link to={"/"}>
                         <div className="inner">
                           <div className="content">
-                            <p>React Js dolor sit, amet consectetur.</p>
+                            <p>Lập trình hướng đối tượng</p>
                             <span className="transparent-button">
                               Tìm hiểu thêm
                               <ArrowForwardIcon />
@@ -68,63 +68,60 @@ const Banner = () => {
                 <div className="swiper-slide">
                   <div className="single-slide">
                     <div className="rbt-service rbt-service-2 rbt-hover-02 bg-no-shadow card-bg-4">
-                      <div className="inner">
-                        <div className="content">
-                          <h4 className="title">
-                            <a href="#">React</a>
-                          </h4>
-                          <p>React Js dolor sit, amet consectetur.</p>
-                          <a className="transparent-button" href="#">
-                            Tìm hiểu thêm
-                            <ArrowForwardIcon />
-                          </a>
+                      <Link to={"/"}>
+                        <div className="inner">
+                          <div className="content">
+                            <p>Cấu trúc dữ liệu</p>
+                            <span className="transparent-button">
+                              Tìm hiểu thêm
+                              <ArrowForwardIcon />
+                            </span>
+                          </div>
+                          <div className="thumbnail">
+                            <img src={images.pdf} className="img_banner" alt="Education Images" />
+                          </div>
                         </div>
-                        <div className="thumbnail">
-                          <img src={images.pdf} className="img_banner" alt="Education Images" />
-                        </div>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
                 <div className="swiper-slide">
                   <div className="single-slide">
                     <div className="rbt-service rbt-service-2 rbt-hover-02 bg-no-shadow card-bg-4">
-                      <div className="inner">
-                        <div className="content">
-                          <h4 className="title">
-                            <a href="#">React</a>
-                          </h4>
-                          <p>React Js dolor sit, amet consectetur.</p>
-                          <a className="transparent-button" href="#">
-                            Learn More
-                            <ArrowForwardIcon />
-                          </a>
+                      <Link to={"/"}>
+                        <div className="inner">
+                          <div className="content">
+                            <p>Toán cao cấp</p>
+                            <span className="transparent-button">
+                              Tìm hiểu thêm
+                              <ArrowForwardIcon />
+                            </span>
+                          </div>
+                          <div className="thumbnail">
+                            <img src={images.pdf} className="img_banner" alt="Education Images" />
+                          </div>
                         </div>
-                        <div className="thumbnail">
-                          <img src={images.pdf} className="img_banner" alt="Education Images" />
-                        </div>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
                 <div className="swiper-slide">
                   <div className="single-slide">
                     <div className="rbt-service rbt-service-2 rbt-hover-02 bg-no-shadow card-bg-4">
-                      <div className="inner">
-                        <div className="content">
-                          <h4 className="title">
-                            <a href="#">React</a>
-                          </h4>
-                          <p>React Js dolor sit, amet consectetur.</p>
-                          <a className="transparent-button" href="#">
-                            Learn More
-                            <ArrowForwardIcon />
-                          </a>
+                      <Link to={"/"}>
+                        <div className="inner">
+                          <div className="content">
+                            <p>Xác xuất thống kê</p>
+                            <span className="transparent-button">
+                              Tìm hiểu thêm
+                              <ArrowForwardIcon />
+                            </span>
+                          </div>
+                          <div className="thumbnail">
+                            <img src={images.pdf} className="img_banner" alt="Education Images" />
+                          </div>
                         </div>
-                        <div className="thumbnail">
-                          <img src={images.pdf} className="img_banner" alt="Education Images" />
-                        </div>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>

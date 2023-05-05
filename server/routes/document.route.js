@@ -3,13 +3,15 @@ import {
   shareDocument,
   payDocument,
   pagination,
+  pagination1,
   singleDocument,
   editDocument,
   deleteDocument,
+  checkDocument,
 } from "../controllers/document.controller.js";
 import validator from "../utils/validate.js";
 
-import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
+import { verifyToken, checkUser, checkAdmin } from "../middlewares/auth.middleware.js";
 import UploadMiddleware from "../middlewares/upload.middleware.js";
 
 const router = express.Router();
@@ -39,6 +41,10 @@ router.post(
 );
 
 router.route("/").get(pagination);
+
+router.route("/admin").get(pagination1);
+
+router.route("/check").post(verifyToken, checkAdmin, checkDocument);
 
 router.route("/:id").get(singleDocument).patch(editDocument).delete(deleteDocument);
 
