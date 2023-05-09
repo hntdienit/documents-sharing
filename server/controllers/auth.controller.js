@@ -7,8 +7,20 @@ import emailExistence from "email-existence";
 import mailer from "../utils/mailer.js";
 import createError from "../utils/createError.js";
 
-// import User from "../models/user.model.js";
 import Users from "../models/user.model.js";
+
+const setTimeOutOTP = (userId) => {
+  setTimeout(async () => {
+    const findUser = await Users.findByPk(userId);
+    if (findUser) {
+      await Users.update({ So_dien_thoai: 0 }, { where: { id: userId } });
+    }
+  }, 1 * 60 * 1000);
+};
+
+const createOTP = () => {
+  return Math.floor(Math.random() * (999999 - 100000)) + 100000;
+};
 
 const endCode = (id, Email, Quyen) => {
   return jwt.sign(
@@ -24,53 +36,40 @@ const endCode = (id, Email, Quyen) => {
 
 export const register = async (req, res, next) => {
   try {
-    const { Email, Mat_khau } = req.body;
-    // bcrypt.hash(password, 10).then(async (hash) => {
-    //   const newUser = await Users.create({
-    //     username: username,
-    //     email: email,
-    //     password: hash,
-    //     // emailverified: Math.floor(Math.random() * (999999 - 100000)) + 100000,
-    //   });
-    //   // emailExistence.check(newUser.email, function (error, response) {
-    //   //   const mailcheck = response;
-    //   //   console.log("mailcheck", mailcheck);
-    //   //   if (mailcheck === true) {
-    //   //     mailer(
-    //   //       newUser.email,
-    //   //       "Verify Email",
-    //   //       `<div style="text-align: center">
-    //   //         <div>
-    //   //           <img src="${process.env.IMAGE_MAIL}" width="100px" height="100px" />
-    //   //         </div>
-    //   //         <h2>Confirm email for account!</h2>
-    //   //         <p>Hello <span style="color: #00aff0">${newUser.username}!</span></p>
-    //   //         <p>You just signed up for an account</p>
-    //   //         <h2>Your account verification code : <span style="color: #00aff0">${newUser.emailverified}</span></h2>
-    //   //       </div>`
-    //   //     );
-    //   //     // Carts.create({ userId: newUser.id });
-    //   //     setTimeOutOTP(newUser.id);
-    //   //     return res
-    //   //       .status(201)
-    //   //       .json({ verify: "verify", username: newUser.username });
-    //   //   } else {
-    //   //     Users.destroy({ where: { username: newUser.username } });
-    //   //     return res.json({ error: "Email does not exist!" });
-    //   //   }
-    //   // });
-    // });
 
-    //--------------
+    const user = await Users.findOne({ where: { Email: req.body.Email } });
+    if (user) {
+      return next(createError(200, "Email đã được đăng ký tài khoản!"));
+    }
+
     const hash = bcrypt.hashSync(req.body.Mat_khau, 5);
 
     const newUser = await Users.create({
       Ho_ten: req.body.Ho_ten,
-      Email: Email,
+      Email: req.body.Email,
       Mat_khau: hash,
+      So_dien_thoai: createOTP(),
     });
 
-    res.status(201).send("Đăng ký tài khoản thành công!");
+    emailExistence.check(newUser.Email, function (error, response) {
+      if (response) {
+        mailer(
+          newUser.Email,
+          "Mã xác thực tài khoản",
+          `<div style="text-align: center">
+            <h2>Xác thực email cho tài khoản!</h2>
+            <p>Xin chào <span style="color: #00aff0">${newUser.Ho_ten}</span>!</p>
+            <p>Bạn vừa đăng ký tài khoản</p>
+            <h2>Mã xác minh tài khoản của bạn : <span style="color: #00aff0">${newUser.So_dien_thoai}</span></h2>
+          </div>`
+        );
+        setTimeOutOTP(newUser.id);
+        return res.status(201).json(newUser.Email);
+      } else {
+        Users.destroy({ where: { Email: newUser.Email } });
+        return res.json({ error: "Email không tồn tại!" });
+      }
+    });
   } catch (err) {
     next(err);
   }
@@ -116,7 +115,57 @@ export const logout = async (req, res) => {
     .send("Bạn đã đăng xuất thành công. Tạm biệt!");
 };
 
-export const googleSuccess = async (req, res) => {
+export const verify = async (req, res, next) => {
+  try {
+    const user = await Users.findOne({ where: { Email: req.body.Email } });
+    if (!user) {
+      return next(createError(200, "Không tìm thấy thông tin!"));
+    }
+
+    if (parseInt(user.So_dien_thoai) === 0) {
+      return res.json({
+        error: "Mã xác minh tài khoản của bạn đã hết hạn, vui lòng chọn gửi lại mã xác minh tài khoản để nhận mã mới!",
+      });
+    }
+
+    if (parseInt(req.body.Ma_xac_thuc) === parseInt(user.So_dien_thoai)) {
+      await Users.update({ So_dien_thoai: 1 }, { where: { id: user.id } });
+      return res.json();
+    } else {
+      return next(createError(200, "Mã xác thực không chính xác!"));
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const newverify = async (req, res, next) => {
+  try {
+    console.log(req.body.Email);
+    const user = await Users.findOne({ where: { Email: req.body.Email } });
+    if (!user) {
+      return next(createError(200, "Không tìm thấy thông tin!"));
+    }
+
+    await Users.update({ So_dien_thoai: createOTP() }, { where: { id: user.id } });
+    const updateUser = await Users.findOne({ where: { Email: req.body.Email } });
+    mailer(
+      updateUser.Email,
+      "Mã xác thực mới",
+      `<div style="text-align: center">
+        <h2>Xác thực email cho tài khoản!</h2>
+        <p>Xin chào <span style="color: #00aff0">${updateUser.Ho_ten}</span>!</p>
+        <p>Bạn vừa đăng ký tài khoản</p>
+        <h2>Mã xác minh tài khoản của bạn : <span style="color: #00aff0">${updateUser.So_dien_thoai}</span></h2>
+      </div>`
+    );
+    return res.json();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const loginSuccess = async (req, res) => {
   const user = req.user;
   if (!user) return res.redirect("/auth/callback/failure");
   const accessToken = endCode(user.id, user.Email, user.Quyen);

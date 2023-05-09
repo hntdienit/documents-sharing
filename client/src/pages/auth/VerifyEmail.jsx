@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { Formik } from "formik";
@@ -10,7 +10,7 @@ import newRequest from "../../utils/newRequest.js";
 import validationData from "../../helpers/validationData.jsx";
 
 const VerifyEmail = () => {
-  const { setCurrentUser } = useContext(AuthContext);
+  const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || null);
 
   const initialValues = {
     Ma_xac_thuc: "",
@@ -18,19 +18,30 @@ const VerifyEmail = () => {
 
   // const validationSchema = validationData.register;
 
+  console.log(email)
+
   const navigate = useNavigate();
 
-  const handleLogin = async (data) => {
-    // await newRequest.post("/auth/register", data).then((res) => {
-    //   if (res.data.error) {
-    //     toast.error(res.data.error, {});
-    //   } else {
-    //     setCurrentUser(res.data);
-    //     toast.success("Bạn đã đăng ký thành công!, vui lòng đăng nhập", {});
+  const handleVerify = async (data) => {
+    data.Email = email;
+    await newRequest.post("/auth/verify", data).then((res) => {
+      if (res.data.error) {
+        toast.error(res.data.error, {});
+      } else {
+        toast.success("Xác thực email thành công!, vui lòng đăng nhập", {});
+        navigate("/login");
+      }
+    });
+  };
 
-    //     navigate("/login");
-    //   }
-    // });
+  const handleNewVerify = async () => {
+    await newRequest.post("/auth/newverify", {Email : email}).then((res) => {
+      if (res.data.error) {
+        toast.error(res.data.error, {});
+      } else {
+        toast.success("Mã xác thực mới đã được gửi!", {});
+      }
+    });
   };
 
   return (
@@ -42,7 +53,7 @@ const VerifyEmail = () => {
             initialValues={initialValues}
             // validationSchema={validationSchema}
             onSubmit={(values) => {
-              handleLogin(values);
+              handleVerify(values);
             }}
           >
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
@@ -62,7 +73,7 @@ const VerifyEmail = () => {
                                 <div className="row mb--15">
                   <div className="col-lg-12 mt-3">
                     <div className="rbt-lost-password text-center">
-                      <Link className="rbt-btn-link" to={"/"}>
+                      <Link className="rbt-btn-link" onClick={handleNewVerify}>
                         Gửi lại mã xác thực
                       </Link>
                     </div>

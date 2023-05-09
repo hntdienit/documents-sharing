@@ -10,7 +10,7 @@ import newRequest from "../../utils/newRequest.js";
 import validationData from "../../helpers/validationData.jsx";
 
 const Login = () => {
-  const { setCurrentUser } = useContext(AuthContext);
+  const { setCurrentUser, currentUser } = useContext(AuthContext);
 
   const initialValues = {
     Email: "dien1@gmail.com",
@@ -37,21 +37,12 @@ const Login = () => {
     });
   };
 
+
   const handleLoginGG = async () => {
-    await newRequest.get("/auth/google").then((res) => {
-      if (res.data.error) {
-        toast.error(res.data.error, {});
-      } else {
-        setCurrentUser(res.data);
-        toast.success("Bạn đã đăng nhập thành công!", {});
-        if (res.data.Quyen === "QuanTri") {
-          navigate("/admin");
-        } else {
-          navigate("/");
-        }
-      }
-    });
+    window.open("http://localhost:3200/auth/google", "_self");
   };
+
+
   return (
     <>
       <div className="container login">

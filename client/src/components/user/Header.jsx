@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -280,12 +280,17 @@ const Header = () => {
                     <li className="with-megamenu has-menu-child-item position-static">
                       <Link to={"/"}>Trang chủ </Link>
                     </li>
-                    <li className="has-dropdown has-menu-child-item">
-                      <Link to={"/document/share"}>Chia sẻ tài liệu</Link>
-                    </li>
-                    <li className="has-dropdown has-menu-child-item">
-                      <Link to={"/document/pay"}>Bán tài liệu</Link>
-                    </li>
+
+                    {currentUser?.Quyen !== "NguoiDung" && (
+                      <>
+                        <li className="has-dropdown has-menu-child-item">
+                          <Link to={"/document/share"}>Chia sẻ tài liệu</Link>
+                        </li>
+                        <li className="has-dropdown has-menu-child-item">
+                          <Link to={"/document/pay"}>Bán tài liệu</Link>
+                        </li>
+                      </>
+                    )}
                     <li className="has-dropdown has-menu-child-item">
                       <Link to={"/document/all"}>Danh sách tài liệu</Link>
                     </li>

@@ -72,7 +72,10 @@ const Wishlist = () => {
                             <tr key={d?.id}>
                               <td className="pro-thumbnail">
                                 <Link to={`/document/${d?.Tai_lieu_id}`}>
-                                  <img src={images.pdf} alt="Product" />
+                                  <img
+                                    src={d?.Tai_lieu?.Url === null ? d?.Tai_lieu?.Hinhs[0]?.Url : images.pdf}
+                                    alt="Product"
+                                  />
                                 </Link>
                               </td>
                               <td className="pro-title">

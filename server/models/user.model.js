@@ -15,6 +15,7 @@ const Users = sequelize.define(
     // Trang_thai_nguoi_dung: { type: DataTypes.STRING, defaultValue: "ChuaKichHoat" },
     Hinh_dai_dien: { type: DataTypes.STRING, allowNull: true },
     Quyen: { type: DataTypes.STRING, defaultValue: "SinhVien" },
+    // Ma_google: { type: DataTypes.STRING, allowNull: true },
   },
   {
     createdAt: "Thoi_gian_tao",

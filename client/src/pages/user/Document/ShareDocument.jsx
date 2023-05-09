@@ -22,16 +22,6 @@ import newRequest from "../../../utils/newRequest.js";
 import validationData from "../../../helpers/validationData.jsx";
 import { AuthContext } from "../../../helpers/AuthContext.jsx";
 
-const lop = [
-  {
-    id: 1,
-    name: "123",
-  },
-  {
-    id: 2,
-    name: "5656",
-  },
-];
 
 const ShareDocument = () => {
   const { currentUser } = useContext(AuthContext);

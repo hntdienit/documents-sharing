@@ -4,6 +4,7 @@ import { Op } from "sequelize";
 import createError from "../utils/createError.js";
 
 import Majors from "../models/major.model.js";
+import Documents from "../models/document.model.js";
 
 export const getAll = async (req, res, next) => {
   try {
@@ -138,6 +139,94 @@ export const deletemajor = async (req, res, next) => {
     } else {
       return next(createError(404, "Không tìm thấy thông tin tìm kiếm!"));
     }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const docByMajor = async (req, res, next) => {
+  try {
+    const quy = parseInt(req.query.quy) || 1;
+    const nam = parseInt(req.query.nam) || 2023;
+    let tim;
+    if (quy === 5 || 3 || 4) {
+      tim = {
+        attributes: ["Nganh_hoc_id"],
+        where: {
+          [Op.and]: [
+            // sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 4),
+            sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
+          ],
+        },
+        group: "Nganh_hoc_id",
+      };
+    }
+    if (quy === 2) {
+      tim = {
+        attributes: ["Nganh_hoc_id"],
+        where: {
+          [Op.or]: {
+            [Op.and]: [
+              sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 4),
+              sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
+            ],
+            // [Op.and]: [
+            //   sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 5),
+            //   sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
+            // ],
+            // [Op.and]: [
+            //   sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 6),
+            //   sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
+            // ],
+          },
+        },
+        group: "Nganh_hoc_id",
+      };
+    }
+    if (quy === 1) {
+      tim = {
+        attributes: ["Nganh_hoc_id"],
+        where: {
+          [Op.or]: {
+            [Op.and]: [
+              sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 1),
+              sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
+            ],
+            // [Op.and]: [
+            //   sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 2),
+            //   sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
+            // ],
+            // [Op.and]: [
+            //   sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 3),
+            //   sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
+            // ],
+          },
+        },
+        group: "Nganh_hoc_id",
+      };
+    }
+
+    const mang = [];
+    const listmajor = await Majors.findAll({});
+
+    let haha;
+
+    haha = await Documents.count(tim);
+
+    let j = 0;
+    listmajor.map((i) => {
+      if (i.id === haha[j].Nganh_hoc_id) {
+        mang.push(haha[j].count);
+        j++;
+      } else {
+        mang.push(0);
+      }
+    });
+
+    // console.log("listmajor", listmajor);
+    // console.log("mang", mang);
+
+    return res.json({ count: mang, listmajor: listmajor });
   } catch (err) {
     next(err);
   }

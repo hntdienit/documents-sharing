@@ -1,5 +1,6 @@
 import Wishlist from "../models/like.model.js";
 import Documents from "../models/document.model.js";
+import Images from "../models/image.model.js";
 
 export const getAll = async (req, res, next) => {
   try {
@@ -8,7 +9,16 @@ export const getAll = async (req, res, next) => {
         Nguoi_dung_id: req.user.id,
       },
       required: false,
-      include: [{ model: Documents }],
+      include: [
+        {
+          model: Documents,
+          include: [
+            {
+              model: Images,
+            },
+          ],
+        },
+      ],
     });
     res.json(list);
   } catch (err) {

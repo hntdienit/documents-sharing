@@ -7,7 +7,7 @@ import sortObject from "../utils/sortObject.js";
 import querystring from "qs";
 import crypto from "crypto";
 import createError from "../utils/createError.js";
-import mailer from "../utils/mailer.js";
+import mailer  from "../utils/mailer.js";
 
 import Order from "../models/order.model.js";
 import CartDetails from "../models/cartdetail.model.js";
@@ -23,7 +23,7 @@ function deleteZombieOrder(orderId) {
       await OrderDetails.destroy({ where: { Don_hang_id: findOrder.id } });
       await Order.destroy({ where: { Ma_don_hang: orderId, Trang_thai_thanh_toan: 0 } });
     }
-  }, 2 * 60 * 1000);
+  }, 15 * 60 * 1000);
 }
 
 export const getAllOrder = async (req, res, next) => {

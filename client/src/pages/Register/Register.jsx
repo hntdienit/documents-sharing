@@ -1,56 +1,47 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
 import GoogleIcon from "@mui/icons-material/Google";
 
-import { AuthContext } from "../../helpers/AuthContext.jsx";
 import newRequest from "../../utils/newRequest.js";
 import validationData from "../../helpers/validationData.jsx";
 
 const Register = () => {
-  const { setCurrentUser } = useContext(AuthContext);
+  const [emailError, setEmailError] = useState("");
 
   const initialValues = {
-    Ho_ten: "",
-    Email: "",
-    Mat_khau: "",
-    Lai_mat_khau: "",
+    Ho_ten: "dien662",
+    Email: "hntdienit@gmail.com",
+    Mat_khau: "Admin123!",
+    Lai_mat_khau: "Admin123!",
   };
 
   const validationSchema = validationData.register;
 
   const navigate = useNavigate();
 
-  const handleLogin = async (data) => {
+  const handleRegister = async (data) => {
     await newRequest.post("/auth/register", data).then((res) => {
       if (res.data.error) {
-        toast.error(res.data.error, {});
+        if (res.data.error == "Email không tồn tại!") {
+          setEmailError(res.data.error);
+        } else {
+          toast.error(res.data.error, {});
+        }
       } else {
-        setCurrentUser(res.data);
-        toast.success("Bạn đã đăng ký thành công!, vui lòng đăng nhập", {});
-
-        navigate("/login");
+        localStorage.setItem("email", JSON.stringify(res.data));
+        toast.success("Bạn đã đăng ký thành công!, vui lòng xác minh email", {});
+        navigate("/verifyemail");
       }
     });
   };
 
   const handleLoginGG = async () => {
-    await newRequest.get("/auth/google").then((res) => {
-      if (res.data.error) {
-        toast.error(res.data.error, {});
-      } else {
-        setCurrentUser(res.data);
-        toast.success("Bạn đã đăng nhập thành công!", {});
-        if (res.data.Quyen === "QuanTri") {
-          navigate("/admin");
-        } else {
-          navigate("/");
-        }
-      }
-    });
+    window.open("http://localhost:3200/auth/google", "_self");
   };
+
   return (
     <>
       <div className="container login">
@@ -62,7 +53,7 @@ const Register = () => {
                   handleLoginGG();
                 }}
               >
-                <button type="submit" className="rbt-btn btn-md w-100 btn__social">
+                <button className="rbt-btn btn-md w-100 btn__social">
                   <span className="icon__social">
                     <GoogleIcon />
                   </span>
@@ -77,7 +68,7 @@ const Register = () => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              handleLogin(values);
+              handleRegister(values);
             }}
           >
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
@@ -103,8 +94,8 @@ const Register = () => {
                   type="email"
                   value={values.Email}
                   onChange={handleChange}
-                  error={touched.Email && Boolean(errors.Email)}
-                  helperText={touched.Email && errors.Email}
+                  error={(touched.Email && Boolean(errors.Email)) || Boolean(emailError)}
+                  helperText={(touched.Email && errors.Email) || emailError}
                 />
                 <TextField
                   fullWidth

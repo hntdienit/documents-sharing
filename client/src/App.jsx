@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import newRequest from "./utils/newRequest";
+import { AuthContext } from "./helpers/AuthContext";
 
 import "./app.scss";
 // import "./assets/scss/style.scss"
@@ -15,6 +17,25 @@ import ProtectedRoute from "./routes/protected.route.jsx";
 
 function App() {
   const queryClient = new QueryClient();
+  const { setCurrentUser} = useContext(AuthContext);
+
+
+  const getUser = async () => {
+    await newRequest
+    .get("http://localhost:3200/auth/login/success")
+    .then((res) => {
+      if (res.data.error) {
+        // toast.error(res.data.error, {});
+      } else {
+        setCurrentUser(res.data);
+      }
+    });
+	};
+
+	useEffect(() => {
+		getUser();
+	}, []);
+
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -50,7 +71,7 @@ function App() {
         </Router>
       </div>
       <ToastContainer autoClose={5000} />
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

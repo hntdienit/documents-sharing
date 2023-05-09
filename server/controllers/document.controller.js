@@ -153,6 +153,7 @@ export const pagination = async (req, res, next) => {
     next(err);
   }
 };
+
 export const pagination1 = async (req, res, next) => {
   try {
     const page = parseInt(req.query.page) || 0;
