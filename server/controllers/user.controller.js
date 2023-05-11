@@ -8,8 +8,18 @@ export const getUser = async (req, res, next) => {
   }
   const userinfo = {
     id: user.id,
-    Ho_ten: user.Ho_ten
-  }
+    Ho_ten: user.Ho_ten,
+  };
 
   res.status(200).send(userinfo);
+};
+
+export const getUser1 = async (req, res, next) => {
+  const user = await Users.findOne({
+    attributes: ["id", "Ho_ten", "Hinh_dai_dien", "Quyen"],
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.status(200).send(user);
 };

@@ -1,13 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
-import "./Messages.scss";
 import moment from "moment";
 import LoadingCompoment from "../../components/public/LoadingCompoment.jsx";
 import ErrorCompoment from "../../components/public/ErrorCompoment.jsx";
+import images from "../../assets/images";
+import Message from "./Message.jsx";
+import UserMessage from "./UserMessage";
+import { AuthContext } from "../../helpers/AuthContext";
 
-const Messages = () => {
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import SearchIcon from "@mui/icons-material/Search";
+import MessageIcon from "@mui/icons-material/Message";
+
+const Messages = ({ openMess, setOpenMess, openChatbot, setOpenChatbot, id, setId, uid, setUId }) => {
+  const { currentUser } = useContext(AuthContext);
+
   const { isLoading, error, data } = useQuery({
     queryKey: ["conversation"],
     queryFn: () =>
@@ -16,47 +25,120 @@ const Messages = () => {
       }),
   });
 
-  if (isLoading) return <LoadingCompoment />;
-  if (error) return <ErrorCompoment />;
+  const NguoiMua = useQuery({
+    queryKey: ["NguoiMua"],
+    queryFn: () =>
+      newRequest.get(`/user/signle/${uid}`).then((res) => {
+        return res.data;
+      }),
+  });
+
+  useEffect(() => {
+    NguoiMua.refetch();
+  }, [uid]);
+
+  if (isLoading || NguoiMua.isLoading) return <LoadingCompoment />;
+  if (error || NguoiMua.error) return <ErrorCompoment />;
 
   return (
-    <div className="messages">
-      <div className="container">
-        <div className="title">
-          <h1>Messages</h1>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Người dùng</th>
-              <th>Tin nhắn cuối</th>
-              <th>Date</th>
-              {/* <th>Action</th> */}
-            </tr>
-          </thead>
+    <>
+      {openMess && (
+        <div className="messages-wrap messui messages-wrap-active row chat-wrapper">
+          <div className="card">
+            <div className="card-body">
+              <div className="row position-relative w-100">
+                <div className="col-lg-4 chat-aside border-end-lg">
+                  <div className="aside-content">
+                    <div className="aside-header">
+                      <div className="d-flex justify-content-between align-items-center pb-2 mb-2">
+                        <div className="d-flex align-items-center">
+                          <figure className="me-2 mb-0">
+                            <img src={images.avatar} className="img-sm rounded-circle" alt="profile" />
+                            {/* <div className="status online"></div> */}
+                          </figure>
+                          <div>
+                            <h6>{currentUser?.Ho_ten}</h6>
+                            <p className="text-muted tx-13">
+                              {currentUser?.Quyen === "SinhVien" ? "Sinh viên" : "Giảng viên"}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="dropdown">
+                          <a
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            <i className="icon-lg text-muted pb-3px">
+                              <VisibilityIcon />
+                            </i>
+                          </a>
+                        </div>
+                      </div>
+                      {/* <form className="search-form">
+                        <div className="input-group">
+                          <span className="input-group-text">
+                            <i className="cursor-pointer">
+                              <SearchIcon />
+                            </i>
+                          </span>
+                          <input type="text" className="form-control" id="searchForm" placeholder="Tìm người ..." />
+                        </div>
+                      </form> */}
+                    </div>
+                    <div className="aside-body">
+                      <hr />
+                      <div className="tab-content mt-3">
+                        <div
+                          className="tab-pane fade show active"
+                          id="chats"
+                          role="tabpanel"
+                          aria-labelledby="chats-tab"
+                        >
+                          <div>
+                            <ul className="list-unstyled chat-list px-1">
+                              {data?.map((c) => (
+                                <UserMessage
+                                  key={c?.id}
+                                  id={c?.Nguoi_ban_id === currentUser?.userId ? c?.Nguoi_mua_id : c?.Nguoi_ban_id}
+                                  setId={setId}
+                                  setUId={setUId}
+                                  c={c}
+                                />
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-          <tbody>
-            {data.map((c) => (
-              <tr
-                // className={
-                //   ((currentUser.isSeller && !c.readBySeller) || (!currentUser.isSeller && !c.readByBuyer)) && "active"
-                // }
-                key={c.id}
-              >
-                {/* <td>{currentUser.isSeller ? c.buyerId : c.sellerId}</td> */}
-                <td>{c.Nguoi_mua_id}</td>
-                <td>
-                  <Link to={`/message/${c.id}`} className="link">
-                    {c?.Tin_nhan_cuoi?.substring(0, 100)}...
-                  </Link>
-                </td>
-                <td>{moment(c.updatedAt).fromNow()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                <div className="col-lg-8 chat-content">
+                  <Message id={id} NguoiMua={NguoiMua} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div
+        className="progress_parent messui backto_top_active"
+        onClick={() => {
+          setOpenMess(!openMess);
+          if (openChatbot) {
+            setOpenChatbot(!openChatbot);
+          }
+        }}
+      >
+        <i>
+          <MessageIcon />
+        </i>
       </div>
-    </div>
+    </>
   );
 };
 

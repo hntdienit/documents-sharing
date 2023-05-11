@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -17,25 +17,25 @@ import ProtectedRoute from "./routes/protected.route.jsx";
 
 function App() {
   const queryClient = new QueryClient();
-  const { setCurrentUser} = useContext(AuthContext);
+  const { setCurrentUser } = useContext(AuthContext);
 
+  const [openMess, setOpenMess] = useState(false);
+  const [id, setId] = useState(0);
+  const [uid, setUId] = useState(0);
 
   const getUser = async () => {
-    await newRequest
-    .get("http://localhost:3200/auth/login/success")
-    .then((res) => {
+    await newRequest.get("http://localhost:3200/auth/login/success").then((res) => {
       if (res.data.error) {
         // toast.error(res.data.error, {});
       } else {
         setCurrentUser(res.data);
       }
     });
-	};
+  };
 
-	useEffect(() => {
-		getUser();
-	}, []);
-
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -54,14 +54,42 @@ function App() {
                   element={
                     item.role ? (
                       <ProtectedRoute role={item.role}>
-                        <Layout>
-                          <Page></Page>
+                        <Layout
+                          openMess={openMess}
+                          setOpenMess={setOpenMess}
+                          id={id}
+                          setId={setId}
+                          uid={uid}
+                          setUId={setUId}
+                        >
+                          <Page
+                            openMess={openMess}
+                            setOpenMess={setOpenMess}
+                            id={id}
+                            setId={setId}
+                            uid={uid}
+                            setUId={setUId}
+                          ></Page>
                         </Layout>
-                       </ProtectedRoute>
+                      </ProtectedRoute>
                     ) : (
-                    <Layout>
-                      <Page></Page>
-                    </Layout>
+                      <Layout
+                        openMess={openMess}
+                        setOpenMess={setOpenMess}
+                        id={id}
+                        setId={setId}
+                        uid={uid}
+                        setUId={setUId}
+                      >
+                        <Page
+                          openMess={openMess}
+                          setOpenMess={setOpenMess}
+                          id={id}
+                          setId={setId}
+                          uid={uid}
+                          setUId={setUId}
+                        ></Page>
+                      </Layout>
                     )
                   }
                 ></Route>

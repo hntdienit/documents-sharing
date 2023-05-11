@@ -1,5 +1,9 @@
+import sequelize from "../config/db.js";
+import { Op } from "sequelize";
+
 import createError from "../utils/createError.js";
 import Conversation from "../models/conversation.model.js";
+import Users from "../models/user.model.js";
 
 export const createConversation = async (req, res, next) => {
   try {
@@ -13,31 +17,18 @@ export const createConversation = async (req, res, next) => {
   }
 };
 
-// export const updateConversation = async (req, res, next) => {
-//   try {
-//     const updatedConversation = await Conversation.findOneAndUpdate(
-//       { id: req.params.id },
-//       {
-//         $set: {
-//           // readBySeller: true,
-//           // readByBuyer: true,
-//           ...(req.isSeller ? { readBySeller: true } : { readByBuyer: true }),
-//         },
-//       },
-//       { new: true }
-//     );
-
-//     res.status(200).send(updatedConversation);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
 export const getSingleConversation = async (req, res, next) => {
   try {
-    const conversation = await Conversation.findOne({ id: req.params.id });
-    if (!conversation) return next(createError(404, "Not found!"));
-    res.status(200).send(conversation);
+    const conversation = await Conversation.findOne({
+      where: {
+        Nguoi_ban_id: req.user.id,
+        Nguoi_mua_id: req.params.id,
+      },
+    });
+    if (!conversation.id) {
+      res.status(200).json(0);
+    }
+    res.status(200).json(conversation.id);
   } catch (err) {
     next(err);
   }
@@ -45,16 +36,25 @@ export const getSingleConversation = async (req, res, next) => {
 
 export const getConversations = async (req, res, next) => {
   try {
-    // const conversations = await Conversation.find(
-    //   req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
-    // ).sort({ updatedAt: -1 });
-
     const conversations = await Conversation.findAll({
+      // attributes: ["id", "Tin_nhan_cuoi", "Nguoi_mua_id"],
       where: {
-        Nguoi_ban_id: req.user.id,
+        // Nguoi_ban_id: req.user.id
+        [Op.or]: [
+          {
+            Nguoi_ban_id: req.user.id,
+          },
+          {
+            Nguoi_mua_id: req.user.id,
+          },
+        ],
       },
       order: [["id", "DESC"]],
+      required: false,
+      include: [{ model: Users }],
     });
+
+    // console.log(conversations)
 
     res.status(200).send(conversations);
   } catch (err) {

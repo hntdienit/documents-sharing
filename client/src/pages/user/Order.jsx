@@ -11,8 +11,8 @@ import newRequest from "../../utils/newRequest.js";
 import LoadingCompoment from "../../components/public/LoadingCompoment.jsx";
 import ErrorCompoment from "../../components/public/ErrorCompoment.jsx";
 
-const Order = () => {
-  const { isLoading, error, data, refetch } = useQuery({
+const Order = ({ setOpenMess, setId, setUId }) => {
+  const { isLoading, error, data } = useQuery({
     queryKey: ["orderall"],
     queryFn: () =>
       newRequest.get("/order/all").then((res) => {
@@ -20,16 +20,25 @@ const Order = () => {
       }),
   });
 
-  // const handleChange = async (id) => {
-  //   await newRequest.patch(`/wishlist/change`, { Tai_lieu_id: id }).then((res) => {
-  //     if (res.data.error) {
-  //       toast.error(`${res.data.error}`, {});
-  //     } else {
-  //       // toast.s(`${res.data.error}`, {});
-  //       refetch();
-  //     }
-  //   });
-  // };
+  const handleMess = async (id) => {
+    // console.log(id)
+    await newRequest.get(`/conversation/single/${id}`).then((res) => {
+      if (res.data.error) {
+        // toast.error(`${res.data.error}`, {});
+      } else {
+        // toast.s(`${res.data.error}`, {});
+        if (res.data === 1) {
+          setId(res.data);
+          setUId(id)
+        }
+        else {
+          // toast.s(`${res.data.error}`, {});
+        }
+      }
+    });
+    setOpenMess(true);
+    // setId(id) // id cuoc hoi thoai
+  };
 
   let total = 0;
 
@@ -85,7 +94,11 @@ const Order = () => {
                                 <p hidden>{total > 0 ? (total = 0) : (total = 0)}</p>
                               </td>
                               <td className="pro-remove">
-                                <Link to={"/messages"}>
+                                <Link
+                                  onClick={() => {
+                                    handleMess(d?.Nguoi_dung_id);
+                                  }}
+                                >
                                   <MessageIcon />
                                 </Link>
                               </td>
