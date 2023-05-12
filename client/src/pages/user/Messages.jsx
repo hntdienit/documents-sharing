@@ -17,7 +17,7 @@ import MessageIcon from "@mui/icons-material/Message";
 const Messages = ({ openMess, setOpenMess, openChatbot, setOpenChatbot, id, setId, uid, setUId }) => {
   const { currentUser } = useContext(AuthContext);
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["conversation"],
     queryFn: () =>
       newRequest.get(`/conversation`).then((res) => {
@@ -34,8 +34,9 @@ const Messages = ({ openMess, setOpenMess, openChatbot, setOpenChatbot, id, setI
   });
 
   useEffect(() => {
+    refetch();
     NguoiMua.refetch();
-  }, [uid]);
+  }, [uid, id, currentUser]);
 
   if (isLoading || NguoiMua.isLoading) return <LoadingCompoment />;
   if (error || NguoiMua.error) return <ErrorCompoment />;
@@ -54,12 +55,11 @@ const Messages = ({ openMess, setOpenMess, openChatbot, setOpenChatbot, id, setI
                         <div className="d-flex align-items-center">
                           <figure className="me-2 mb-0">
                             <img src={images.avatar} className="img-sm rounded-circle" alt="profile" />
-                            {/* <div className="status online"></div> */}
                           </figure>
                           <div>
                             <h6>{currentUser?.Ho_ten}</h6>
                             <p className="text-muted tx-13">
-                              {currentUser?.Quyen === "SinhVien" ? "Sinh viên" : "Giảng viên"}
+                              {currentUser?.Vai_tro === "SinhVien" ? "Sinh viên" : "Giảng viên"}
                             </p>
                           </div>
                         </div>
@@ -77,16 +77,6 @@ const Messages = ({ openMess, setOpenMess, openChatbot, setOpenChatbot, id, setI
                           </a>
                         </div>
                       </div>
-                      {/* <form className="search-form">
-                        <div className="input-group">
-                          <span className="input-group-text">
-                            <i className="cursor-pointer">
-                              <SearchIcon />
-                            </i>
-                          </span>
-                          <input type="text" className="form-control" id="searchForm" placeholder="Tìm người ..." />
-                        </div>
-                      </form> */}
                     </div>
                     <div className="aside-body">
                       <hr />

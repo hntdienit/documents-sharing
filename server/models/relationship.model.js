@@ -15,15 +15,9 @@ import Reviews from "./review.model.js";
 import Subjects from "./subject.model.js";
 import Users from "./user.model.js";
 import Majors from "./major.model.js";
+import Notifications from "./notification.model.js";
 
 const relationship = () => {
-  //   /* Users x Addresses: Many to Many */
-  //   Users.belongsToMany(Addresses, { through: "UserAddresses", foreignKey: "userId" });
-  //   Addresses.belongsToMany(Users, { through: "UserAddresses", foreignKey: "addressId" });
-  //   /* Users x Promotions: one to Many */
-  //   Users.hasMany(Promotions, { foreignKey: "employeeId" });
-  //   Promotions.belongsTo(Users, { foreignKey: "employeeId" });
-
   /* Users x BuyHistorys: one to Many */
   Users.hasMany(BuyHistorys, { foreignKey: "Nguoi_dung_id" });
   BuyHistorys.belongsTo(Users, { foreignKey: "Nguoi_dung_id" });
@@ -147,6 +141,10 @@ const relationship = () => {
   /* Users x Conversations: one to Many */
   Users.hasMany(Conversations, { foreignKey: "Nguoi_mua_id" });
   Conversations.belongsTo(Users, { foreignKey: "Nguoi_mua_id" });
+
+  /* Users x Notifications: one to Many */
+  Users.hasMany(Notifications, { foreignKey: "Nguoi_dung_id" });
+  Notifications.belongsTo(Users, { foreignKey: "Nguoi_dung_id" });
 };
 
 export default relationship;

@@ -78,7 +78,6 @@ export const listcourse = async (req, res, next) => {
   }
 };
 
-
 export const getcourse = async (req, res, next) => {
   try {
     const findItem = await Courses.findByPk(req.params.id)

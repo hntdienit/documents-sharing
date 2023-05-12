@@ -281,7 +281,7 @@ const Header = () => {
                       <Link to={"/"}>Trang chủ </Link>
                     </li>
 
-                    {currentUser?.Quyen !== "NguoiDung" && (
+                    {currentUser?.Vai_tro !== "NguoiDung" && (
                       <>
                         <li className="has-dropdown has-menu-child-item">
                           <Link to={"/document/share"}>Chia sẻ tài liệu</Link>

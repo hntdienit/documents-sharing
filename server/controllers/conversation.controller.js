@@ -11,7 +11,7 @@ export const createConversation = async (req, res, next) => {
       Nguoi_ban_id: req.user.id,
       Nguoi_mua_id: req.body.Nguoi_mua_id,
     });
-    res.status(201).send(newConversation);
+    return res.status(201).json(newConversation.id);
   } catch (err) {
     next(err);
   }
@@ -25,10 +25,10 @@ export const getSingleConversation = async (req, res, next) => {
         Nguoi_mua_id: req.params.id,
       },
     });
-    if (!conversation.id) {
-      res.status(200).json(0);
+    if (!conversation) {
+      return res.status(200).json(0);
     }
-    res.status(200).json(conversation.id);
+    return res.status(200).json(conversation.id);
   } catch (err) {
     next(err);
   }
@@ -53,10 +53,7 @@ export const getConversations = async (req, res, next) => {
       required: false,
       include: [{ model: Users }],
     });
-
-    // console.log(conversations)
-
-    res.status(200).send(conversations);
+    return res.status(200).send(conversations);
   } catch (err) {
     next(err);
   }

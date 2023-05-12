@@ -8,7 +8,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { useQuery } from "@tanstack/react-query";
 
-import "./Document.scss";
 import HeaderPage from "../../../components/user/HeaderPage/HeaderPage.jsx";
 import LoadingCompoment from "../../../components/public/LoadingCompoment.jsx";
 import ErrorCompoment from "../../../components/public/ErrorCompoment.jsx";

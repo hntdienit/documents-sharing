@@ -15,9 +15,9 @@ function ProtectedRoute({ role, children }) {
     case "NguoiDung":
       if (currentUser) {
         if (
-          currentUser?.Quyen === "NguoiDung" ||
-          currentUser?.Quyen === "SinhVien" ||
-          currentUser?.Quyen === "GiangVien"
+          currentUser?.Vai_tro === "NguoiDung" ||
+          currentUser?.Vai_tro === "SinhVien" ||
+          currentUser?.Vai_tro === "GiangVien"
         )
           Content = children;
         else Content = <Navigate to="/P404" replace />;
@@ -28,7 +28,7 @@ function ProtectedRoute({ role, children }) {
       break;
     case "SinhVien":
       if (currentUser) {
-        if (currentUser?.Quyen === "SinhVien" || currentUser?.Quyen === "GiangVien") Content = children;
+        if (currentUser?.Vai_tro === "SinhVien" || currentUser?.Vai_tro === "GiangVien") Content = children;
         else Content = <Navigate to="/P404" replace />;
       } else {
         toast.info("Bạn cần đăng nhập trước khi sử dụng tính năng này!", {});
@@ -37,7 +37,7 @@ function ProtectedRoute({ role, children }) {
       break;
     case "GiangVien":
       if (currentUser) {
-        if (currentUser?.Quyen === "GiangVien") Content = children;
+        if (currentUser?.Vai_tro === "GiangVien") Content = children;
         else Content = <Navigate to="/P404" replace />;
       } else {
         toast.info("Bạn cần đăng nhập trước khi sử dụng tính năng này!", {});
@@ -47,7 +47,7 @@ function ProtectedRoute({ role, children }) {
 
     case "QuanTri":
       if (currentUser) {
-        if (currentUser?.Quyen === "QuanTri") Content = children;
+        if (currentUser?.Vai_tro === "QuanTri") Content = children;
         else Content = <Navigate to="/P404" replace />;
       } else {
         toast.info("Bạn cần đăng nhập trước khi sử dụng tính năng này!", {});

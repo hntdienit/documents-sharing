@@ -14,7 +14,6 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import sp_pdfjs_dist from "../../../assets/js/sp_pdfjs_dist.js";
 
-import "./Document.scss";
 import HeaderPage from "../../../components/user/HeaderPage/HeaderPage.jsx";
 import LoadingCompoment from "../../../components/public/LoadingCompoment.jsx";
 import ErrorCompoment from "../../../components/public/ErrorCompoment.jsx";
@@ -196,7 +195,7 @@ const ShareDocument = () => {
                               {pdfError && <span className="text-danger">{pdfError}</span>}
                             </div>
 
-                            {currentUser.Quyen === "GiangVien" && (
+                            {currentUser.Vai_tro === "GiangVien" && (
                               <div className="col-12 mt-4">
                                 <div>
                                   <FormControlLabel

@@ -33,7 +33,6 @@ const Card = ({ item }) => {
       if (res.data.error) {
         toast.error(`${res.data.error}`, {});
       } else {
-        // toast.s(`${res.data.error}`, {});
         refetch();
       }
     });
@@ -42,14 +41,14 @@ const Card = ({ item }) => {
   if (isLoading) return <LoadingCompoment />;
   if (error) return <ErrorCompoment />;
 
-  var l;
+  var l = false;
 
   return (
     <>
       <div className="rbt-card variation-01 rbt-hover-02 card-list-2">
         <div className="rbt-card-img">
           <Link to={`/document/${item.id}`}>
-            <img src={item?.Url ? images.pdf : item?.Hinhs[0]?.Url} alt="Card image"  className="img-full"/>
+            <img src={item?.Url ? images.pdf : item?.Hinhs[0]?.Url} alt="Card image" className="img-full" />
           </Link>
         </div>
         <div className="rbt-card-body">
@@ -72,11 +71,15 @@ const Card = ({ item }) => {
               Tìm hiểu thêm
               <DoubleArrowIcon />
             </Link>
-            {data?.map((d) => {
-              if (d?.Tai_lieu_id === item.id) {
-                l = true;
-              }
-            })}
+            {data?.error ? (
+              <></>
+            ) : (
+              data?.map((d) => {
+                if (d?.Tai_lieu_id === item.id) {
+                  l = true;
+                }
+              })
+            )}
             {l ? (
               <button onClick={handleChangWishlist} className="rbt-cart-sidenav-activation rbt-round-btn icon_like">
                 <FavoriteIcon />

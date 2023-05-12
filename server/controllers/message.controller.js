@@ -31,10 +31,12 @@ export const getMessages = async (req, res, next) => {
     const messages = await Message.findAll({
       where: { Hoi_thoai_id: req.params.id },
       required: false,
-      include: [{ 
-        model: Users,
-        attributes: ["id", "Ho_ten", "Hinh_dai_dien"]
-      }],
+      include: [
+        {
+          model: Users,
+          attributes: ["id", "Ho_ten", "Hinh_dai_dien"],
+        },
+      ],
     });
     res.status(200).send(messages);
   } catch (err) {

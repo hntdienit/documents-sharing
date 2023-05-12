@@ -3,22 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
-import GoogleIcon from "@mui/icons-material/Google";
 
-import { AuthContext } from "../../helpers/AuthContext.jsx";
 import newRequest from "../../utils/newRequest.js";
 import validationData from "../../helpers/validationData.jsx";
 
 const VerifyEmail = () => {
   const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")) || null);
+  const [newpassword, setNewpassword] = useState(JSON.parse(localStorage.getItem("newpassword")) || null);
 
   const initialValues = {
-    Ma_xac_thuc: "",
+    Ma_xac_thuc_email: "",
   };
 
   // const validationSchema = validationData.register;
-
-  console.log(email)
 
   const navigate = useNavigate();
 
@@ -28,14 +25,21 @@ const VerifyEmail = () => {
       if (res.data.error) {
         toast.error(res.data.error, {});
       } else {
-        toast.success("Xác thực email thành công!, vui lòng đăng nhập", {});
-        navigate("/login");
+        if (newpassword === 1) {
+          toast.success("Xác thực email thành công!, vui lòng nhập mật khẩu mới", {});
+          localStorage.removeItem("newpassword");
+          navigate("/newpassword");
+        } else {
+          toast.success("Xác thực email thành công!, vui lòng đăng nhập", {});
+          localStorage.removeItem("email");
+          navigate("/login");
+        }
       }
     });
   };
 
   const handleNewVerify = async () => {
-    await newRequest.post("/auth/newverify", {Email : email}).then((res) => {
+    await newRequest.post("/auth/newverify", { Email: email }).then((res) => {
       if (res.data.error) {
         toast.error(res.data.error, {});
       } else {
@@ -61,16 +65,16 @@ const VerifyEmail = () => {
                 <TextField
                   fullWidth
                   margin="normal"
-                  id="Ma_xac_thuc"
-                  name="Ma_xac_thuc"
+                  id="Ma_xac_thuc_email"
+                  name="Ma_xac_thuc_email"
                   label="Mã xác thực"
                   type="text"
-                  value={values.Ma_xac_thuc}
+                  value={values.Ma_xac_thuc_email}
                   onChange={handleChange}
-                  error={touched.Ma_xac_thuc && Boolean(errors.Ma_xac_thuc)}
-                  helperText={touched.Ma_xac_thuc && errors.Ma_xac_thuc}
+                  error={touched.Ma_xac_thuc_email && Boolean(errors.Ma_xac_thuc_email)}
+                  helperText={touched.Ma_xac_thuc_email && errors.Ma_xac_thuc_email}
                 />
-                                <div className="row mb--15">
+                <div className="row mb--15">
                   <div className="col-lg-12 mt-3">
                     <div className="rbt-lost-password text-center">
                       <Link className="rbt-btn-link" onClick={handleNewVerify}>

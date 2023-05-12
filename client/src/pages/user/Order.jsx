@@ -20,24 +20,33 @@ const Order = ({ setOpenMess, setId, setUId }) => {
       }),
   });
 
+  const handleNewMess = async (id) => {
+    await newRequest.post("/conversation", { Nguoi_mua_id: id }).then((res) => {
+      if (res.data.error) {
+        toast.error(res.data.error, {});
+      } else {
+        setId(res.data);
+        setUId(id);
+        setOpenMess(true);
+      }
+    });
+  };
+
   const handleMess = async (id) => {
-    // console.log(id)
     await newRequest.get(`/conversation/single/${id}`).then((res) => {
       if (res.data.error) {
-        // toast.error(`${res.data.error}`, {});
+        toast.error(res.data.error, {});
       } else {
-        // toast.s(`${res.data.error}`, {});
-        if (res.data === 1) {
+        if (res.data === 0) {
+          handleNewMess(id);
+        } else {
           setId(res.data);
-          setUId(id)
-        }
-        else {
-          // toast.s(`${res.data.error}`, {});
+          setUId(id);
+          setOpenMess(true);
         }
       }
     });
-    setOpenMess(true);
-    // setId(id) // id cuoc hoi thoai
+    setUId(id);
   };
 
   let total = 0;

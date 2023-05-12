@@ -23,6 +23,7 @@ const Message = ({ id, NguoiMua }) => {
       newRequest.get(`/messages/${id}`).then((res) => {
         return res.data;
       }),
+      refetchInterval: 1000,
   });
 
   useEffect(() => {
@@ -69,11 +70,10 @@ const Message = ({ id, NguoiMua }) => {
                 ></i>
                 <figure className="mb-0 me-2">
                   <img src={images.avatar} className="img-sm rounded-circle" alt="image" />
-                  {/* <div className="status online"></div> */}
                 </figure>
                 <div>
                   <p>{NguoiMua.data?.Ho_ten}</p>
-                  <p className="text-muted tx-13">{NguoiMua.data?.Quyen === "SinhVien" ? "Sinh viên" : "Giảng viên"}</p>
+                  <p className="text-muted tx-13">{NguoiMua.data?.Vai_tro === "SinhVien" ? "Sinh viên" : "Giảng viên"}</p>
                 </div>
               </div>
               <div className="d-flex align-items-center me-n1">
@@ -108,7 +108,7 @@ const Message = ({ id, NguoiMua }) => {
                       <div className="bubble">
                         <p>{m?.Noi_dung_tin_nhan}</p>
                       </div>
-                      <span>{m?.Nguoi_dung_id}</span>
+                      {/* <span>{m?.Nguoi_dung_id}</span> */}
                     </div>
                   </div>
                 </li>

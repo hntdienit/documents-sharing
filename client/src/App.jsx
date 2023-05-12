@@ -25,7 +25,7 @@ function App() {
   const [uid, setUId] = useState(0);
 
   const getUser = async () => {
-    await newRequest.get("http://localhost:3200/auth/login/success").then((res) => {
+    await newRequest.get("/auth/login/success").then((res) => {
       if (res.data.error) {
         // toast.error(res.data.error, {});
       } else {

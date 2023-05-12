@@ -3,17 +3,21 @@ import AdminLayout from "../layouts/AdminLayout/AdminLayout.jsx";
 import AdminHome from "../pages/admin/Home/Home.jsx";
 
 // public
-import Page404 from "../pages/public/Page404/Page404.jsx";
-import Home from "../pages/Home/Home.jsx";
+import Page404 from "../pages/public/Page404.jsx";
+import Home from "../pages/public/Home.jsx";
 import Categories from "../pages/user/Categories.jsx";
 import Detail from "../pages/user/Detail.jsx";
 import ViewPDF from "../pages/public/ViewPDF.jsx";
 
 // auth
-import Register from "../pages/Register/Register.jsx";
-import Login from "../pages/Login/Login.jsx";
+import Register from "../pages/auth/Register.jsx";
+import Login from "../pages/auth/Login.jsx";
 import VerifyEmail from "../pages/auth/VerifyEmail.jsx";
-import Profile from "../pages/auth/Profile/Profile.jsx";
+import ForgotPassword from "../pages/auth/ForgotPassword.jsx";
+import NewPassword from "../pages/auth/NewPassword.jsx";
+
+// user
+import Profile from "../pages/auth/Profile.jsx";
 import Wishlist from "../pages/user/Wishlist.jsx";
 import Cart from "../pages/user/Cart.jsx";
 import Checkout from "../pages/user/Checkout.jsx";
@@ -21,6 +25,12 @@ import Message from "../pages/user/Message.jsx";
 import Messages from "../pages/user/Messages.jsx";
 import Order from "../pages/user/Order.jsx";
 import UserOrder from "../pages/user/UserOrder.jsx";
+
+// sinhvien
+import ShareDocument from "../pages/user/Document/ShareDocument.jsx";
+import PayDocument from "../pages/user/Document/PayDocument.jsx";
+
+// giangvien
 
 // admin
 import CreateUser from "../pages/admin/User/CreateUser.jsx";
@@ -55,20 +65,17 @@ import ListReport from "../pages/admin/Report/ListReport.jsx";
 import ViewReport from "../pages/admin/Report/ViewReport.jsx";
 
 import Statistic from "../pages/admin/Statistic/Statistic.jsx";
-
-// sinhvien
-import ShareDocument from "../pages/user/Document/ShareDocument.jsx";
-import PayDocument from "../pages/user/Document/PayDocument.jsx";
 import ViewPDFDocument from "../pages/admin/Document/ViewPDFDocument.jsx";
 import ViewDocument from "../pages/admin/Document/ViewDocument.jsx";
-
-// giangvien
 
 const routes = [
   // auth
   { path: "/register", component: Register, layout: null },
   { path: "/login", component: Login, layout: null },
   { path: "/verifyemail", component: VerifyEmail, layout: null },
+  { path: "/forgotpassword", component: ForgotPassword, layout: null },
+  { path: "/newpassword", component: NewPassword, layout: null },
+
   { path: "/profile", component: Profile, role: "NguoiDung" },
   { path: "/wishlist", component: Wishlist, role: "NguoiDung" },
   { path: "/cart", component: Cart, role: "SinhVien" },

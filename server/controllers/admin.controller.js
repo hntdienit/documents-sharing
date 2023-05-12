@@ -22,7 +22,7 @@ export const newuser = async (req, res, next) => {
       CCCD: req.body.CCCD,
       Gioi_tinh: req.body.Gioi_tinh,
       So_dien_thoai: req.body.So_dien_thoai,
-      Quyen: "NguoiDung"
+      Vai_tro: "NguoiDung"
     });
 
     res.status(201).send("Đăng ký tài khoản thành công!");
@@ -71,7 +71,7 @@ export const listuser = async (req, res, next) => {
             },
           },
         ],
-        Quyen : "NguoiDung"
+        Vai_tro : "NguoiDung"
       },
       offset: offset,
       limit: limit,
@@ -114,7 +114,7 @@ export const listuser = async (req, res, next) => {
             },
           },
         ],
-        Quyen : "NguoiDung"
+        Vai_tro : "NguoiDung"
       },
       offset: offset,
       limit: limit,
@@ -145,7 +145,7 @@ export const newstudent = async (req, res, next) => {
       CCCD: req.body.CCCD,
       Gioi_tinh: req.body.Gioi_tinh,
       So_dien_thoai: req.body.So_dien_thoai,
-      Quyen: "SinhVien"
+      Vai_tro: "SinhVien"
     });
      return res.status(201).send("Đăng ký tài khoản thành công!");
   } catch (err) {
@@ -193,7 +193,7 @@ export const liststudent = async (req, res, next) => {
             },
           },
         ],
-        Quyen : "SinhVien"
+        Vai_tro : "SinhVien"
       },
       offset: offset,
       limit: limit,
@@ -236,7 +236,7 @@ export const liststudent = async (req, res, next) => {
             },
           },
         ],
-        Quyen : "SinhVien"
+        Vai_tro : "SinhVien"
       },
       offset: offset,
       limit: limit,
@@ -267,7 +267,7 @@ export const newlecturers = async (req, res, next) => {
       CCCD: req.body.CCCD,
       Gioi_tinh: req.body.Gioi_tinh,
       So_dien_thoai: req.body.So_dien_thoai,
-      Quyen: "GiangVien"
+      Vai_tro: "GiangVien"
     });
      return res.status(201).send("Đăng ký tài khoản thành công!");
   } catch (err) {
@@ -315,7 +315,7 @@ export const listlecturers = async (req, res, next) => {
             },
           },
         ],
-        Quyen : "GiangVien"
+        Vai_tro : "GiangVien"
       },
       offset: offset,
       limit: limit,
@@ -358,7 +358,7 @@ export const listlecturers = async (req, res, next) => {
             },
           },
         ],
-        Quyen : "GiangVien"
+        Vai_tro : "GiangVien"
       },
       offset: offset,
       limit: limit,
