@@ -3,6 +3,8 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { toast } from "react-toastify";
+import TextField from "@mui/material/TextField";
+import { Formik } from "formik";
 
 import images from "../../assets/images/index.js";
 import HeaderPage from "../../components/user/HeaderPage/HeaderPage.jsx";
@@ -15,6 +17,7 @@ import ErrorCompoment from "../../components/public/ErrorCompoment.jsx";
 const Detail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [openReport, setOpenReport] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
 
@@ -58,8 +61,26 @@ const Detail = () => {
     }
   };
 
+  const initialValues = {
+    Noi_dung_bao_cao: "",
+  };
+
+  // const validationSchema = validationData.login;
+
+  const handleReport = async (data) => {
+    data.Tai_lieu_id = id;
+    await newRequest.post("/report/", data).then((res) => {
+      if (res.data.error) {
+        toast.error(res.data.error, {});
+      } else {
+        toast.success("Bạn đã báo cáo vi phạm thành công!", {});
+        // navigate("/");
+      }
+    });
+  };
+
   if (isLoading) return <LoadingCompoment />;
-  if (error) return <ErrorCompoment err={error?.response?.data} />;
+  if (error) return <ErrorCompoment />;
 
   return (
     <>
@@ -177,9 +198,82 @@ const Detail = () => {
                     <span>Ngành học: </span>
                     <Link to={"/"}>{data?.Nganh?.Ma_nganh_hoc + " - " + data?.Nganh?.Ten_nganh_hoc}</Link>
                   </li>
+
+                  {!openReport && (
+                    <div className="plceholder-button">
+                      <button
+                        type="button"
+                        className="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-50"
+                        onClick={() => {
+                          setOpenReport(!openReport);
+                        }}
+                      >
+                        <span data-text="Tài liệu có vi phạm?">Báo cáo vi phạm</span>
+                      </button>
+                    </div>
+                  )}
                 </ul>
               </div>
             </div>
+            <div className="col-lg-2"></div>
+            {openReport && (
+              <div className="col-lg-8">
+                <div className="rbt-comment-form mt-4 rbt-shadow-box">
+                  <div className="row">
+                    <div className="col-lg-8 comment-form-inner">
+                      <h3 className="title fs-2">Báo cáo vi phạm tài liệu</h3>
+                    </div>
+                    <div className="col-lg-4">
+                      <div className="plceholder-button">
+                        <button
+                          type="button"
+                          className="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100"
+                          onClick={() => {
+                            setOpenReport(!openReport);
+                          }}
+                        >
+                          <span data-text="Hủy báo cáo?">Hủy</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <Formik
+                    initialValues={initialValues}
+                    // validationSchema={validationSchema}
+                    onSubmit={(values) => {
+                      handleReport(values);
+                    }}
+                  >
+                    {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+                      <form onSubmit={handleSubmit}>
+                        <TextField
+                          label="Nội dung báo cáo"
+                          multiline
+                          rows={4}
+                          fullWidth
+                          margin="normal"
+                          id="Noi_dung_bao_cao"
+                          name="Noi_dung_bao_cao"
+                          type="text"
+                          value={values.Noi_dung_bao_cao}
+                          onChange={handleChange}
+                          error={touched.Noi_dung_bao_cao && Boolean(errors.Noi_dung_bao_cao)}
+                          helperText={touched.Noi_dung_bao_cao && errors.baocao}
+                        />
+
+                        <div className="form-submit-group">
+                          <div className="plceholder-button">
+                            <button type="submit" className="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100">
+                              <span data-text="Xác nhận báo cáo vi phạm">Báo cáo vi phạm</span>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    )}
+                  </Formik>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

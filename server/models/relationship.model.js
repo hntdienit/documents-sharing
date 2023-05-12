@@ -112,9 +112,9 @@ const relationship = () => {
   Users.hasMany(Reports, { foreignKey: "Nguoi_dung_id" });
   Reports.belongsTo(Users, { foreignKey: "Nguoi_dung_id" });
 
-  /* Reports x Images: one to Many */
-  Reports.hasMany(Images, { foreignKey: "Bao_cao_id" });
-  Images.belongsTo(Reports, { foreignKey: "Bao_cao_id" });
+  /* Documents x Reports: one to Many */
+  Documents.hasMany(Reports, { foreignKey: "Tai_lieu_id" });
+  Reports.belongsTo(Documents, { foreignKey: "Tai_lieu_id" });
 
   /* Users x Reviews: one to Many */
   Users.hasMany(Reviews, { foreignKey: "Nguoi_dung_id" });

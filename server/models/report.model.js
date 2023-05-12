@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const Report = sequelize.define(
+const Reports = sequelize.define(
   "Bao_cao",
   {
     Noi_dung_bao_cao: { type: DataTypes.STRING, allowNull: true },
@@ -12,4 +12,4 @@ const Report = sequelize.define(
   }
 );
 
-export default Report;
+export default Reports;

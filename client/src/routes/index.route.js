@@ -51,7 +51,10 @@ import CreateMajor from "../pages/admin/Major/CreateMajor.jsx";
 import ListMajor from "../pages/admin/Major/ListMajor.jsx";
 import EditMajor from "../pages/admin/Major/EditMajor.jsx";
 
-import Statistic from "../pages/admin/Statistic/Statistic.jsx"
+import ListReport from "../pages/admin/Report/ListReport.jsx";
+import ViewReport from "../pages/admin/Report/ViewReport.jsx";
+
+import Statistic from "../pages/admin/Statistic/Statistic.jsx";
 
 // sinhvien
 import ShareDocument from "../pages/user/Document/ShareDocument.jsx";
@@ -106,6 +109,9 @@ const routes = [
   { path: "/admin/major/create", component: CreateMajor, layout: AdminLayout },
   { path: "/admin/major/list", component: ListMajor, layout: AdminLayout },
   { path: "/admin/major/edit/:id", component: EditMajor, layout: AdminLayout },
+
+  { path: "/admin/report/list", component: ListReport, layout: AdminLayout },
+  { path: "/admin/report/view/:id", component: ViewReport, layout: AdminLayout },
 
   { path: "/admin/statistic", component: Statistic, layout: AdminLayout },
 

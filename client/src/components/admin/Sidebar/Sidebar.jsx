@@ -8,26 +8,6 @@ import newRequest from "../../../utils/newRequest.js";
 import { AuthContext } from "../../../helpers/AuthContext.jsx";
 import images from "../../../assets/images";
 
-const sidelink = [
-  {
-    nav_category: "Trang",
-    nav: [
-      {
-        title: "tài liệu",
-        titleIcon: <icons.AddCircleOutlineIcon />,
-        // linkCreate: "/admin/document/create",
-        linkList: "/admin/document/list",
-      },
-      {
-        title: "Email31",
-        titleIcon: <icons.AddCircleOutlineIcon />,
-        linkCreate: "/admin",
-        linkList: "/admin",
-      },
-    ],
-  },
-];
-
 const Sidebar = () => {
   const { setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -50,86 +30,11 @@ const Sidebar = () => {
           <Link to={"/admin"} className="sidebar__brand">
             <img src={images.logo} alt="" />
           </Link>
-          {/* <div className="sidebar-toggler not-active">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div> */}
         </div>
 
         <div className="sidebar__body">
           <ul className="nav">
-            {/* {sidelink.map((s, i) => (
-              <div key={s.nav_category}>
-                <li className="nav-item nav-category">{s.nav_category}</li>
-                {s.nav.map((n) => (
-                  <li key={n.title} className="nav-item">
-                    <a
-                      className="nav-link"
-                      data-bs-toggle="collapse"
-                      href={"#" + n.title}
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="emails"
-                    >
-                      <i className="link-icon">{n.titleIcon}</i>
-                      <span className="link-title">{n.title}</span>
-                      <i className="link-arrow">
-                        <icons.SearchIcon />
-                      </i>
-                    </a>
-                    <div id={n.title}>
-                      <ul className="nav sub-menu">
-                        <li className="nav-item">
-                          <Link to={n.linkCreate} className="nav-link">
-                            tao {n.title}
-                          </Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link to={n.linkList} className="nav-link">
-                            danh sach {n.title}
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                ))}
-              </div>
-            ))} */}
-
             <div>
-              {/* <li className="nav-item nav-category">Trang</li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      data-bs-toggle="collapse"
-                      href={"#document"}
-                      role="button"
-                      aria-expanded="false"
-                      aria-controls="emails"
-                    >
-                      <i className="link-icon"><icons.AddCircleOutlineIcon /></i>
-                      <span className="link-title">Tài liệu</span>
-                      <i className="link-arrow">
-                     
-                      </i>
-                    </a>
-                    <div id="document">
-                      <ul className="nav sub-menu">
-                        <li className="nav-item">
-                          <Link to={n.linkCreate} className="nav-link">
-                            tao {n.title}
-                          </Link>
-                        </li>
-                        <li className="nav-item">
-                          <Link to={'/admin/document/list'} className="nav-link">
-                            Kiểm duyệt tài liệu
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </li> */}
-
               <li className="nav-item nav-category">Quản lý thông tin</li>
               <li className="nav-item">
                 <div id="document">
@@ -229,14 +134,25 @@ const Sidebar = () => {
                 <div id="document">
                   <ul className="nav sub-menu">
                     <li className="nav-item">
-                      <Link to={"/admin/document/list"} className="nav-link">
+                      <Link to={"/admin/report/list"} className="nav-link">
                         Xử lý vi phạm
                       </Link>
                     </li>
                   </ul>
                 </div>
               </li>
-
+              <li className="nav-item nav-category">Hệ thống</li>
+              <li className="nav-item">
+                <div id="document">
+                  <ul className="nav sub-menu">
+                    <li className="nav-item">
+                      <Link className="nav-link" onClick={handleLogout}>
+                        Đăng xuất
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
             </div>
           </ul>
         </div>
