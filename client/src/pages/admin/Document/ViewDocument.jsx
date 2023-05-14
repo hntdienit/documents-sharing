@@ -1,8 +1,9 @@
 /* eslint-disable no-extra-boolean-cast */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
+import Slider from "react-slick";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -13,6 +14,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import SaveIcon from "@mui/icons-material/Save";
+import images from "../../../assets/images"
 
 import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
 import LoadingCompoment from "../../../components/public/LoadingCompoment.jsx";
@@ -24,6 +26,33 @@ import { useQuery } from "@tanstack/react-query";
 const ViewDocument = () => {
   const { id } = useParams();
   let navigate = useNavigate();
+
+  const customeSlider = useRef();
+
+
+  const previous = () => {
+    customeSlider.current.slickNext();
+  };
+
+  const next = () => {
+    customeSlider.current.slickPrev();
+  };
+
+  const settings = {
+    arrows: false,
+    centerMode: true,
+    swipeToSlide: true,
+    infinite: true,
+    rows: 1,
+    slidesPerRow: 1,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    speed: 600,
+    initialSlide: 0,
+    autoplaySpeed: 5000,
+   
+  };
 
   const { isLoading, error, data } = useQuery({
     queryKey: [`viewpdf${id}`],
@@ -54,11 +83,14 @@ const ViewDocument = () => {
           <HeaderPage edit title={"tài liệu"} to={"/admin/listwarehouse"}></HeaderPage>
           <div className="row">
             <div className="col-lg-8 pdfview mt-3 row">
+            <Slider ref={customeSlider} {...settings}>
               {data?.Hinhs?.map((h) => (
-                <div className="col-lg-6" key={h?.id}>
+                <div className="" key={h?.id}>
                   <img src={h.Url} alt="" className="img_eidt"/>
                 </div>
-              ))}
+              ))}           
+            </Slider>
+              
             </div>
             <div className="col-lg-4 pdfview mt-3 pb-3">
               <div className="row">

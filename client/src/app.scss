@@ -76,8 +76,8 @@
 }
 
 .img_eidt {
-  width: 300px !important;
-  height: 300px !important;
+  width: 90% !important;
+  height: 800px !important;
   object-fit: cover;
   background-color: darkgray;
   border-radius: 20px;
@@ -528,4 +528,8 @@
   .sub__title {
     font-size: 40px;
   }
+}
+
+.h-900{
+  // height: 900px !important;
 }

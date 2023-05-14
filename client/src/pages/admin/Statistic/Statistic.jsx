@@ -178,7 +178,7 @@ const Statistic = () => {
                           fullWidth
                           margin="normal"
                           select
-                          label="Quý"
+                          label="Tháng"
                           id="Quy"
                           name="Quy"
                           value={quy}

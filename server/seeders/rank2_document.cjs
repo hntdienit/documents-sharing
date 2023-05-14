@@ -33,7 +33,7 @@ module.exports = {
         Cong_khai: true,
         So_luong: 1,
         Gia: 0,
-        Nguoi_dung_id: 3,
+        Nguoi_dung_id: 2,
         Nganh_hoc_id: 1,
         Kiem_duyet: 1,
       },

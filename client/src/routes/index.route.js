@@ -1,6 +1,6 @@
 // layout
 import AdminLayout from "../layouts/AdminLayout/AdminLayout.jsx";
-import AdminHome from "../pages/admin/Home/Home.jsx";
+import AdminHome from "../pages/admin/User/ListUser.jsx";
 
 // public
 import Page404 from "../pages/public/Page404.jsx";

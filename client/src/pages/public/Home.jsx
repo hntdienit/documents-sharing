@@ -26,7 +26,7 @@ const Home = () => {
             </div>
           </div>
           <div className="categories pt-1">
-            <div className="mt-7 pt-7"></div>
+            <div className="mt-6 pt-5"></div>
             <div className="rbt-section-overlayping-top rbt-section-gapBottom">
               <div className="container">
                 <div className="rbt-course-grid-column list-column-half active-list-view">
@@ -179,7 +179,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="rbt-about-area bg-color-white rbt-section-gapTop pb_md--80 pb_sm--80 about-style-1">
+      <div className="rbt-about-area bg-color-white pb_md--80 pb_sm--80 about-style-1 h-900">
         <div className="container">
           <div className="row g-5 align-items-center">
             <div className="col-lg-6">

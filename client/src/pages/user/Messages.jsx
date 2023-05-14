@@ -54,7 +54,11 @@ const Messages = ({ openMess, setOpenMess, openChatbot, setOpenChatbot, id, setI
                       <div className="d-flex justify-content-between align-items-center pb-2 mb-2">
                         <div className="d-flex align-items-center">
                           <figure className="me-2 mb-0">
-                            <img src={images.avatar} className="img-sm rounded-circle" alt="profile" />
+                            <img
+                              src={currentUser?.Hinh_dai_dien ? currentUser?.Hinh_dai_dien : images.avatar}
+                              className="img-sm rounded-circle"
+                              alt="profile"
+                            />
                           </figure>
                           <div>
                             <h6>{currentUser?.Ho_ten}</h6>

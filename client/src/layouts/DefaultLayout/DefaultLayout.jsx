@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Footer from "../../components/user/Footer/Footer.jsx";
 import Header from "../../components/user/Header.jsx";
 import Messages from "../../pages/user/Messages.jsx";
-// import ChatBot from "../../pages/user/ChatBot.jsx";
 import Chatbot from "react-chatbot-kit";
 import "react-chatbot-kit/build/main.css";
 
 import ActionProvider from "../../components/public/Chatbot/ActionProvider.jsx";
 import MessageParser from "../../components/public/Chatbot/MessageParser.jsx";
 import config from "../../components/public/Chatbot/config.jsx";
-import SmartToyIcon from '@mui/icons-material/SmartToy';
+import SmartToyIcon from "@mui/icons-material/SmartToy";
+import { AuthContext } from "../../helpers/AuthContext.jsx";
 
 import "./DefaultLayout.scss";
 import "../../assets/scss/style.scss";
 
 function DefaultLayout({ children, openMess, setOpenMess, id, setId, uid, setUId }) {
   const [openChatbot, setOpenChatbot] = useState(false);
+
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <>
@@ -53,19 +55,24 @@ function DefaultLayout({ children, openMess, setOpenMess, id, setId, uid, setUId
           }
         }}
       >
-        <i><SmartToyIcon /></i>
+        <i>
+          <SmartToyIcon />
+        </i>
       </div>
 
-      <Messages
-        openMess={openMess}
-        setOpenMess={setOpenMess}
-        openChatbot={openChatbot}
-        setOpenChatbot={setOpenChatbot}
-        id={id}
-        setId={setId}
-        uid={uid}
-        setUId={setUId}
-      />
+      {currentUser && (
+        <Messages
+          openMess={openMess}
+          setOpenMess={setOpenMess}
+          openChatbot={openChatbot}
+          setOpenChatbot={setOpenChatbot}
+          id={id}
+          setId={setId}
+          uid={uid}
+          setUId={setUId}
+        />
+      )}
+
       <Footer />
     </>
   );

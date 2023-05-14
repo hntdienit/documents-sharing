@@ -13,8 +13,8 @@ const Login = () => {
   const { setCurrentUser, currentUser } = useContext(AuthContext);
 
   const initialValues = {
-    Email: "dien1@gmail.com",
-    Mat_khau: "dien1",
+    Email: "",
+    Mat_khau: "Admin123!",
   };
 
   const validationSchema = validationData.login;

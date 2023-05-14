@@ -43,9 +43,9 @@ const UserOrder = () => {
         <div className="wishlist_area bg-color-white rbt-section-gap">
           <div className="container">
             <div className="row">
-              {data?.order?.length === 0 ? (
+              {data?.length === 0 ? (
                 <div className="col-12 h-50vh mt-5">
-                  <div className="fs-1 mt-2 text-center">Bạn chưa có đơn hàng nào!</div>
+                  <div className="fs-1 mt-2 text-center">Bạn chưa có đơn đặt hàng nào!</div>
                 </div>
               ) : (
                 <div className="col-12">

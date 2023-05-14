@@ -78,6 +78,9 @@ export const login = async (req, res, next) => {
   try {
     const { Email, Mat_khau } = req.body;
 
+    // const hash = bcrypt.hashSync(req.body.Mat_khau, 5);
+    // await Users.update({ Mat_khau: hash }, { where: { Email: Email } });
+
     const user = await Users.findOne({ where: { Email: Email } });
 
     if (!user) return res.status(200).json({ error: "Tài khoản không tồn tại!" });

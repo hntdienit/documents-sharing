@@ -41,7 +41,7 @@ passport.use(
           if (!user.Ma_google) {
             const updateUser = await Users.update(
               {
-                Ho_ten: profile.given_name,
+                // Ho_ten: profile.given_name,
                 Hinh_dai_dien: profile.picture,
                 Ma_google: profile.id,
                 Xac_thuc_mail: 1,

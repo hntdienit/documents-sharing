@@ -34,9 +34,9 @@ const relationship = () => {
   Documents.hasMany(CartDetails, { foreignKey: "Tai_lieu_id" });
   CartDetails.belongsTo(Documents, { foreignKey: "Tai_lieu_id" });
 
-  // /* Courses x Users: one to Many */
-  // Courses.hasMany(Users, { foreignKey: "Lop_id" });
-  // Users.belongsTo(Courses, { foreignKey: "Lop_id" });
+  /* Courses x Users: one to Many */
+  Courses.hasMany(Users, { foreignKey: "Lop_id" });
+  Users.belongsTo(Courses, { foreignKey: "Lop_id" });
 
   /* Subjects x Documents: one to Many */
   Subjects.hasMany(Documents, { foreignKey: "Lop_hoc_phan_id" });
@@ -82,17 +82,9 @@ const relationship = () => {
   Users.hasMany(Orders, { foreignKey: "Nguoi_dung_id" });
   Orders.belongsTo(Users, { foreignKey: "Nguoi_dung_id" });
 
-  /* Users x Orders: one to Many */
-  Users.hasMany(Orders, { foreignKey: "Nguoi_dung_id" });
-  Orders.belongsTo(Users, { foreignKey: "Nguoi_dung_id" });
-
   /* PaymentMethods x Orders: one to Many */
   PaymentMethods.hasMany(Orders, { foreignKey: "Phuong_thuc_thanh_toan_id" });
   Orders.belongsTo(PaymentMethods, { foreignKey: "Phuong_thuc_thanh_toan_id" });
-
-  /* Users x PaymentMethods: one to Many */
-  Users.hasMany(PaymentMethods, { foreignKey: "Nguoi_dung_id" });
-  PaymentMethods.belongsTo(Users, { foreignKey: "Nguoi_dung_id" });
 
   /* Users x PaymentMethods: one to Many */
   Users.hasMany(PaymentMethods, { foreignKey: "Nguoi_dung_id" });

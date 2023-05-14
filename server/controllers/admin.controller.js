@@ -15,14 +15,15 @@ export const newuser = async (req, res, next) => {
     const hash = bcrypt.hashSync(req.body.Mat_khau, 5);
 
     const newUser = await Users.create({
-      Ho_ten: req.body.Ho_ten,
       Email: req.body.Email,
       Mat_khau: hash,
+      Ho_ten: req.body.Ho_ten,
       Dia_chi: req.body.Dia_chi,
       CCCD: req.body.CCCD,
       Gioi_tinh: req.body.Gioi_tinh,
       So_dien_thoai: req.body.So_dien_thoai,
-      Vai_tro: "NguoiDung"
+      Email_da_xac_thuc: 1,
+      Vai_tro: "NguoiDung",
     });
 
     res.status(201).send("Đăng ký tài khoản thành công!");
@@ -71,7 +72,7 @@ export const listuser = async (req, res, next) => {
             },
           },
         ],
-        Vai_tro : "NguoiDung"
+        Vai_tro: "NguoiDung",
       },
       offset: offset,
       limit: limit,
@@ -114,7 +115,7 @@ export const listuser = async (req, res, next) => {
             },
           },
         ],
-        Vai_tro : "NguoiDung"
+        Vai_tro: "NguoiDung",
       },
       offset: offset,
       limit: limit,
@@ -138,16 +139,17 @@ export const newstudent = async (req, res, next) => {
     const hash = bcrypt.hashSync(req.body.Mat_khau, 5);
 
     const newUser = await Users.create({
-      Ho_ten: req.body.Ho_ten,
       Email: req.body.Email,
       Mat_khau: hash,
+      Ho_ten: req.body.Ho_ten,
       Dia_chi: req.body.Dia_chi,
       CCCD: req.body.CCCD,
       Gioi_tinh: req.body.Gioi_tinh,
       So_dien_thoai: req.body.So_dien_thoai,
-      Vai_tro: "SinhVien"
+      Email_da_xac_thuc: 1,
+      Vai_tro: "SinhVien",
     });
-     return res.status(201).send("Đăng ký tài khoản thành công!");
+    return res.status(201).send("Đăng ký tài khoản thành công!");
   } catch (err) {
     next(err);
   }
@@ -193,7 +195,7 @@ export const liststudent = async (req, res, next) => {
             },
           },
         ],
-        Vai_tro : "SinhVien"
+        Vai_tro: "SinhVien",
       },
       offset: offset,
       limit: limit,
@@ -236,7 +238,7 @@ export const liststudent = async (req, res, next) => {
             },
           },
         ],
-        Vai_tro : "SinhVien"
+        Vai_tro: "SinhVien",
       },
       offset: offset,
       limit: limit,
@@ -260,16 +262,17 @@ export const newlecturers = async (req, res, next) => {
     const hash = bcrypt.hashSync(req.body.Mat_khau, 5);
 
     const newUser = await Users.create({
-      Ho_ten: req.body.Ho_ten,
       Email: req.body.Email,
       Mat_khau: hash,
+      Ho_ten: req.body.Ho_ten,
       Dia_chi: req.body.Dia_chi,
       CCCD: req.body.CCCD,
       Gioi_tinh: req.body.Gioi_tinh,
       So_dien_thoai: req.body.So_dien_thoai,
-      Vai_tro: "GiangVien"
+      Email_da_xac_thuc: 1,
+      Vai_tro: "GiangVien",
     });
-     return res.status(201).send("Đăng ký tài khoản thành công!");
+    return res.status(201).send("Đăng ký tài khoản thành công!");
   } catch (err) {
     next(err);
   }
@@ -315,7 +318,7 @@ export const listlecturers = async (req, res, next) => {
             },
           },
         ],
-        Vai_tro : "GiangVien"
+        Vai_tro: "GiangVien",
       },
       offset: offset,
       limit: limit,
@@ -358,7 +361,7 @@ export const listlecturers = async (req, res, next) => {
             },
           },
         ],
-        Vai_tro : "GiangVien"
+        Vai_tro: "GiangVien",
       },
       offset: offset,
       limit: limit,
@@ -379,8 +382,8 @@ export const listlecturers = async (req, res, next) => {
 
 export const getuser = async (req, res, next) => {
   try {
-    const findItem = await Users.findByPk(req.params.id)
-    if(findItem){
+    const findItem = await Users.findByPk(req.params.id);
+    if (findItem) {
       return res.status(201).json(findItem);
     } else {
       return next(createError(404, "Không tìm thấy thông tin tìm kiếm!"));
@@ -392,8 +395,8 @@ export const getuser = async (req, res, next) => {
 
 export const edituser = async (req, res, next) => {
   try {
-    const findItem = await Users.findByPk(req.params.id)
-    if(findItem){
+    const findItem = await Users.findByPk(req.params.id);
+    if (findItem) {
       await Users.update(
         {
           Ho_ten: req.body.Ho_ten,
@@ -420,23 +423,21 @@ export const edituser = async (req, res, next) => {
 
 export const deleteuser = async (req, res, next) => {
   try {
-    const findItem = await Users.findByPk(req.params.id)
-    if(findItem){
-          await Users.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    return res.status(201).json("Xóa thành công");
+    const findItem = await Users.findByPk(req.params.id);
+    if (findItem) {
+      await Users.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      return res.status(201).json("Xóa thành công");
     } else {
       return next(createError(404, "Không tìm thấy thông tin tìm kiếm!"));
     }
-
   } catch (err) {
     next(err);
   }
 };
-
 
 // export const payDocument = async (req, res, next) => {
 //   try {
@@ -469,8 +470,6 @@ export const deleteuser = async (req, res, next) => {
 //     next(err);
 //   }
 // };
-
-
 
 // export const singleDocument = async (req, res, next) => {
 //   try {
