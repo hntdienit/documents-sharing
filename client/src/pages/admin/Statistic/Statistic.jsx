@@ -50,7 +50,7 @@ const Statistic = () => {
   // });
 
   useEffect(() => {
-    newRequest.get(`/major/docbymajor?quy=${quy}&nam=${name}`).then((res) => {
+    newRequest.get(`/major/docbymajor?quy=${quy}&nam=${nam}`).then((res) => {
       if (res.data.error) {
         // alert(res.data.error);
       } else {
