@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { toast } from "react-toastify";
@@ -11,7 +11,8 @@ import newRequest from "../../utils/newRequest.js";
 import LoadingCompoment from "./LoadingCompoment.jsx";
 import ErrorCompoment from "./ErrorCompoment.jsx";
 
-const Card = ({ item }) => {
+const Card = ({ item, edit = false, deleteTL }) => {
+  const navigate = useNavigate();
   let Tong_sao = 0;
   item?.Danh_gia?.forEach((item) => {
     Tong_sao += +item?.So_sao;
@@ -67,27 +68,58 @@ const Card = ({ item }) => {
           </span>
           <p className="rbt-card-text mt_d">{item?.Mo_ta_tai_lieu}</p>
           <div className="rbt-card-bottom">
-            <Link to={`/document/${item.id}`} className="transparent-button">
-              Tìm hiểu thêm
-              <DoubleArrowIcon />
-            </Link>
-            {data?.error ? (
-              <></>
+            {!edit ? (
+              <>
+                <Link to={`/document/${item.id}`} className="transparent-button">
+                  Tìm hiểu thêm
+                  <DoubleArrowIcon />
+                </Link>
+                {data?.error ? (
+                  <></>
+                ) : (
+                  data?.map((d) => {
+                    if (d?.Tai_lieu_id === item.id) {
+                      l = true;
+                    }
+                  })
+                )}
+                {l ? (
+                  <button onClick={handleChangWishlist} className="rbt-cart-sidenav-activation rbt-round-btn icon_like">
+                    <FavoriteIcon />
+                  </button>
+                ) : (
+                  <button onClick={handleChangWishlist} className="rbt-cart-sidenav-activation rbt-round-btn">
+                    <FavoriteIcon />
+                  </button>
+                )}
+              </>
             ) : (
-              data?.map((d) => {
-                if (d?.Tai_lieu_id === item.id) {
-                  l = true;
-                }
-              })
-            )}
-            {l ? (
-              <button onClick={handleChangWishlist} className="rbt-cart-sidenav-activation rbt-round-btn icon_like">
-                <FavoriteIcon />
-              </button>
-            ) : (
-              <button onClick={handleChangWishlist} className="rbt-cart-sidenav-activation rbt-round-btn">
-                <FavoriteIcon />
-              </button>
+              <>
+                <div className="plceholder-button">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      item?.Url
+                        ? navigate(`/document/owner1/edit/${item?.id}`)
+                        : navigate(`/document/owner/edit/${item?.id}`);
+                    }}
+                    className="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100"
+                  >
+                    <span data-text="Sửa tài liệu?">Sửa tài liệu</span>
+                  </button>
+                </div>
+                <div className="plceholder-button">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      deleteTL(item.id);
+                    }}
+                    className="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100"
+                  >
+                    <span data-text="Xóa tài liệu?">Xóa tài liệu</span>
+                  </button>
+                </div>
+              </>
             )}
           </div>
         </div>

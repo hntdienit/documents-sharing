@@ -47,7 +47,7 @@ const ListReport = () => {
   return (
     <>
       <Card elevation={4}>
-        <HeaderPage list title={"báo cáo vi phạm"} to={"/admin/major/create"} setKeyword={setKeyword} />
+        <HeaderPage list notnew title={"báo cáo vi phạm"} to={"/admin/major/create"} setKeyword={setKeyword} />
         <Typography component={"div"} marginTop={2} marginX={3}>
           <Card elevation={3}>
             <TableContainer component={Paper}>
@@ -82,7 +82,6 @@ const ListReport = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {console.log(list)}
                   {list.map((item, index) => (
                     <TableRow key={item.id}>
                       <TableCell component="th" scope="row" align="center">
@@ -92,11 +91,17 @@ const ListReport = () => {
                       <TableCell align="center">{item?.Tai_lieu?.Ten_tai_lieu}</TableCell>
                       <TableCell align="center">{item?.Nguoi_dung?.Ho_ten}</TableCell>
                       <TableCell align="center">
-                        <Link to={`/admin/major/edit/${item.id}`}>
-                          <Button color="warning">
-                            <EditIcon />
-                          </Button>
-                        </Link>
+                        {item?.Tai_lieu?.Gia < 0 ? (
+                          "Đã xử lý"
+                        ) : (
+                          <>
+                            <Link to={`/admin/report/view/${item.id}`}>
+                              <Button color="warning">
+                                <EditIcon />
+                              </Button>
+                            </Link>
+                          </>
+                        )}
                       </TableCell>
                     </TableRow>
                   ))}

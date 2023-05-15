@@ -74,7 +74,7 @@ const Detail = () => {
         toast.error(res.data.error, {});
       } else {
         toast.success("Bạn đã báo cáo vi phạm thành công!", {});
-        // navigate("/");
+        navigate("/");
       }
     });
   };

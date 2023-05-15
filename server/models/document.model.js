@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
-
 const Documents = sequelize.define(
   "Tai_lieu",
   {

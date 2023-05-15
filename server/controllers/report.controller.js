@@ -5,10 +5,30 @@ import createError from "../utils/createError.js";
 
 import Documents from "../models/document.model.js";
 import Users from "../models/user.model.js";
-import Reviews from "../models/review.model.js";
-import Images from "../models/image.model.js";
-import Majors from "../models/major.model.js";
 import Reports from "../models/report.model.js";
+import Images from "../models/image.model.js";
+import Notifications from "../models/notification.model.js";
+
+const countNotifi = async (id) => {
+  const totalNotifi = await Notifications.count({
+    where: {
+      Nguoi_dung_id: id,
+    },
+  });
+  console.log(totalNotifi);
+  const allNotifi = await Notifications.findAll({
+    where: {
+      Nguoi_dung_id: id,
+    },
+  });
+  if (totalNotifi > 4) {
+    await Notifications.destroy({
+      where: {
+        id: allNotifi[0].id,
+      },
+    });
+  }
+};
 
 export const newReport = async (req, res, next) => {
   try {
@@ -67,103 +87,77 @@ export const pagination = async (req, res, next) => {
   }
 };
 
-export const singleDocument = async (req, res, next) => {
+export const findReport = async (req, res, next) => {
   try {
-    const document = await Documents.findByPk(req.params.id);
-    const userDocument = await Users.findByPk(document.Nguoi_dung_id);
-    if (!document) {
-      return next(createError(404, "Tài liệu bạn tìm không tồn tại!"));
-    }
-    if (!userDocument) {
-      return next(createError(404, "Thông tin chủ sở hữu không tồn tại!"));
-    }
-
-    const reviewDocument = await Reviews.findAll({ where: { Tai_lieu_id: document.id } });
-    let Tong_sao = 0;
-    reviewDocument.forEach((item) => {
-      Tong_sao += +item.So_sao;
-    });
-
-    let So_sao = Tong_sao / reviewDocument.length;
-    So_sao = So_sao.toFixed(1);
-
-    const Hinhs = await Images.findAll({
-      where: { Tai_lieu_id: document.id },
-    });
-
-    const Nganh = await Majors.findByPk(document.Nganh_hoc_id);
-
-    const singledocument = {
-      Tai_lieu: document,
-      Danh_gia: {
-        So_sao: So_sao,
-        So_nguoi: reviewDocument.length,
-      },
-      Hinhs: Hinhs,
-      Nganh: Nganh,
-      Nguoi_dung: {
-        Ho_ten: userDocument.Ho_ten,
-      },
-    };
-    res.status(200).json(singledocument);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const editDocument = async (req, res, next) => {
-  try {
-    await Documents.update(
-      {
-        Ten_tai_lieu: req.body.Ten_tai_lieu,
-      },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
-    );
-    return res.status(201).json("sua thanh cong");
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const deleteDocument = async (req, res, next) => {
-  try {
-    await Documents.destroy({
+    const report = await Reports.findOne({
       where: {
         id: req.params.id,
       },
+      include: [
+        {
+          model: Documents,
+          include: [{ model: Users }, { model: Images }],
+        },
+      ],
     });
-    return res.status(201).json("xoa thanh cong");
+    if (!report) {
+      return next(createError(200, "báo cáo bạn tìm không tồn tại!"));
+    }
+
+    // console.log(report);
+
+    res.status(200).json(report);
   } catch (err) {
     next(err);
   }
 };
 
-export const checkDocument = async (req, res, next) => {
+export const checkReport = async (req, res, next) => {
   try {
     if (req.body.checkD) {
       await Documents.update(
         {
           Kiem_duyet: 1,
+          Gia: -10,
         },
         {
           where: {
-            id: req.body.id,
+            id: req.body.idTL,
           },
         }
       );
+      const doc = await Documents.findByPk(req.body.idTL);
+      countNotifi(doc.Nguoi_dung_id);
+      await Notifications.create({
+        Noi_dung_thong_bao: "Thông báo mới: Bạn đã bị ẩn 1 tài liệu do vi phạm",
+        Nguoi_dung_id: doc.Nguoi_dung_id,
+      });
+      countNotifi(req.body.idNBC);
+      await Notifications.create({
+        Noi_dung_thong_bao: "Báo cáo tài liệu vi phạm của bạn đã được xử lý!",
+        Nguoi_dung_id: req.body.idNBC,
+      });
     } else {
-      await Documents.destroy({
-        where: {
-          id: req.body.id,
-        },
+      countNotifi(req.body.idNBC);
+      await Notifications.create({
+        Noi_dung_thong_bao: "Báo cáo tài liệu vi phạm của bạn đã được xử lý!",
+        Nguoi_dung_id: req.body.idNBC,
       });
     }
 
     res.status(201).json();
+  } catch (err) {
+    next(err);
+  }
+};
+export const NotifiAll = async (req, res, next) => {
+  try {
+    const notifi = await Notifications.findAll({
+      where: {
+        Nguoi_dung_id: req.user.id,
+      },
+    });
+    res.status(201).json(notifi);
   } catch (err) {
     next(err);
   }

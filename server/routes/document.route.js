@@ -8,6 +8,9 @@ import {
   editDocument,
   deleteDocument,
   checkDocument,
+  paginationpp,
+  updatepayDocument,
+  updateshareDocument,
 } from "../controllers/document.controller.js";
 import validator from "../utils/validate.js";
 
@@ -27,6 +30,17 @@ router.post(
   checkUser,
   shareDocument
 );
+router.patch(
+  "/editshare/:id",
+  function (req, res, next) {
+    req.storage = "./public/files";
+    next();
+  },
+  UploadMiddleware.array("datafile", 10),
+  verifyToken,
+  checkUser,
+  updateshareDocument
+);
 
 router.post(
   "/pay",
@@ -40,7 +54,21 @@ router.post(
   payDocument
 );
 
+router.patch(
+  "/payedit/:id",
+  function (req, res, next) {
+    req.storage = "./public/images";
+    next();
+  },
+  UploadMiddleware.array("datafile", 10),
+  verifyToken,
+  checkUser,
+  updatepayDocument
+);
+
 router.route("/").get(pagination);
+
+router.route("/user").get(verifyToken, paginationpp);
 
 router.route("/admin").get(pagination1);
 

@@ -27,7 +27,7 @@ const ViewPDF = () => {
   });
 
   if (isLoading) return <LoadingCompoment />;
-  if (error) return <ErrorCompoment err={error?.response?.data} />;
+  if (error) return <ErrorCompoment />;
 
   return (
     <>

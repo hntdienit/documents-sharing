@@ -45,31 +45,6 @@ const ListDocument = () => {
     setPage(selected);
   };
 
-  const deleteItem = (Id) => {
-    Swal.fire({
-      title: "Bạn có chắc muốn xóa?",
-      text: "Bạn sẽ không thể phục hồi!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Xóa",
-      cancelButtonText: "Hủy",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        newRequest.delete(`/document/${Id}`).then((res) => {
-          setList(
-            list.filter((val) => {
-              return val.id !== Id;
-            })
-          );
-        });
-        Swal.fire("Xóa!", "Bạn đã xóa thành công", "success");
-        setDeleteload(deleteload + 1);
-      }
-    });
-  };
-
   return (
     <>
       <Card elevation={4}>

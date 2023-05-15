@@ -29,6 +29,8 @@ import UserOrder from "../pages/user/UserOrder.jsx";
 // sinhvien
 import ShareDocument from "../pages/user/Document/ShareDocument.jsx";
 import PayDocument from "../pages/user/Document/PayDocument.jsx";
+import EditPayDocument from "../pages/user/Document/EditPayDocument.jsx";
+import EditShareDocument from "../pages/user/Document/EditShareDocument.jsx";
 
 // giangvien
 
@@ -125,6 +127,8 @@ const routes = [
   // sinhvien
   { path: "/document/share", component: ShareDocument, role: "SinhVien" },
   { path: "/document/pay", component: PayDocument, role: "SinhVien" },
+  { path: "/document/owner/edit/:id", component: EditPayDocument, role: "SinhVien" },
+  { path: "/document/owner1/edit/:id", component: EditShareDocument, role: "SinhVien" },
 
   // giangvien
 

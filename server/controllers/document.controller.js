@@ -1,5 +1,5 @@
 import sequelize from "../config/db.js";
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
 
 import createError from "../utils/createError.js";
 
@@ -57,6 +57,60 @@ export const shareDocument = async (req, res, next) => {
     next(err);
   }
 };
+export const updateshareDocument = async (req, res, next) => {
+  try {
+    if (!req.body.Cong_Khai && !req.body.LopHP) {
+      req.body.Cong_Khai = true;
+    }
+    let data;
+    if (req.body.Cong_Khai == "true") {
+      if (req.body.LopHP == "true") {
+        data = {
+          Ten_tai_lieu: req.body.Ten_tai_lieu,
+          Mo_ta_tai_lieu: req.body.Mo_ta_tai_lieu,
+          Url: `${req.protocol}://${req.get("host")}/files/${req.files[0].filename}`,
+          Cong_khai: true,
+          Lop_hoc_phan_id: req.body.LopHPId,
+          Nguoi_dung_id: req.user.id,
+          Nganh_hoc_id: req.body.Nganh_hoc_id,
+          Kiem_duyet: 0,
+        };
+      } else {
+        data = {
+          Ten_tai_lieu: req.body.Ten_tai_lieu,
+          Mo_ta_tai_lieu: req.body.Mo_ta_tai_lieu,
+          Url: `${req.protocol}://${req.get("host")}/files/${req.files[0].filename}`,
+          Cong_khai: true,
+          Lop_hoc_phan_id: null,
+          Nguoi_dung_id: req.user.id,
+          Nganh_hoc_id: req.body.Nganh_hoc_id,
+          Kiem_duyet: 0,
+        };
+      }
+    } else {
+      data = {
+        Ten_tai_lieu: req.body.Ten_tai_lieu,
+        Mo_ta_tai_lieu: req.body.Mo_ta_tai_lieu,
+        Url: `${req.protocol}://${req.get("host")}/files/${req.files[0].filename}`,
+        Cong_khai: false,
+        Lop_hoc_phan_id: req.body.LopHPId,
+        Nguoi_dung_id: req.user.id,
+        Nganh_hoc_id: req.body.Nganh_hoc_id,
+        Kiem_duyet: 0,
+      };
+    }
+
+    const newDocument = await Documents.update(data, {
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    res.status(201).json(newDocument);
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const payDocument = async (req, res, next) => {
   try {
@@ -89,6 +143,45 @@ export const payDocument = async (req, res, next) => {
     next(err);
   }
 };
+export const updatepayDocument = async (req, res, next) => {
+  try {
+    const newDocument = await Documents.update(
+      {
+        Ten_tai_lieu: req.body.Ten_tai_lieu,
+        Mo_ta_tai_lieu: req.body.Mo_ta_tai_lieu,
+        Kieu_tai_lieu: "Tài liệu vật lý",
+        Url: null,
+        Cong_khai: true,
+        So_luong: req.body.So_luong,
+        Gia: req.body.Gia,
+        Nguoi_dung_id: req.user.id,
+        Nganh_hoc_id: req.body.Nganh_hoc_id,
+        Kiem_duyet: 0,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    const images = req.files;
+
+    for (let i = 0; i < images.length; i++) {
+      await Images.create({
+        Tai_lieu_id: newDocument.id,
+        Url: `${req.protocol}://${req.get("host")}/images/${req.files[i].filename}`,
+      });
+      // delete file
+      // const filepath = `./public/image/product/${req.files[i].filename}`;
+      // fs.unlinkSync(filepath);
+    }
+
+    res.status(201).json("Sửa tài liệu đăng tài liệu thành công!");
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const pagination = async (req, res, next) => {
   try {
@@ -111,6 +204,7 @@ export const pagination = async (req, res, next) => {
           },
         ],
         Kiem_duyet: true,
+        Gia: { [Op.gte]: 0 },
       },
       offset: offset,
       limit: limit,
@@ -134,6 +228,74 @@ export const pagination = async (req, res, next) => {
           },
         ],
         Kiem_duyet: true,
+        Gia: { [Op.gte]: 0 },
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+      required: false,
+      include: [{ model: Reviews }, { model: Images }, { model: Majors }],
+    });
+
+    res.json({
+      result: result,
+      page: page,
+      limit: limit,
+      totalRows: totalRows,
+      totalPage: totalPage,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+export const paginationpp = async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.keyword || "";
+    const offset = limit * page;
+    const totalRows = await Documents.count({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
+        Kiem_duyet: true,
+        Gia: { [Op.gte]: 0 },
+        Nguoi_dung_id: req.user.id,
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+    });
+
+    const totalPage = Math.ceil(totalRows / limit);
+
+    const result = await Documents.findAll({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
+        Kiem_duyet: true,
+        Gia: { [Op.gte]: 0 },
+        Nguoi_dung_id: req.user.id,
       },
       offset: offset,
       limit: limit,
@@ -174,6 +336,7 @@ export const pagination1 = async (req, res, next) => {
             },
           },
         ],
+        Gia: { [Op.gte]: 0 },
       },
       offset: offset,
       limit: limit,
@@ -196,6 +359,7 @@ export const pagination1 = async (req, res, next) => {
             },
           },
         ],
+        Gia: { [Op.gte]: 0 },
       },
       offset: offset,
       limit: limit,

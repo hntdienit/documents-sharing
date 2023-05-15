@@ -11,15 +11,27 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import LoadingCompoment from "../../components/public/LoadingCompoment.jsx";
+import ErrorCompoment from "../../components/public/ErrorCompoment.jsx";
 
 import newRequest from "../../utils/newRequest.js";
 import images from "../../assets/images";
 import { AuthContext } from "../../helpers/AuthContext.jsx";
+import { useQuery } from "@tanstack/react-query";
 
 const Header = () => {
   const navigate = useNavigate();
 
   const { currentUser, setCurrentUser } = useContext(AuthContext);
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: [`notifi`],
+    queryFn: () =>
+      newRequest.get(`/report/notifi`).then((res) => {
+        return res.data;
+      }),
+  });
 
   const handleLogout = async () => {
     await newRequest.post("/auth/logout").then((res) => {
@@ -32,6 +44,9 @@ const Header = () => {
       }
     });
   };
+
+  if (isLoading) return <LoadingCompoment />;
+  if (error) return <ErrorCompoment />;
 
   return (
     <>
@@ -255,6 +270,41 @@ const Header = () => {
                             </ul>
                           </div>
                         </div>
+                      </li>
+                      <li className="access-icon rbt-user-wrapper icon__user">
+                        <a className="rbt-round-btn" href="#">
+                          <i>
+                            <NotificationsIcon />
+                          </i>
+                        </a>
+                        {(currentUser && data.error !== 'Bạn chưa đăng nhập!') && (
+                          <>
+                            {data.length == 0 ? (
+                              <div className="rbt-user-menu-list-wrapper">
+                                <div className="inner">
+                                  <ul className="user-list-wrapper">
+                                    <li>
+                                      <p className="notifi">Bạn chưa có thông báo!</p>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="rbt-user-menu-list-wrapper">
+                                <div className="inner">
+                                  <ul className="user-list-wrapper">
+                                    {data?.map((i) => (
+                                      <li key={i?.id}>
+                                        <p className="notifi">{i?.Noi_dung_thong_bao}</p>
+                                        <hr />
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+                            )}
+                          </>
+                        )}
                       </li>
                       <li className="access-icon rbt-mini-cart">
                         <Link to={"/wishlist"} className="rbt-cart-sidenav-activation rbt-round-btn">
