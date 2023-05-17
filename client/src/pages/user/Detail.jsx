@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -13,10 +13,12 @@ import Reviews from "../../components/user/Reviews/Reviews.jsx";
 import newRequest from "../../utils/newRequest.js";
 import LoadingCompoment from "../../components/public/LoadingCompoment.jsx";
 import ErrorCompoment from "../../components/public/ErrorCompoment.jsx";
+import { AuthContext } from "../../helpers/AuthContext.jsx";
 
 const Detail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
   const [openReport, setOpenReport] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
@@ -199,7 +201,7 @@ const Detail = () => {
                     <Link to={"/"}>{data?.Nganh?.Ma_nganh_hoc + " - " + data?.Nganh?.Ten_nganh_hoc}</Link>
                   </li>
 
-                  {!openReport && (
+                  {currentUser && !openReport && (
                     <div className="plceholder-button">
                       <button
                         type="button"

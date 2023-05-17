@@ -60,7 +60,7 @@ function DefaultLayout({ children, openMess, setOpenMess, id, setId, uid, setUId
         </i>
       </div>
 
-      {currentUser && (
+      {currentUser && currentUser?.Vai_tro !== "NguoiDung" && (
         <Messages
           openMess={openMess}
           setOpenMess={setOpenMess}

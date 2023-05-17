@@ -58,7 +58,7 @@ const ViewReport = () => {
         toast.error(`${res.data.error}`, {});
       } else {
         toast.success("Xử lý báo cáo thành công!", {});
-        // navigate("/admin/document/list");
+        navigate("/admin/document/list");
       }
     });
   };

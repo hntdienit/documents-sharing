@@ -140,92 +140,94 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="rbt-profile-course-area mt-5">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="sction-title">
-                    <h2 className="">Danh sách tài liệu cá nhân</h2>
+            {currentUser && currentUser?.Vai_tro !== "NguoiDung" && (
+              <div className="rbt-profile-course-area mt-5">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="sction-title">
+                      <h2 className="">Danh sách tài liệu cá nhân</h2>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="categories">
-                <div className="rbt-page-banner-wrapper">
-                  <div className="rbt-banner-content">
-                    {list.length !== 0 && (
-                      <div className="rbt-course-top-wrapper">
-                        <div className="container">
-                          <div className="row g-5 align-items-center">
-                            <div className="col-lg-5 col-md-12">
-                              <div className="rbt-sorting-list d-flex flex-wrap align-items-center">
-                                <div className="rbt-short-item">
-                                  <span className="course-index fs-4">
-                                    Thứ tự {(page + 1) * limit - limit + 1} đến{" "}
-                                    {(page + 1) * limit > rows ? rows : (page + 1) * limit} của {rows} kết quả
-                                  </span>
+                <div className="categories">
+                  <div className="rbt-page-banner-wrapper">
+                    <div className="rbt-banner-content">
+                      {list.length !== 0 && (
+                        <div className="rbt-course-top-wrapper">
+                          <div className="container">
+                            <div className="row g-5 align-items-center">
+                              <div className="col-lg-5 col-md-12">
+                                <div className="rbt-sorting-list d-flex flex-wrap align-items-center">
+                                  <div className="rbt-short-item">
+                                    <span className="course-index fs-4">
+                                      Thứ tự {(page + 1) * limit - limit + 1} đến{" "}
+                                      {(page + 1) * limit > rows ? rows : (page + 1) * limit} của {rows} kết quả
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className="col-lg-7 col-md-12">
-                              <div className="rbt-sorting-list d-flex flex-wrap align-items-center justify-content-start justify-content-lg-end">
-                                <div className="rbt-short-item">
-                                  <form action="#" className="rbt-search-style me-0">
-                                    <input
-                                      type="text"
-                                      placeholder="Tìm kiếm tài liệu..."
-                                      onChange={(e) => {
-                                        setKeyword(e.target.value);
-                                      }}
-                                    />
-                                    <button type="submit" className="rbt-search-btn rbt-round-btn">
-                                      <SearchIcon />
-                                    </button>
-                                  </form>
+                              <div className="col-lg-7 col-md-12">
+                                <div className="rbt-sorting-list d-flex flex-wrap align-items-center justify-content-start justify-content-lg-end">
+                                  <div className="rbt-short-item">
+                                    <form action="#" className="rbt-search-style me-0">
+                                      <input
+                                        type="text"
+                                        placeholder="Tìm kiếm tài liệu..."
+                                        onChange={(e) => {
+                                          setKeyword(e.target.value);
+                                        }}
+                                      />
+                                      <button type="submit" className="rbt-search-btn rbt-round-btn">
+                                        <SearchIcon />
+                                      </button>
+                                    </form>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="rbt-section-overlayping-top rbt-section-gapBottom">
-                  <div className="container">
-                    {list.length === 0 ? (
-                      <h2 className="no_data_search">Bạn chưa có tài liệu nào!</h2>
-                    ) : (
-                      <>
-                        <div className="rbt-course-grid-column list-column-half active-list-view">
-                          {list.map((i) => (
-                            <div
-                              key={i.id}
-                              className="course-grid-4"
-                              data-sal-delay="150"
-                              data-sal="slide-up"
-                              data-sal-duration="800"
-                            >
-                              <Card item={i} edit deleteTL={deleteTL} />
-                            </div>
-                          ))}
-                        </div>
+                  <div className="rbt-section-overlayping-top rbt-section-gapBottom">
+                    <div className="container">
+                      {list.length === 0 ? (
+                        <h2 className="no_data_search">Bạn chưa có tài liệu nào!</h2>
+                      ) : (
+                        <>
+                          <div className="rbt-course-grid-column list-column-half active-list-view">
+                            {list.map((i) => (
+                              <div
+                                key={i.id}
+                                className="course-grid-4"
+                                data-sal-delay="150"
+                                data-sal="slide-up"
+                                data-sal-duration="800"
+                              >
+                                <Card item={i} edit deleteTL={deleteTL} />
+                              </div>
+                            ))}
+                          </div>
 
-                        <div className="mt-5">
-                          <Pagination
-                            even
-                            limit={limit}
-                            setLimit={setLimit}
-                            setPage={setPage}
-                            changePage={changePage}
-                            pages={pages}
-                          />
-                        </div>
-                      </>
-                    )}
+                          <div className="mt-5">
+                            <Pagination
+                              even
+                              limit={limit}
+                              setLimit={setLimit}
+                              setPage={setPage}
+                              changePage={changePage}
+                              pages={pages}
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

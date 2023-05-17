@@ -178,14 +178,16 @@ const Header = () => {
                 <div className="rbt-header-content">
                   <div className="header-info">
                     <ul className="quick-access">
-                      <li className="access-icon rbt-mini-cart">
-                        <Link to={"/cart"} className="rbt-cart-sidenav-activation rbt-round-btn">
-                          <i>
-                            <ShoppingCartIcon />
-                          </i>
-                          {/* <span className="rbt-cart-count">4</span> */}
-                        </Link>
-                      </li>
+                      {currentUser && currentUser?.Vai_tro !== "NguoiDung" && (
+                        <li className="access-icon rbt-mini-cart">
+                          <Link to={"/cart"} className="rbt-cart-sidenav-activation rbt-round-btn">
+                            <i>
+                              <ShoppingCartIcon />
+                            </i>
+                            {/* <span className="rbt-cart-count">4</span> */}
+                          </Link>
+                        </li>
+                      )}
 
                       <li className="access-icon rbt-user-wrapper icon__user">
                         <a className="rbt-round-btn" href="#">
@@ -222,22 +224,26 @@ const Header = () => {
                                       <span>Danh sách yêu thích</span>
                                     </Link>
                                   </li>
-                                  <li>
-                                    <Link to={"/order"}>
-                                      <span className="me-2">
-                                        <ListAltIcon />
-                                      </span>
-                                      <span>Đơn hàng</span>
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <Link to={"/userorder"}>
-                                      <span className="me-2">
-                                        <ListAltIcon />
-                                      </span>
-                                      <span>Đơn đặt hàng</span>
-                                    </Link>
-                                  </li>
+                                  {currentUser && currentUser?.Vai_tro !== "NguoiDung" && (
+                                    <>
+                                      <li>
+                                        <Link to={"/order"}>
+                                          <span className="me-2">
+                                            <ListAltIcon />
+                                          </span>
+                                          <span>Đơn hàng</span>
+                                        </Link>
+                                      </li>
+                                      <li>
+                                        <Link to={"/userorder"}>
+                                          <span className="me-2">
+                                            <ListAltIcon />
+                                          </span>
+                                          <span>Đơn đặt hàng</span>
+                                        </Link>
+                                      </li>
+                                    </>
+                                  )}
                                 </ul>
                                 <hr className="mt--10 mb--10" />
                               </>
@@ -271,48 +277,53 @@ const Header = () => {
                           </div>
                         </div>
                       </li>
-                      <li className="access-icon rbt-user-wrapper icon__user">
-                        <a className="rbt-round-btn" href="#">
-                          <i>
-                            <NotificationsIcon />
-                          </i>
-                        </a>
-                        {(currentUser && data.error !== 'Bạn chưa đăng nhập!') && (
-                          <>
-                            {data.length == 0 ? (
-                              <div className="rbt-user-menu-list-wrapper">
-                                <div className="inner">
-                                  <ul className="user-list-wrapper">
-                                    <li>
-                                      <p className="notifi">Bạn chưa có thông báo!</p>
-                                    </li>
-                                  </ul>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="rbt-user-menu-list-wrapper">
-                                <div className="inner">
-                                  <ul className="user-list-wrapper">
-                                    {data?.map((i) => (
-                                      <li key={i?.id}>
-                                        <p className="notifi">{i?.Noi_dung_thong_bao}</p>
-                                        <hr />
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              </div>
+
+                      {currentUser && (
+                        <>
+                          <li className="access-icon rbt-user-wrapper icon__user">
+                            <a className="rbt-round-btn" href="#">
+                              <i>
+                                <NotificationsIcon />
+                              </i>
+                            </a>
+                            {currentUser && data.error !== "Bạn chưa đăng nhập!" && (
+                              <>
+                                {data.length == 0 ? (
+                                  <div className="rbt-user-menu-list-wrapper">
+                                    <div className="inner">
+                                      <ul className="user-list-wrapper">
+                                        <li>
+                                          <p className="notifi">Bạn chưa có thông báo!</p>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="rbt-user-menu-list-wrapper">
+                                    <div className="inner">
+                                      <ul className="user-list-wrapper">
+                                        {data?.map((i) => (
+                                          <li key={i?.id}>
+                                            <p className="notifi">{i?.Noi_dung_thong_bao}</p>
+                                            <hr />
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </div>
+                                )}
+                              </>
                             )}
-                          </>
-                        )}
-                      </li>
-                      <li className="access-icon rbt-mini-cart">
-                        <Link to={"/wishlist"} className="rbt-cart-sidenav-activation rbt-round-btn">
-                          <i>
-                            <FavoriteIcon />
-                          </i>
-                        </Link>
-                      </li>
+                          </li>
+                          <li className="access-icon rbt-mini-cart">
+                            <Link to={"/wishlist"} className="rbt-cart-sidenav-activation rbt-round-btn">
+                              <i>
+                                <FavoriteIcon />
+                              </i>
+                            </Link>
+                          </li>
+                        </>
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -331,7 +342,7 @@ const Header = () => {
                       <Link to={"/"}>Trang chủ </Link>
                     </li>
 
-                    {currentUser?.Vai_tro !== "NguoiDung" && (
+                    {currentUser && currentUser?.Vai_tro !== "NguoiDung" && (
                       <>
                         <li className="has-dropdown has-menu-child-item">
                           <Link to={"/document/share"}>Chia sẻ tài liệu</Link>
