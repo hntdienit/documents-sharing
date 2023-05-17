@@ -8,6 +8,7 @@ import Users from "../models/user.model.js";
 import Reviews from "../models/review.model.js";
 import Images from "../models/image.model.js";
 import Majors from "../models/major.model.js";
+import BuyHistory from "../models/buyhistory.model.js";
 
 export const shareDocument = async (req, res, next) => {
   try {
@@ -205,6 +206,8 @@ export const pagination = async (req, res, next) => {
         ],
         Kiem_duyet: true,
         Gia: { [Op.gte]: 0 },
+        So_luong: { [Op.gt]: 0 },
+        Lop_hoc_phan_id:{ [Op.eq]: null },
       },
       offset: offset,
       limit: limit,
@@ -229,6 +232,77 @@ export const pagination = async (req, res, next) => {
         ],
         Kiem_duyet: true,
         Gia: { [Op.gte]: 0 },
+        So_luong: { [Op.gt]: 0 },
+        Lop_hoc_phan_id:{ [Op.eq]: null },
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+      required: false,
+      include: [{ model: Reviews }, { model: Images }, { model: Majors }],
+    });
+
+    res.json({
+      result: result,
+      page: page,
+      limit: limit,
+      totalRows: totalRows,
+      totalPage: totalPage,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+export const paginationnotuser = async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.keyword || "";
+    const offset = limit * page;
+    const totalRows = await Documents.count({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
+        Kiem_duyet: true,
+        Gia: { [Op.gte]: 0 },
+        So_luong: { [Op.gt]: 0 },
+        Kieu_tai_lieu: "Tài liệu điện tử",
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+    });
+
+    const totalPage = Math.ceil(totalRows / limit);
+
+    const result = await Documents.findAll({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
+        Kiem_duyet: true,
+        Gia: { [Op.gte]: 0 },
+        So_luong: { [Op.gt]: 0 },
+        Kieu_tai_lieu: "Tài liệu điện tử",
       },
       offset: offset,
       limit: limit,
@@ -477,6 +551,83 @@ export const checkDocument = async (req, res, next) => {
     }
 
     res.status(201).json();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const newdoc = async (req, res, next) => {
+  try {
+    const newdoc = await Documents.findOne({
+      where: {
+        Kieu_tai_lieu: "Tài liệu vật lý",
+      },
+      order: [["thoi_gian_tao", "DESC"]],
+      include: [{ model: Reviews }, { model: Images }, { model: Majors }],
+    });
+
+    res.status(201).json(newdoc);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const shouldbuy = async (req, res, next) => {
+  try {
+    const lopid = await Users.findByPk(req.user.id);
+    const listUser = await Users.findAll({
+      where: {
+        Lop_id: lopid.Lop_id,
+        id: {
+          [Op.ne]: req.user.id,
+        },
+      },
+    });
+    let a = [];
+
+    if (listUser.length === 0) {
+      const newdoc = await Documents.findAll({
+        where: {
+          Kieu_tai_lieu: "Tài liệu vật lý",
+        },
+        order: [["thoi_gian_tao", "DESC"]],
+        include: [{ model: Reviews }, { model: Images }, { model: Majors }],
+      });
+      return res.status(201).json(newdoc[0]);
+    }
+
+    listUser.map((i) => {
+      a = [...a, i.id];
+    });
+
+    const lsmua = await BuyHistory.findAll({
+      where: {
+        Nguoi_dung_id: {
+          [Op.in]: a,
+        },
+      },
+      order: [["thoi_gian_tao", "DESC"]],
+    });
+
+    if (lsmua.length === 0) {
+      const newdoc = await Documents.findAll({
+        where: {
+          Kieu_tai_lieu: "Tài liệu vật lý",
+        },
+        order: [["thoi_gian_tao", "DESC"]],
+        include: [{ model: Reviews }, { model: Images }, { model: Majors }],
+      });
+      return res.status(201).json(newdoc[0]);
+    }
+
+    const newdoc = await Documents.findOne({
+      where: {
+        id: lsmua[0].Tai_lieu_id,
+      },
+      include: [{ model: Reviews }, { model: Images }, { model: Majors }],
+    });
+
+    res.status(201).json(newdoc);
   } catch (err) {
     next(err);
   }

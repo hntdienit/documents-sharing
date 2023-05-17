@@ -7,7 +7,7 @@ import sortObject from "../utils/sortObject.js";
 import querystring from "qs";
 import crypto from "crypto";
 import createError from "../utils/createError.js";
-import mailer  from "../utils/mailer.js";
+import mailer from "../utils/mailer.js";
 
 import Order from "../models/order.model.js";
 import CartDetails from "../models/cartdetail.model.js";
@@ -15,6 +15,7 @@ import Documents from "../models/document.model.js";
 import PaymentMethod from "../models/paymentmethod.model.js";
 import OrderDetails from "../models/orderdetail.model.js";
 import Users from "../models/user.model.js";
+import BuyHistory from "../models/buyhistory.model.js";
 
 function deleteZombieOrder(orderId) {
   setTimeout(async function () {
@@ -83,6 +84,7 @@ export const getUserOrder = async (req, res, next) => {
       where: {
         Nguoi_dung_id: req.user.id,
       },
+      order: [["thoi_gian_tao", "DESC"]],
     });
     res.json(order);
   } catch (err) {
@@ -126,6 +128,11 @@ export const postCheckout = async (req, res, next) => {
       include: [{ model: Documents }],
     });
 
+    const userlsm = await BuyHistory.findAll({
+      where: { Nguoi_dung_id: req.user.id },
+      order: [["thoi_gian_tao", "DESC"]],
+    });
+
     if (userOrder) {
       userCartItem.map(async (item) => {
         await OrderDetails.create({
@@ -133,6 +140,11 @@ export const postCheckout = async (req, res, next) => {
           Gia: item.Tai_lieu.Gia,
           Don_hang_id: userOrder.id,
           Tai_lieu_id: item.Tai_lieu_id,
+        });
+        await BuyHistory.create({
+          Thu_tu_mua: userlsm[0] ? ++userlsm[0].Thu_tu_mua : 1,
+          Tai_lieu_id: item.Tai_lieu_id,
+          Nguoi_dung_id: userOrder.Nguoi_dung_id,
         });
         await CartDetails.destroy({ where: { id: item.id } });
         const thisDocumentDetails = await Documents.findOne({ where: { id: item.Tai_lieu_id } });
@@ -230,6 +242,11 @@ export const createvnpay = async (req, res, next) => {
     required: false,
     include: [{ model: Documents }],
   });
+  
+  const userlsm = await BuyHistory.findAll({
+    where: { Nguoi_dung_id: req.user.id },
+    order: [["thoi_gian_tao", "DESC"]],
+  });
 
   if (userOrder) {
     userCartItem.map(async (item) => {
@@ -238,6 +255,11 @@ export const createvnpay = async (req, res, next) => {
         Gia: item.Tai_lieu.Gia,
         Don_hang_id: userOrder.id,
         Tai_lieu_id: item.Tai_lieu_id,
+      });
+      await BuyHistory.create({
+        Thu_tu_mua: userlsm[0] ? ++userlsm[0].Thu_tu_mua : 1,
+        Tai_lieu_id: item.Tai_lieu_id,
+        Nguoi_dung_id: userOrder.Nguoi_dung_id,
       });
       await CartDetails.destroy({ where: { id: item.id } });
       // const thisDocumentDetails = await Documents.findByPk(item.Tai_lieu_id);

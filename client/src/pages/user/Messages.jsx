@@ -68,7 +68,7 @@ const Messages = ({ openMess, setOpenMess, openChatbot, setOpenChatbot, id, setI
                           </div>
                         </div>
                         <div className="dropdown">
-                          <a
+                          {/* <a
                             type="button"
                             id="dropdownMenuButton"
                             data-bs-toggle="dropdown"
@@ -78,7 +78,7 @@ const Messages = ({ openMess, setOpenMess, openChatbot, setOpenChatbot, id, setI
                             <i className="icon-lg text-muted pb-3px">
                               <VisibilityIcon />
                             </i>
-                          </a>
+                          </a> */}
                         </div>
                       </div>
                     </div>

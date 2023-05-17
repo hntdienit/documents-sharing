@@ -8,6 +8,7 @@ import Home from "../pages/public/Home.jsx";
 import Categories from "../pages/user/Categories.jsx";
 import Detail from "../pages/user/Detail.jsx";
 import ViewPDF from "../pages/public/ViewPDF.jsx";
+import DocSubject from "../pages/user/SubjectDoc.jsx"
 
 // auth
 import Register from "../pages/auth/Register.jsx";
@@ -134,6 +135,7 @@ const routes = [
 
   // public
   { path: "/document/all", component: Categories },
+  // { path: "/document/subject", component: DocSubject },
   { path: "/document/viewpdf/:id", component: ViewPDF },
   { path: "/document/:id", component: Detail },
   { path: "/", component: Home },

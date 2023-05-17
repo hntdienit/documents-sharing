@@ -1,24 +1,3 @@
-// // MessageParser starter code in MessageParser.js
-// class MessageParser {
-//     constructor(actionProvider) {
-//       this.actionProvider = actionProvider;
-//     }
-
-//     parse(message) {
-//       const lowerCaseMessage = message.toLowerCase();
-
-//       if (lowerCaseMessage.includes("hello")) {
-//         this.actionProvider.greet();
-//       }
-
-//       if (lowerCaseMessage.includes("javascript")) {
-//         this.actionProvider.handleJavascriptList();
-//       }
-//     }
-//   }
-
-//   export default MessageParser;
-
 import React from "react";
 
 const MessageParser = ({ children, actions }) => {
@@ -26,11 +5,13 @@ const MessageParser = ({ children, actions }) => {
     if (message.includes("xin chào")) {
       actions.handleHello();
     }
-    // if (message.includes('dog')) {
-    //   actions.handleDog();
-    // }
-    if (message.includes('123')) {
-      actions.handle123();
+
+    if (message.includes('moi')) {
+      actions.handlenewdoc();
+    }
+
+    if (message.includes('mua')) {
+      actions.handleshouldbuy();
     }
   };
 

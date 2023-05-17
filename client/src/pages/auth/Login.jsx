@@ -28,7 +28,6 @@ const Login = () => {
       } else {
         setCurrentUser(res.data);
         toast.success("Bạn đã đăng nhập thành công!", {});
-        console.log(res.data.Vai_tro)
         if (res.data.Vai_tro === "QuanTri") {
           navigate("/admin");
         } else {

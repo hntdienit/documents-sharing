@@ -6,6 +6,7 @@ import {
   getsubject,
   editsubject,
   deletesubject,
+  usersubject
 } from "../controllers/subject.controller.js";
 import validator from "../utils/validate.js";
 
@@ -14,6 +15,8 @@ import { verifyToken, checkUser, checkAdmin } from "../middlewares/auth.middlewa
 const router = express.Router();
 
 router.route("/learn/all").get(verifyToken, checkUser, learnAll);
+
+router.route("/usersubject").get(verifyToken, usersubject);
 
 router.route("/").post(verifyToken, checkAdmin, newsubject).get(listsubject);
 

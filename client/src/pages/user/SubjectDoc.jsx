@@ -1,27 +1,38 @@
 import React, { useState, useEffect, useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 
 import HeaderPage from "../../components/user/HeaderPage/HeaderPage.jsx";
 import Card from "../../components/public/Card.jsx";
 import Pagination from "../../components/public/Pagination.jsx";
 import { AuthContext } from "../../helpers/AuthContext.jsx";
+import { useQuery } from "@tanstack/react-query";
+import LoadingCompoment from "../../components/public/LoadingCompoment.jsx";
+import ErrorCompoment from "../../components/public/ErrorCompoment.jsx";
 
 import newRequest from "../../utils/newRequest.js";
 
-const Categories = () => {
-
-  const {currentUser} = useContext(AuthContext)
-
+const SubjectDoc = () => {
+  const { currentUser } = useContext(AuthContext);
   const [list, setList] = useState([]);
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
   const [pages, setPages] = useState(0);
   const [rows, setRows] = useState(0);
   const [keyword, setKeyword] = useState("");
+  const [subject, setSubject] = useState("");
 
-if(currentUser && currentUser?.Vai_tro !== "NguoiDung"){
+  const { isLoading, error, data } = useQuery({
+    queryKey: [`usersubject_${currentUser?.id}`],
+    queryFn: () =>
+      newRequest.get(`/subject/usersubject`).then((res) => {
+        return res.data;
+      }),
+  });
+
   useEffect(() => {
-    newRequest.get(`/document?keyword=${keyword}&page=${page}&limit=${limit}`).then((res) => {
+    newRequest.get(`/document?keyword=${keyword}&subject=${subject}&page=${page}&limit=${limit}`).then((res) => {
       if (res.data.error) {
         // alert(res.data.error);
       } else {
@@ -32,29 +43,13 @@ if(currentUser && currentUser?.Vai_tro !== "NguoiDung"){
       }
     });
   }, [page, limit, keyword]);
-}
-else{
-  useEffect(() => {
-    newRequest.get(`/document/notuser?keyword=${keyword}&page=${page}&limit=${limit}`).then((res) => {
-      if (res.data.error) {
-        // alert(res.data.error);
-      } else {
-        setList(res.data.result);
-        setPage(res.data.page);
-        setPages(res.data.totalPage);
-        setRows(res.data.totalRows);
-      }
-    });
-  }, [page, limit, keyword]);
-}
- 
 
   const changePage = ({ selected }) => {
     setPage(selected);
   };
 
-  // if (data) return <LoadingCompoment />;
-  // if (error) return <ErrorCompoment />;
+  if (data) return <LoadingCompoment />;
+  if (error) return <ErrorCompoment />;
 
   return (
     <>
@@ -79,6 +74,22 @@ else{
                     <div className="rbt-sorting-list d-flex flex-wrap align-items-center justify-content-start justify-content-lg-end">
                       <div className="rbt-short-item">
                         <form action="#" className="rbt-search-style me-0">
+                          <TextField
+                            fullWidth
+                            margin="normal"
+                            select
+                            label="Thuộc ngành"
+                            id="Nganh_hoc_id"
+                            name="Nganh_hoc_id"
+                            value={subject}
+                            // onChange={handleChange}
+                          >
+                            {data?.map((m) => (
+                              <MenuItem key={m.id} value={m.id}>
+                                {m?.Ma_nganh_hoc} - {m?.Ten_nganh_hoc}
+                              </MenuItem>
+                            ))}
+                          </TextField>
                           <input
                             type="text"
                             placeholder="Tìm kiếm tài liệu..."
@@ -137,4 +148,4 @@ else{
   );
 };
 
-export default Categories;
+export default SubjectDoc;

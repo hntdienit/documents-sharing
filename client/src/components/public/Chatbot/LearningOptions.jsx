@@ -1,23 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../helpers/AuthContext.jsx";
 
 const LearningOptions = (props) => {
-  console.log(props)
-  const options = [
-    {
-      text: "Tài liệu mới",
-      handler: props.actionProvider.handleJavascriptList,
-      id: 1,
-    },
-    { text: "Tài liệu nên mua", handler: () => {}, id: 2 },
-    { text: "Tài liệu nên đọc", handler: () => {}, id: 3 },
-  ];
+  const { currentUser } = useContext(AuthContext);
+
+  let options;
+  if (currentUser) {
+    options = [
+      {
+        text: "Tài liệu mới",
+        handler: props.actionProvider.handleJavascriptList,
+        id: 1,
+      },
+      { text: "Tài liệu nên mua", handler: () => {}, id: 2 },
+    ];
+  } else {
+    options = [
+      {
+        text: "Tài liệu mới",
+        handler: props.actionProvider.handleJavascriptList,
+        id: 1,
+      },
+    ];
+  }
 
   const optionsMarkup = options.map((option) => (
-    <button
-      className="learning-option-button"
-      key={option.id}
-      onClick={option.handler}
-    >
+    <button className="learning-option-button" key={option.id} onClick={option.handler}>
       {option.text}
     </button>
   ));

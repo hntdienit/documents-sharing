@@ -11,6 +11,9 @@ import {
   paginationpp,
   updatepayDocument,
   updateshareDocument,
+  newdoc,
+  shouldbuy,
+  paginationnotuser,
 } from "../controllers/document.controller.js";
 import validator from "../utils/validate.js";
 
@@ -66,7 +69,14 @@ router.patch(
   updatepayDocument
 );
 
+
 router.route("/").get(pagination);
+
+router.route("/notuser").get(paginationnotuser);
+
+router.route("/newdoc").get(newdoc);
+
+router.route("/shouldbuy").get( verifyToken,shouldbuy);
 
 router.route("/user").get(verifyToken, paginationpp);
 

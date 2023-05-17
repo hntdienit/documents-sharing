@@ -350,6 +350,9 @@ const Header = () => {
                         <li className="has-dropdown has-menu-child-item">
                           <Link to={"/document/pay"}>Bán tài liệu</Link>
                         </li>
+                        {/* <li className="has-dropdown has-menu-child-item">
+                          <Link to={"/document/subject"}>Danh sách tài liệu theo lóp học phần</Link>
+                        </li> */}
                       </>
                     )}
                     <li className="has-dropdown has-menu-child-item">

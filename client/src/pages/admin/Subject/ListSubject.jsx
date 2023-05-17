@@ -126,6 +126,15 @@ const ListSubject = () => {
                         >
                           <DeleteForeverIcon />
                         </Button>
+                        {/* |
+                        <Button
+                          color="primary"
+                          onClick={() => {
+                            deleteItem(item.id);
+                          }}
+                        >
+                          nds
+                        </Button> */}
                       </TableCell>
                     </TableRow>
                   ))}

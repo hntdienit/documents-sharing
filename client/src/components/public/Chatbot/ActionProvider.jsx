@@ -64,11 +64,16 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     updateChatbotState(botMessage);
   };
 
-  const handle123 = () => {
-    const botMessage = createChatBotMessage("Here's a nice dog picture for you!", {
-      widget: "javascriptLinks",
-      // payload: {},
-      // delay: 1000,
+  const handlenewdoc = () => {
+    const botMessage = createChatBotMessage("Tài liệu mới", {
+      widget: "newdoc",
+    });
+    updateChatbotState(botMessage);
+  };
+
+  const handleshouldbuy = () => {
+    const botMessage = createChatBotMessage("Tài liệu bạn nên mua", {
+      widget: "shouldbuy",
     });
     updateChatbotState(botMessage);
   };
@@ -81,7 +86,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleHello,
             // handleDog,
             handleJavascriptList,
-            handle123,
+            handlenewdoc,
+            handleshouldbuy,
           },
         });
       })}

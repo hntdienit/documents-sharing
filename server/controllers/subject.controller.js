@@ -4,10 +4,11 @@ import { Op } from "sequelize";
 import createError from "../utils/createError.js";
 
 import Subjects from "../models/subject.model.js";
+import ListSubjectsmodels from "../models/ListSubjectsmodel.js";
 
 export const learnAll = async (req, res, next) => {
   try {
-    const list = await Subjects.findAll({
+    const list = await l.findAll({
       attributes: ["id", "Ma_lop_hoc_phan", "Ten_lop_hoc_phan"],
       where: {
         Hoat_dong: true,
@@ -142,6 +143,37 @@ export const deletesubject = async (req, res, next) => {
     } else {
       return next(createError(404, "Không tìm thấy thông tin tìm kiếm!"));
     }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const usersubject = async (req, res, next) => {
+  try {
+    // const findItem = await ListSubjectsmodels.findAll({ where: { Nguoi_dung_id: req.user.id } });
+
+    // let a = [];
+    // findItem.map((i) => {
+    //   a= [...a, i?.Lop_hoc_phan_id]
+    // })
+
+    // const listsubject = await Subjects.findAll({
+    //   where: {
+    //     // id: {
+    //     //   [Op.in]: findItem,
+    //     // }
+    //   },
+    //   // limit: 2,
+    //   // order: [["id", "DESC"]],
+    // });
+    const list = await Subjects.findAll({
+      where: {
+        id:{
+          [Op.in] : [1,2]
+        }
+      }
+    })
+    return res.status(201).json(list);
   } catch (err) {
     next(err);
   }

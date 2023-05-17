@@ -69,20 +69,20 @@ const Message = ({ id, NguoiMua }) => {
                   className="icon-lg me-2 ms-n2 text-muted d-lg-none"
                 ></i>
                 <figure className="mb-0 me-2">
-                  <img src={images.avatar} className="img-sm rounded-circle" alt="image" />
+                  <img src={NguoiMua.data?.Hinh_dai_dien ? NguoiMua.data?.Hinh_dai_dien : images.avatar} className="img-sm rounded-circle" alt="image" />
                 </figure>
                 <div>
                   <p>{NguoiMua.data?.Ho_ten}</p>
                   <p className="text-muted tx-13">{NguoiMua.data?.Vai_tro === "SinhVien" ? "Sinh viên" : "Giảng viên"}</p>
                 </div>
               </div>
-              <div className="d-flex align-items-center me-n1">
+              {/* <div className="d-flex align-items-center me-n1">
                 <Link to={"/213"} className="d-none d-sm-block">
                   <i className="icon-lg text-muted">
                     <VisibilityIcon />
                   </i>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -116,7 +116,7 @@ const Message = ({ id, NguoiMua }) => {
             </ul>
           </div>
           <div className="chat-footer d-flex">
-            <div>
+            {/* <div>
               <button
                 type="button"
                 className="btn border btn-icon rounded-circle me-2"
@@ -135,7 +135,7 @@ const Message = ({ id, NguoiMua }) => {
               >
                 <i data-feather="paperclip" className="text-muted"></i>
               </button>
-            </div>
+            </div> */}
             <div className="d-none d-md-block">
               <button
                 type="button"
