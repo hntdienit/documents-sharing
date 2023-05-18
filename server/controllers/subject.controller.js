@@ -8,7 +8,7 @@ import ListSubjectsmodels from "../models/ListSubjectsmodel.js";
 
 export const learnAll = async (req, res, next) => {
   try {
-    const list = await l.findAll({
+    const list = await Subjects.findAll({
       attributes: ["id", "Ma_lop_hoc_phan", "Ten_lop_hoc_phan"],
       where: {
         Hoat_dong: true,
