@@ -14,6 +14,7 @@ import newRequest from "../../utils/newRequest.js";
 import LoadingCompoment from "../../components/public/LoadingCompoment.jsx";
 import ErrorCompoment from "../../components/public/ErrorCompoment.jsx";
 import { AuthContext } from "../../helpers/AuthContext.jsx";
+import CheckIcon from "@mui/icons-material/Check";
 
 const Detail = () => {
   const { id } = useParams();
@@ -111,6 +112,13 @@ const Detail = () => {
                     reviews={data?.Danh_gia?.So_sao > 0 ? `${data?.Danh_gia?.So_nguoi} đánh giá` : "0 đánh giá"}
                   />
                 </div>
+                {(data?.Tin_cay >= 5 && data?.Nganh.id === 1)  ? (
+                  <div className="rbt-review justify-content-start">
+                    <span className="color-success fs-3">
+                      <CheckIcon /> Độ tin cậy cao
+                    </span>
+                  </div>
+                ) : <></>}
 
                 <h2 className="title mt--10 mb--10">{data?.Tai_lieu?.Ten_tai_lieu}</h2>
                 <span className="rbt-label-style description">{data?.Nguoi_dung?.Ho_ten}</span>

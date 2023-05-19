@@ -38,7 +38,7 @@ const Statistic = () => {
 
   const [list, setList] = useState([]);
   const [count, setCount] = useState([]);
-  const [quy, setQuy] = useState(5);
+  const [thang, setThang] = useState(5);
   const [nam, setNam] = useState(2023);
 
   // const major = useQuery({
@@ -50,7 +50,7 @@ const Statistic = () => {
   // });
 
   useEffect(() => {
-    newRequest.get(`/major/docbymajor?quy=${quy}&nam=${nam}`).then((res) => {
+    newRequest.get(`/major/docbymajor?thang=${thang}&nam=${nam}`).then((res) => {
       if (res.data.error) {
         // alert(res.data.error);
       } else {
@@ -58,7 +58,7 @@ const Statistic = () => {
         setCount(res.data.count);
       }
     });
-  }, [quy, nam]);
+  }, [thang, nam]);
 
   // const docbymajor = useQuery({
   //   queryKey: [`docbymajor`],
@@ -118,29 +118,61 @@ const Statistic = () => {
   };
 
   const initialValues = {
-    Quy: "",
+    Thang: "",
     Nam: "",
   };
 
-  const quyn = [
+  const thangn = [
     {
       id: 1,
-      val: "Quý 1",
+      val: "Tháng 1",
     },
     {
       id: 2,
-      val: "Quý 2",
+      val: "Tháng 2",
     },
     {
       id: 3,
-      val: "Quý 3",
+      val: "Tháng 3",
     },
     {
       id: 4,
-      val: "Quý 4",
+      val: "Tháng 4",
     },
     {
       id: 5,
+      val: "Tháng 5",
+    },
+    {
+      id: 6,
+      val: "Tháng 6",
+    },
+    {
+      id: 7,
+      val: "Tháng 7",
+    },
+    {
+      id: 8,
+      val: "Tháng 8",
+    },
+    {
+      id: 9,
+      val: "Tháng 9",
+    },
+    {
+      id: 10,
+      val: "Tháng 10",
+    },
+    {
+      id: 11,
+      val: "Tháng 11",
+    },
+    {
+      id: 12,
+      val: "Tháng 12",
+    },
+    {
+      id: 13,
       val: "Cả năm",
     },
   ];
@@ -179,15 +211,15 @@ const Statistic = () => {
                           margin="normal"
                           select
                           label="Tháng"
-                          id="Quy"
-                          name="Quy"
-                          value={quy}
+                          id="Thang"
+                          name="Thang"
+                          value={thang}
                           onChange={(e) => {
-                            setQuy(e.target.value);
+                            setThang(e.target.value);
                             // handleStatistic();
                           }}
                         >
-                          {quyn.map((i) => (
+                          {thangn.map((i) => (
                             <MenuItem key={i.id} value={i.id}>
                               {i.val}
                             </MenuItem>
@@ -215,17 +247,9 @@ const Statistic = () => {
                           ))}
                         </TextField>
                       </Grid>
-                      <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                        {/* <Link to={`/document/`}>
-                <div className="plceholder-button">
-                  <button className="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100" type="submit">
-                    <span data-text="Về trang chi tiết">Về trang chi tiết</span>
-                  </button>
-                </div>
-              </Link> */}
-                      </Grid>
+                      <Grid item xs={12} sm={12} md={4} lg={4} xl={4}></Grid>
                     </Grid>
-                    <Pie data={data} />
+                    {count.length !== 0 ? <Pie data={data} /> : <p>Tháng {thang} chưa có số liệu!</p>}
                   </Grid>
                   <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <Card elevation={4} className="card_tk">
@@ -260,7 +284,7 @@ const Statistic = () => {
                                       {index + 1}
                                     </TableCell>
                                     <TableCell align="center">{item?.Ten_nganh_hoc}</TableCell>
-                                    <TableCell align="center">{count[index]}</TableCell>
+                                    <TableCell align="center">{count.length !== 0 ? count[index] : 0}</TableCell>
                                   </TableRow>
                                 ))}
                               </TableBody>

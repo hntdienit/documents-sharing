@@ -34,6 +34,7 @@ import EditPayDocument from "../pages/user/Document/EditPayDocument.jsx";
 import EditShareDocument from "../pages/user/Document/EditShareDocument.jsx";
 
 // giangvien
+import CheckDoc from "../pages/user/CheckDoc.jsx";
 
 // admin
 import CreateUser from "../pages/admin/User/CreateUser.jsx";
@@ -87,6 +88,7 @@ const routes = [
   { path: "/message/:id", component: Message, role: "SinhVien" },
   { path: "/order", component: Order, role: "SinhVien" },
   { path: "/userorder", component: UserOrder, role: "SinhVien" },
+  { path: "/checkdoc", component: CheckDoc, role: "GiangVien" },
 
   // admin
   { path: "/admin", component: AdminHome, layout: AdminLayout, role: "QuanTri" },
@@ -132,6 +134,7 @@ const routes = [
   { path: "/document/owner1/edit/:id", component: EditShareDocument, role: "SinhVien" },
 
   // giangvien
+  { path: "/gv/document/viewpdf/:id", component: ViewPDFDocument, role: "GiangVien" },
 
   // public
   { path: "/document/all", component: Categories },

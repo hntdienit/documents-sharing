@@ -207,7 +207,7 @@ export const pagination = async (req, res, next) => {
         Kiem_duyet: true,
         Gia: { [Op.gte]: 0 },
         So_luong: { [Op.gt]: 0 },
-        Lop_hoc_phan_id:{ [Op.eq]: null },
+        Lop_hoc_phan_id: { [Op.eq]: null },
       },
       offset: offset,
       limit: limit,
@@ -233,7 +233,7 @@ export const pagination = async (req, res, next) => {
         Kiem_duyet: true,
         Gia: { [Op.gte]: 0 },
         So_luong: { [Op.gt]: 0 },
-        Lop_hoc_phan_id:{ [Op.eq]: null },
+        Lop_hoc_phan_id: { [Op.eq]: null },
       },
       offset: offset,
       limit: limit,
@@ -411,6 +411,7 @@ export const pagination1 = async (req, res, next) => {
           },
         ],
         Gia: { [Op.gte]: 0 },
+        Kieu_tai_lieu: "Tài liệu vật lý",
       },
       offset: offset,
       limit: limit,
@@ -434,6 +435,7 @@ export const pagination1 = async (req, res, next) => {
           },
         ],
         Gia: { [Op.gte]: 0 },
+        Kieu_tai_lieu: "Tài liệu vật lý",
       },
       offset: offset,
       limit: limit,
@@ -459,10 +461,10 @@ export const singleDocument = async (req, res, next) => {
     const document = await Documents.findByPk(req.params.id);
     const userDocument = await Users.findByPk(document.Nguoi_dung_id);
     if (!document) {
-      return next(createError(404, "Tài liệu bạn tìm không tồn tại!"));
+      return next(createError(200, "Tài liệu bạn tìm không tồn tại!"));
     }
     if (!userDocument) {
-      return next(createError(404, "Thông tin chủ sở hữu không tồn tại!"));
+      return next(createError(200, "Thông tin chủ sở hữu không tồn tại!"));
     }
 
     const reviewDocument = await Reviews.findAll({ where: { Tai_lieu_id: document.id } });
@@ -480,6 +482,28 @@ export const singleDocument = async (req, res, next) => {
 
     const Nganh = await Majors.findByPk(document.Nganh_hoc_id);
 
+    const a = [];
+    reviewDocument.forEach((item) => {
+      if (item.So_sao >= 4) {
+        a.push(item.Nguoi_dung_id);
+      }
+    });
+
+    const userreview = await Users.findAll({
+      where: {
+        id: {
+          [Op.in]: a,
+        },
+      },
+    });
+
+    let b = 0;
+    userreview.forEach((item) => {
+      if (item.Vai_tro === "GiangVien") {
+        b += 1;
+      }
+    });
+
     const singledocument = {
       Tai_lieu: document,
       Danh_gia: {
@@ -491,6 +515,7 @@ export const singleDocument = async (req, res, next) => {
       Nguoi_dung: {
         Ho_ten: userDocument.Ho_ten,
       },
+      Tin_cay: b,
     };
     res.status(200).json(singledocument);
   } catch (err) {
@@ -628,6 +653,76 @@ export const shouldbuy = async (req, res, next) => {
     });
 
     res.status(201).json(newdoc);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const checkDoc = async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 0;
+    const limit = parseInt(req.query.limit) || 5;
+    const search = req.query.keyword || "";
+    const offset = limit * page;
+    const totalRows = await Documents.count({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
+        Gia: { [Op.gte]: 0 },
+        Kieu_tai_lieu: "Tài liệu điện tử",
+        Kiem_duyet: 0,
+        Nganh_hoc_id: 1,
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+    });
+
+    const totalPage = Math.ceil(totalRows / limit);
+
+    const result = await Documents.findAll({
+      where: {
+        [Op.or]: [
+          {
+            Ten_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+          {
+            Mo_ta_tai_lieu: {
+              [Op.like]: "%" + search + "%",
+            },
+          },
+        ],
+        Gia: { [Op.gte]: 0 },
+        Kieu_tai_lieu: "Tài liệu điện tử",
+        Kiem_duyet: 0,
+        Nganh_hoc_id: 1,
+      },
+      offset: offset,
+      limit: limit,
+      order: [["id", "DESC"]],
+      required: false,
+      include: [{ model: Reviews }, { model: Images }, { model: Majors }],
+    });
+
+    res.json({
+      result: result,
+      page: page,
+      limit: limit,
+      totalRows: totalRows,
+      totalPage: totalPage,
+    });
   } catch (err) {
     next(err);
   }

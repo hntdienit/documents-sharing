@@ -14,6 +14,7 @@ import {
   newdoc,
   shouldbuy,
   paginationnotuser,
+  checkDoc
 } from "../controllers/document.controller.js";
 import validator from "../utils/validate.js";
 
@@ -82,7 +83,9 @@ router.route("/user").get(verifyToken, paginationpp);
 
 router.route("/admin").get(pagination1);
 
-router.route("/check").post(verifyToken, checkAdmin, checkDocument);
+router.route("/gv").get(checkDoc);
+
+router.route("/check").post(verifyToken, checkDocument);
 
 router.route("/:id").get(singleDocument).patch(editDocument).delete(deleteDocument);
 

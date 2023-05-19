@@ -69,7 +69,7 @@ const Reviews = ({ documentId, refetch }) => {
     <>
       <div className="rbt-product-description rbt-section-gapBottom bg-color-white pt-4">
         <div className="container">
-          <div className="row">
+          <div className="row  list_review">
             <div className="col-lg-8 offset-lg-2">
               <ul className="nav nav-tabs tab-button-style-2">
                 <li className="nav-item fs-2 fw-bold">

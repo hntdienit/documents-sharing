@@ -226,6 +226,16 @@ const Header = () => {
                                   </li>
                                   {currentUser && currentUser?.Vai_tro !== "NguoiDung" && (
                                     <>
+                                      {currentUser?.Vai_tro === "GiangVien" && (
+                                        <li>
+                                          <Link to={"/checkdoc"}>
+                                            <span className="me-2">
+                                              <ListAltIcon />
+                                            </span>
+                                            <span>Kiểm duyệt tài liệu</span>
+                                          </Link>
+                                        </li>
+                                      )}
                                       <li>
                                         <Link to={"/order"}>
                                           <span className="me-2">

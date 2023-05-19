@@ -23,7 +23,7 @@ import Typography from "@mui/material/Typography";
 
 import SaveIcon from "@mui/icons-material/Save";
 
-import HeaderPage from "../../../components/user/HeaderPage/HeaderPage.jsx";
+import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
 import LoadingCompoment from "../../../components/public/LoadingCompoment.jsx";
 import ErrorCompoment from "../../../components/public/ErrorCompoment.jsx";
 import newRequest from "../../../utils/newRequest.js";
@@ -37,7 +37,7 @@ const ViewPDFDocument = () => {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   const { isLoading, error, data } = useQuery({
-    queryKey: [`viewpdf${id}`],
+    queryKey: [`viewpdf_user${id}`],
     queryFn: () =>
       newRequest.get(`/document/${id}`).then((res) => {
         return res.data;
@@ -50,7 +50,7 @@ const ViewPDFDocument = () => {
         toast.error(`${res.data.error}`, {});
       } else {
         toast.success("Xác nhận tài liệu đã kiểm duyệt!", {});
-        navigate("/checkdoc");
+        navigate("/admin/document/list");
       }
     });
   };
@@ -62,7 +62,7 @@ const ViewPDFDocument = () => {
     <>
       <div className="checkout_area bg-color-white rbt-section-gap pb-7">
         <div className="container">
-        <HeaderPage page={"Kiểm duyệt tài liệu"} linkpage={"Kiểm duyệt tài liệu"} />
+          <HeaderPage edit title={"tài liệu"} to={"/admin/listwarehouse"}></HeaderPage>
           <div className="row">
             <div className="col-lg-8 pdfview mt-3 pb-3">
               <Worker workerUrl={sp_pdfjs_dist}>

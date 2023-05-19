@@ -146,66 +146,31 @@ export const deletemajor = async (req, res, next) => {
 
 export const docByMajor = async (req, res, next) => {
   try {
-    const quy = parseInt(req.query.quy) || 1;
+    const thang = parseInt(req.query.thang) || 5;
     const nam = parseInt(req.query.nam) || 2023;
     let tim;
-    if (quy === 5 || 3 || 4) {
+    if (thang === 13) {
       tim = {
         attributes: ["Nganh_hoc_id"],
         where: {
-          [Op.and]: [
-            // sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 4),
-            sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
-          ],
+          [Op.and]: [sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam)],
         },
         group: "Nganh_hoc_id",
       };
-    }
-    if (quy === 2) {
+    } else {
       tim = {
         attributes: ["Nganh_hoc_id"],
         where: {
           [Op.or]: {
             [Op.and]: [
-              sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 4),
+              sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), thang),
               sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
             ],
-            // [Op.and]: [
-            //   sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 5),
-            //   sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
-            // ],
-            // [Op.and]: [
-            //   sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 6),
-            //   sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
-            // ],
           },
         },
         group: "Nganh_hoc_id",
       };
     }
-    if (quy === 1) {
-      tim = {
-        attributes: ["Nganh_hoc_id"],
-        where: {
-          [Op.or]: {
-            [Op.and]: [
-              sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 1),
-              sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
-            ],
-            // [Op.and]: [
-            //   sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 2),
-            //   sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
-            // ],
-            // [Op.and]: [
-            //   sequelize.where(sequelize.fn("month", sequelize.col("Thoi_gian_tao")), 3),
-            //   sequelize.where(sequelize.fn("YEAR", sequelize.col("Thoi_gian_tao")), nam),
-            // ],
-          },
-        },
-        group: "Nganh_hoc_id",
-      };
-    }
-
     const mang = [];
     const listmajor = await Majors.findAll({});
 
@@ -214,6 +179,10 @@ export const docByMajor = async (req, res, next) => {
     haha = await Documents.count(tim);
 
     let j = 0;
+
+    if(haha.length === 0){
+      return res.json({ count: mang, listmajor: listmajor });
+    }
     listmajor.map((i) => {
       if (i.id === haha[j].Nganh_hoc_id) {
         mang.push(haha[j].count);
