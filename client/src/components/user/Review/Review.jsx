@@ -15,7 +15,6 @@ import { AuthContext } from "../../../helpers/AuthContext";
 const Review = ({ review, setReview, setRating, setOpenReview }) => {
 
   const { currentUser } = useContext(AuthContext);
-console.log(review?.Nguoi_dung_id)
   const { isLoading, error, data } = useQuery({
     queryKey: [`Review_${review?.Nguoi_dung_id}`],
     queryFn: () =>
