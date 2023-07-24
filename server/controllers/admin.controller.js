@@ -1,14 +1,9 @@
-import sequelize from "../config/db.js";
 import { Op } from "sequelize";
 import bcrypt from "bcrypt";
 
 import createError from "../utils/createError.js";
 
-import Documents from "../models/document.model.js";
 import Users from "../models/user.model.js";
-import Reviews from "../models/review.model.js";
-import Images from "../models/image.model.js";
-import Majors from "../models/major.model.js";
 
 export const newuser = async (req, res, next) => {
   try {

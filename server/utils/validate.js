@@ -5,7 +5,7 @@ const vBody = (schema) => {
   return (req, res, next) => {
     const { error, value } = schema.validate(req.body, { abortEarly: false });
     if (error) {
-      return next(createError(400, "Thông tin nhập chưa chính xác!"));
+      return next(createError(400, "The information entered is incorrect!"));
     } else {
       if (!req.value) req.value = {};
       req.value.body = value;
@@ -18,7 +18,7 @@ const vParam = (schema, name) => {
   return (req, res, next) => {
     const { error, value } = schema.validate({ param: req.params[name] }, { abortEarly: false });
     if (error) {
-      return next(createError(400, "Thông tin nhập chưa chính xác!"));
+      return next(createError(400, "The information entered is incorrect!"));
     } else {
       if (!req.value) req.value = {};
       if (!req.value["params"]) req.value.params = {};

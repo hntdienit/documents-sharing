@@ -1,19 +1,9 @@
 import React from "react";
 
-// import "./LinkList.css";
-
 const LinkList = (props) => {
-
-  console.log("link",props)
-
   const linkMarkup = props.options.map((link) => (
     <li key={link.id} className="link-list-item">
-      <a
-        href={link.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="link-list-item-url"
-      >
+      <a href={link.url} target="_blank" rel="noopener noreferrer" className="link-list-item-url">
         {link.text}
       </a>
     </li>

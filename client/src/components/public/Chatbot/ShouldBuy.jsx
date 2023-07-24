@@ -18,8 +18,6 @@ const ShouldBuy = () => {
   if (isLoading) return <LoadingCompoment />;
   if (error) return <ErrorCompoment />;
 
-  // console.log(data);
-
   return <div>{data.error ? <p>bạn không thể mua!</p> : <Card item={data} />}</div>;
 };
 

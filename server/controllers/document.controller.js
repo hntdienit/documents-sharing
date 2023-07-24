@@ -1,5 +1,4 @@
-import sequelize from "../config/db.js";
-import { Op, where } from "sequelize";
+import { Op } from "sequelize";
 
 import createError from "../utils/createError.js";
 
@@ -173,9 +172,6 @@ export const updatepayDocument = async (req, res, next) => {
         Tai_lieu_id: newDocument.id,
         Url: `${req.protocol}://${req.get("host")}/images/${req.files[i].filename}`,
       });
-      // delete file
-      // const filepath = `./public/image/product/${req.files[i].filename}`;
-      // fs.unlinkSync(filepath);
     }
 
     res.status(201).json("Sửa tài liệu đăng tài liệu thành công!");

@@ -1,6 +1,3 @@
-import sequelize from "../config/db.js";
-import { Op } from "sequelize";
-
 import createError from "../utils/createError.js";
 
 import CartDetails from "../models/cartdetail.model.js";

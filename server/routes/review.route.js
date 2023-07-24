@@ -9,6 +9,4 @@ router.route("/document/:id").get(getRatingDocument);
 
 router.route("/:id").patch(patchReview);
 
-// router.route("/single/:id").get(singleDocument);
-
 export default router;

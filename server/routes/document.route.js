@@ -14,11 +14,10 @@ import {
   newdoc,
   shouldbuy,
   paginationnotuser,
-  checkDoc
+  checkDoc,
 } from "../controllers/document.controller.js";
-import validator from "../utils/validate.js";
 
-import { verifyToken, checkUser, checkAdmin } from "../middlewares/auth.middleware.js";
+import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
 import UploadMiddleware from "../middlewares/upload.middleware.js";
 
 const router = express.Router();
@@ -70,14 +69,13 @@ router.patch(
   updatepayDocument
 );
 
-
 router.route("/").get(pagination);
 
 router.route("/notuser").get(paginationnotuser);
 
 router.route("/newdoc").get(newdoc);
 
-router.route("/shouldbuy").get( verifyToken,shouldbuy);
+router.route("/shouldbuy").get(verifyToken, shouldbuy);
 
 router.route("/user").get(verifyToken, paginationpp);
 

@@ -1,20 +1,9 @@
 /* eslint-disable no-extra-boolean-cast */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import Slider from "react-slick";
-
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-
-import SaveIcon from "@mui/icons-material/Save";
-import images from "../../../assets/images";
 
 import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
 import LoadingCompoment from "../../../components/public/LoadingCompoment.jsx";

@@ -104,8 +104,6 @@ export const findReport = async (req, res, next) => {
       return next(createError(200, "báo cáo bạn tìm không tồn tại!"));
     }
 
-    // console.log(report);
-
     res.status(200).json(report);
   } catch (err) {
     next(err);

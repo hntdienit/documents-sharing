@@ -1,27 +1,12 @@
 /* eslint-disable no-extra-boolean-cast */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import * as yup from "yup";
 import { toast } from "react-toastify";
-import { useFormik } from "formik";
-import { Formik, Field, FastField, Form, FieldArray } from "formik";
-
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import sp_pdfjs_dist from "../../../assets/js/sp_pdfjs_dist.js";
-
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-
-import SaveIcon from "@mui/icons-material/Save";
 
 import HeaderPage from "../../../components/user/HeaderPage/HeaderPage.jsx";
 import LoadingCompoment from "../../../components/public/LoadingCompoment.jsx";
@@ -62,7 +47,7 @@ const ViewPDFDocument = () => {
     <>
       <div className="checkout_area bg-color-white rbt-section-gap pb-7">
         <div className="container">
-        <HeaderPage page={"Kiểm duyệt tài liệu"} linkpage={"Kiểm duyệt tài liệu"} />
+          <HeaderPage page={"Kiểm duyệt tài liệu"} linkpage={"Kiểm duyệt tài liệu"} />
           <div className="row">
             <div className="col-lg-8 pdfview mt-3 pb-3">
               <Worker workerUrl={sp_pdfjs_dist}>

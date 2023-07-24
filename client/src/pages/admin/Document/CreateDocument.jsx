@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Box, Grid, Card, CardContent, TextField, Button, Typography, MenuItem } from "@mui/material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+import { Box, Grid, Card, CardContent, TextField, Button, Typography} from "@mui/material";
 
 import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
 import newRequest from "../../../utils/newRequest.js";
@@ -30,7 +25,6 @@ const CreateDocument = () => {
           toast.error(`Add new product failed! - error: ${response.data.error}`, {});
         } else {
           toast.success("Add new product successfully!", {});
-          // navigate("/admin");
         }
       });
   };

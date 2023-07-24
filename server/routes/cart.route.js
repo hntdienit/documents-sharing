@@ -1,8 +1,7 @@
 import express from "express";
 import { addProductToCart, getCart, patchProductInCart, deleteProductInCart } from "../controllers/cart.controller.js";
-import validator from "../utils/validate.js";
 
-import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
+import { verifyToken } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 

@@ -104,11 +104,6 @@ const EditShareDocument = () => {
       });
   };
 
-  // useEffect(() => {
-  //   setDataFile(document.data?.Tai_lieu?.Url);
-  //   console.log(document.data?.Tai_lieu?.Url)
-  // }, [document]);
-
   if (isLoading || major.isLoading) return <LoadingCompoment />;
   if (error || major.error) return <ErrorCompoment />;
 

@@ -1,7 +1,7 @@
 import express from "express";
 import { getAll, changeToWishlist } from "../controllers/wishlist.controller.js";
 
-import { verifyToken, checkUser } from "../middlewares/auth.middleware.js";
+import { verifyToken } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 

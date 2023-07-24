@@ -15,14 +15,13 @@ passport.deserializeUser(function (user, done) {
 passport.use(
   new Strategy(
     {
-      clientID: "172771080770-2t62dfoprtg9nlm5ce67u8qiit6jj08b.apps.googleusercontent.com",
-      clientSecret: "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",
-      callbackURL: `http://localhost:3200/auth/callback`,
+      clientID: "something",
+      clientSecret: "something",
+      callbackURL: "something",
       passReqToCallback: true,
     },
     async (request, accessToken, refreshToken, profile, done) => {
       try {
-        /* check whether this current database */
         const user = await Users.findOne({
           where: { Ma_google: profile.id },
           where: {
@@ -41,7 +40,6 @@ passport.use(
           if (!user.Ma_google) {
             const updateUser = await Users.update(
               {
-                // Ho_ten: profile.given_name,
                 Hinh_dai_dien: profile.picture,
                 Ma_google: profile.id,
                 Xac_thuc_mail: 1,

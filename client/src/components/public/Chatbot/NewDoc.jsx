@@ -18,8 +18,6 @@ const NewDoc = () => {
   if (isLoading) return <LoadingCompoment />;
   if (error) return <ErrorCompoment />;
 
-  // console.log(data);
-
   return (
     <div>
       <Card item={data} />

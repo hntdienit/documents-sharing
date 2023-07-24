@@ -8,7 +8,6 @@ import {
   deletesubject,
   usersubject
 } from "../controllers/subject.controller.js";
-import validator from "../utils/validate.js";
 
 import { verifyToken, checkUser, checkAdmin } from "../middlewares/auth.middleware.js";
 

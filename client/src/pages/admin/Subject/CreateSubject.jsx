@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import * as yup from "yup";
-import { Box, Grid, Card, CardContent, TextField, Button, Typography, MenuItem } from "@mui/material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+import { Box, Grid, Card, CardContent, TextField, Button, Typography } from "@mui/material";
 
 import HeaderPage from "../../../components/admin/HeaderPage/HeaderPage.jsx";
 import newRequest from "../../../utils/newRequest.js";
@@ -18,16 +12,14 @@ const CreateSubject = () => {
   let navigate = useNavigate();
 
   const postForm = async (data) => {
-    await newRequest
-      .post("/subject", data)
-      .then((response) => {
-        if (response.data.error) {
-          toast.error(response.data.error, {});
-        } else {
-          toast.success("Thêm lớp học phần mới thành công", {});
-          navigate("/admin/subject/list");
-        }
-      });
+    await newRequest.post("/subject", data).then((response) => {
+      if (response.data.error) {
+        toast.error(response.data.error, {});
+      } else {
+        toast.success("Thêm lớp học phần mới thành công", {});
+        navigate("/admin/subject/list");
+      }
+    });
   };
 
   const formik = useFormik({
@@ -45,12 +37,7 @@ const CreateSubject = () => {
       <Card elevation={4}>
         <HeaderPage add title={"lớp học phần"} to={"/admin/subject/list"}></HeaderPage>
         <CardContent>
-          <Box
-            component={"form"}
-            sx={{ flexGrow: 1 }}
-            onSubmit={formik.handleSubmit}
-            autoComplete="off"
-          >
+          <Box component={"form"} sx={{ flexGrow: 1 }} onSubmit={formik.handleSubmit} autoComplete="off">
             <Grid container justifyContent="center" alignItems="center" spacing={2} paddingX={2}>
               <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                 <TextField

@@ -3,8 +3,6 @@ import React, { useContext, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import { toast } from "react-toastify";
-import { useFormik } from "formik";
-import { Formik, Field, FastField, Form, FieldArray } from "formik";
 
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";

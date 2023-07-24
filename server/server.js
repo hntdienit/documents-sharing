@@ -13,22 +13,18 @@ import cookieSession from "cookie-session";
 const app = express();
 dotenv.config();
 
-/* connection Mysql */
 try {
   await sequelize.authenticate();
   relationship();
-  // await sequelize.sync({ force: true })
   await sequelize.sync();
-  console.log("Kết nối mySQL thành công...");
+  console.log("✅ Database connection successful...");
 } catch (error) {
-  console.error("Kết nối database thất bại...", error);
+  console.error("❌ Database connection failed...", error);
 }
 
-/* take data req.body */
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ extended: true }));
 
-/* middlewares */
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -45,8 +41,6 @@ app.use(
   cookieSession({
     name: "google-auth-session",
     keys: ["key1", "key2"],
-    // sessionSameSite: "none",
-    // cookieIpCheck: "none",
   })
 );
 
@@ -67,7 +61,6 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* routes */
 router(app);
 
 app.listen(process.env.PORT, () => {

@@ -2,15 +2,15 @@ import nodeMailer from "nodemailer";
 
 function SMail(to, subject, htmlContent) {
   const transporter = nodeMailer.createTransport({
-    service: "gmail",
+    service: process.env.SERVICE_MAIL,
     auth: {
-      user: "dien060620010@gmail.com",
-      pass: "wdzfwrtdpyzdolij",
+      user: process.env.USER_MAIL,
+      pass: process.env.PASSWORD_MAIL,
     },
   });
 
   const mailOptions = {
-    from: "dien060620010@gmail.com",
+    from: process.env.USER_MAIL,
     to: to,
     subject: subject,
     html: htmlContent,

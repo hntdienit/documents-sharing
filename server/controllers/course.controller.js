@@ -1,6 +1,4 @@
-import sequelize from "../config/db.js";
 import { Op } from "sequelize";
-import bcrypt from "bcrypt";
 
 import createError from "../utils/createError.js";
 
@@ -80,8 +78,8 @@ export const listcourse = async (req, res, next) => {
 
 export const getcourse = async (req, res, next) => {
   try {
-    const findItem = await Courses.findByPk(req.params.id)
-    if(findItem){
+    const findItem = await Courses.findByPk(req.params.id);
+    if (findItem) {
       return res.status(201).json(findItem);
     } else {
       return next(createError(404, "Không tìm thấy thông tin tìm kiếm!"));
@@ -93,8 +91,8 @@ export const getcourse = async (req, res, next) => {
 
 export const editcourse = async (req, res, next) => {
   try {
-    const findItem = await Courses.findByPk(req.params.id)
-    if(findItem){
+    const findItem = await Courses.findByPk(req.params.id);
+    if (findItem) {
       await Courses.update(
         {
           Ma_lop: req.body.Ma_lop,
@@ -117,18 +115,17 @@ export const editcourse = async (req, res, next) => {
 
 export const deletecourse = async (req, res, next) => {
   try {
-    const findItem = await Courses.findByPk(req.params.id)
-    if(findItem){
-          await Courses.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    return res.status(201).json("Xóa thành công");
+    const findItem = await Courses.findByPk(req.params.id);
+    if (findItem) {
+      await Courses.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      return res.status(201).json("Xóa thành công");
     } else {
       return next(createError(404, "Không tìm thấy thông tin tìm kiếm!"));
     }
-
   } catch (err) {
     next(err);
   }

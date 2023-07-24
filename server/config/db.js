@@ -1,24 +1,13 @@
 import { Sequelize } from "sequelize";
 const sequelize = new Sequelize(
-  "luanvan",
-  "root",
-  "",
+  process.env.DATABASE_NAME,
+  process.env.DATABASE_USERNAME,
+  process.env.DATABASE_PASSWORD,
   {
-    host: "localhost",
-    dialect: "mysql",
+    host: process.env.DATABASE_HOST,
+    dialect: process.env.DATABASE_DIALECT,
     logging: false,
   }
 );
-// const sequelize = new Sequelize(
-//   process.env.DATABASE_NAME,
-//   process.env.DATABASE_USERNAME,
-//   process.env.DATABASE_PASSWORD,
-//   {
-//     host: process.env.DATABASE_HOST,
-//     dialect: process.env.DATABASE_DIALECT,
-//     logging: false,
-//   }
-// );
-
 
 export default sequelize;

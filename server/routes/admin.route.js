@@ -10,9 +10,8 @@ import {
   newlecturers,
   listlecturers,
 } from "../controllers/admin.controller.js";
-import validator from "../utils/validate.js";
 
-import { verifyToken, checkUser, checkAdmin } from "../middlewares/auth.middleware.js";
+import { verifyToken, checkAdmin } from "../middlewares/auth.middleware.js";
 const router = express.Router();
 
 router.route("/user").post(verifyToken, checkAdmin, newuser).get(listuser);
@@ -26,11 +25,5 @@ router
   .get(getuser)
   .patch(verifyToken, checkAdmin, edituser)
   .delete(verifyToken, checkAdmin, deleteuser);
-
-// router.route("/admin").get(pagination1);
-
-// router.route("/check").post(verifyToken, checkAdmin, checkDocument);
-
-// router.route("/:id").get(singleDocument).patch(editDocument).delete(deleteDocument);
 
 export default router;

@@ -10,7 +10,6 @@ import {
   newPassword,
   loginSuccess,
 } from "../controllers/auth.controller.js";
-import validator from "../utils/validate.js";
 import "../middlewares/passport.middleware.js";
 
 const router = express.Router();
@@ -25,12 +24,10 @@ router.post("/newverify", newverify);
 router.post("/checkemail", checkEmail);
 router.post("/newpassword", newPassword);
 
-// Google
 router.get("/login/success", loginSuccess);
 router.route("/google").get(passport.authenticate("google", { scope: ["email", "profile"] }));
 router.route("/callback").get(
   passport.authenticate("google", {
-    // successRedirect: "/auth/callback/success",
     successRedirect: "http://localhost:5173",
     failureRedirect: "/auth/callback/failure",
   })
@@ -38,9 +35,8 @@ router.route("/callback").get(
 router.route("/callback/success").get(loginSuccess);
 router.route("/callback/failure").get((req, res) => {
   res.status(200).json({
-    error: "Lỗi đăng nhập!",
+    error: "Login error!",
   });
 });
-// Google
 
 export default router;

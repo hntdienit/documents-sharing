@@ -1,5 +1,3 @@
-import sequelize from "../config/db.js";
-import { Op } from "sequelize";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import emailExistence from "email-existence";
@@ -78,9 +76,6 @@ export const login = async (req, res, next) => {
   try {
     const { Email, Mat_khau } = req.body;
 
-    // const hash = bcrypt.hashSync(req.body.Mat_khau, 5);
-    // await Users.update({ Mat_khau: hash }, { where: { Email: Email } });
-
     const user = await Users.findOne({ where: { Email: Email } });
 
     if (!user) return res.status(200).json({ error: "Tài khoản không tồn tại!" });
@@ -143,7 +138,6 @@ export const verify = async (req, res, next) => {
 
 export const newverify = async (req, res, next) => {
   try {
-    console.log(req.body.Email);
     const user = await Users.findOne({ where: { Email: req.body.Email } });
     if (!user) {
       return next(createError(200, "Không tìm thấy thông tin!"));

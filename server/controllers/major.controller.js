@@ -192,9 +192,6 @@ export const docByMajor = async (req, res, next) => {
       }
     });
 
-    // console.log("listmajor", listmajor);
-    // console.log("mang", mang);
-
     return res.json({ count: mang, listmajor: listmajor });
   } catch (err) {
     next(err);

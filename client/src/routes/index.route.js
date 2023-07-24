@@ -138,7 +138,7 @@ const routes = [
 
   // public
   { path: "/document/all", component: Categories },
-  // { path: "/document/subject", component: DocSubject },
+  { path: "/document/subject", component: DocSubject },
   { path: "/document/viewpdf/:id", component: ViewPDF },
   { path: "/document/:id", component: Detail },
   { path: "/", component: Home },
